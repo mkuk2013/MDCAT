@@ -1,0 +1,2213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MDCAT Mock Test</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Lato:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        /* --- Design Variables --- */
+        :root {
+            --primary-color: #6C5CE7; /* Muted Purple */
+            --secondary-color: #00BCD4; /* Cyan/Teal Accent */
+            --text-dark: #2F3640; /* Very Dark Gray */
+            --text-medium: #57606F; /* Medium Gray */
+            --text-light: #8E96A3; /* Light Gray */
+            --bg-light: #F4F7F6; /* Soft Light Gray/Blue */
+            --bg-card: #FFFFFF; /* Pure White Card Background */
+            --border-color: #ECEFF1; /* Very Light Gray Border */
+            --shadow-light: rgba(0, 0, 0, 0.06);
+            --shadow-medium: rgba(0, 0, 0, 0.12);
+            --gradient-start: #6C5CE7;
+            --gradient-end: #8D7EFF; /* Lighter purple for gradient */
+            --success-color: #28a745;
+            --danger-color: #dc3545;
+            --warning-color: #ffc107; /* Added for warnings */
+
+            /* Notice specific colors */
+            --notice-bg: #E3F2FD; /* Light Blue for notices */
+            --notice-text: #1976D2; /* Darker Blue for notice text */
+            --notice-border: #90CAF9; /* Medium Blue for notice border */
+        }
+
+        /* --- Dark Mode Variables --- */
+        body.dark-mode {
+            --primary-color: #A797F0; /* Lighter Purple for Dark Mode */
+            --secondary-color: #4DD0E1; /* Lighter Cyan for Dark Mode */
+            --text-dark: #E0E0E0;
+            --text-medium: #B0B7C6;
+            --text-light: #8A93A2;
+            --bg-light: #262B33; /* Dark background */
+            --bg-card: #343D48; /* Darker card background */
+            --border-color: #4A5568;
+            --shadow-light: rgba(0, 0, 0, 0.4);
+            --shadow-medium: rgba(0, 0, 0, 0.6);
+            --gradient-start: #343D48;
+            --gradient-end: #262B33;
+            --success-color: #28a745; /* Green remains same for visibility */
+            --danger-color: #dc3545; /* Red remains same for visibility */
+            --warning-color: #ffc107; /* Yellow remains same for visibility */
+
+            /* Notice specific colors for dark mode */
+            --notice-bg: #3A475C;
+            --notice-text: #E0E0E0;
+            --notice-border: #66A3FF;
+        }
+
+        /* --- Base Styles --- */
+        body {
+            font-family: 'Lato', sans-serif;
+            background-color: var(--bg-light);
+            color: var(--text-medium);
+            line-height: 1.7;
+            font-size: 16px;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+            scroll-padding-top: 100px; /* Offset for fixed navbar */
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Inter', sans-serif;
+            color: var(--text-dark);
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        a {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        a:hover {
+            color: var(--secondary-color);
+        }
+
+        /* --- Navbar --- */
+        .navbar {
+            background-color: var(--bg-card);
+            box-shadow: 0 4px 15px var(--shadow-light);
+            position: sticky;
+            top: 0;
+            z-index: 1020;
+            padding: 1rem 1.5rem;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        .navbar-brand {
+            font-weight: 800;
+            font-size: 1.9rem;
+            color: var(--primary-color) !important;
+            display: flex;
+            align-items: center;
+        }
+        .navbar-brand i {
+            color: var(--secondary-color);
+            margin-right: 8px;
+        }
+        .navbar-nav .nav-link {
+            color: var(--text-medium);
+            font-weight: 600;
+            margin: 0 1.2rem;
+            position: relative;
+            transition: all 0.3s ease;
+            padding: 0.5rem 0;
+        }
+        .navbar-toggler {
+            border: none;
+        }
+        .navbar-toggler:focus {
+            box-shadow: none;
+        }
+
+        /* Dark Mode Navbar */
+        body.dark-mode .navbar {
+            background-color: var(--bg-card);
+            box-shadow: 0 4px 20px var(--shadow-medium);
+        }
+        body.dark-mode .navbar-brand {
+            color: var(--primary-color) !important;
+        }
+        body.dark-mode .navbar-brand i {
+            color: var(--secondary-color);
+        }
+        body.dark-mode .navbar-nav .nav-link {
+            color: var(--text-medium);
+        }
+        body.dark-mode .navbar-nav .nav-link:hover {
+            color: var(--primary-color);
+        }
+
+        /* --- Main Content Area --- */
+        .mock-test-container {
+            min-height: calc(100vh - 120px); /* Adjust based on navbar/footer height */
+            padding: 40px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .password-protection, .quiz-section, .result-section, .review-section {
+            background-color: var(--bg-card);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px var(--shadow-light);
+            padding: 40px;
+            max-width: 900px;
+            width: 100%;
+            text-align: center;
+            border: 1px solid var(--border-color);
+        }
+        body.dark-mode .password-protection, body.dark-mode .quiz-section, body.dark-mode .result-section, body.dark-mode .review-section {
+            background-color: var(--bg-card);
+            box-shadow: 0 10px 30px var(--shadow-medium);
+            border: 1px solid var(--border-color);
+        }
+
+
+        /* Password Section */
+        .password-protection h2 {
+            font-size: 2.5rem;
+            margin-bottom: 25px;
+            color: var(--primary-color);
+        }
+        .password-protection .form-control {
+            border-radius: 8px;
+            padding: 12px 15px;
+            font-size: 1.1rem;
+            border-color: var(--border-color);
+        }
+        body.dark-mode .password-protection .form-control {
+            background-color: #2F3640;
+            color: var(--text-dark);
+            border-color: #4A5568;
+        }
+        body.dark-mode .password-protection .form-control::placeholder {
+            color: var(--text-medium);
+        }
+        .password-protection .btn-primary {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            padding: 12px 30px;
+            font-size: 1.1rem;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        .password-protection .btn-primary:hover {
+            background-color: #5544CC;
+            border-color: #5544CC;
+            transform: translateY(-2px);
+        }
+        body.dark-mode .password-protection .btn-primary {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+        body.dark-mode .password-protection .btn-primary:hover {
+            background-color: #9A87ED;
+            border-color: #9A87ED;
+        }
+        .mark-input-group {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        .mark-input-group label {
+            flex-basis: 100px;
+            text-align: right;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+        .mark-input-group input {
+            width: 120px;
+        }
+        .mark-input-group span {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+        .input-error {
+            color: var(--danger-color);
+            font-size: 0.9em;
+            margin-top: -10px;
+            margin-bottom: 10px;
+        }
+
+        /* Quiz Section */
+        .quiz-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .quiz-header h3 {
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            margin: 0;
+        }
+        .quiz-header .timer {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--danger-color);
+            background-color: var(--bg-light);
+            padding: 8px 15px;
+            border-radius: 8px;
+        }
+        body.dark-mode .quiz-header .timer {
+            background-color: #2F3640;
+            color: var(--danger-color);
+        }
+
+        .question-palette {
+            margin-top: 30px; /* Moved to bottom, so use margin-top */
+            padding: 20px;
+            background-color: var(--bg-light);
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+            display: flex; /* Changed from grid to flex */
+            flex-wrap: nowrap; /* Keep items in a single row */
+            overflow-x: auto; /* Enable horizontal scrolling */
+            gap: 10px; /* Spacing between buttons */
+            -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+            scroll-behavior: smooth; /* Smooth scroll on click */
+            padding-bottom: 10px; /* Add some padding for scrollbar */
+        }
+        body.dark-mode .question-palette {
+            background-color: #2F3640;
+            border-color: #4A5568;
+        }
+        /* Hide scrollbar for Chrome, Safari and Opera */
+        .question-palette::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        /* Track */
+        .question-palette::-webkit-scrollbar-track {
+            background: var(--bg-card);
+            border-radius: 10px;
+        }
+
+        /* Handle */
+        .question-palette::-webkit-scrollbar-thumb {
+            background: var(--primary-color);
+            border-radius: 10px;
+        }
+
+        /* Handle on hover */
+        .question-palette::-webkit-scrollbar-thumb:hover {
+            background: #5544CC;
+        }
+
+        /* For Firefox */
+        .question-palette {
+            scrollbar-width: thin;
+            scrollbar-color: var(--primary-color) var(--bg-card);
+        }
+
+
+        .palette-btn {
+            min-width: 45px; /* Ensures minimum width */
+            height: 45px;
+            display: flex;
+            flex-shrink: 0; /* Prevent shrinking */
+            align-items: center;
+            justify-content: center;
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-weight: 600;
+            color: var(--text-medium);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .palette-btn:hover:not(.current) {
+            background-color: var(--bg-light);
+            color: var(--primary-color);
+        }
+        .palette-btn.current {
+            background-color: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+        .palette-btn.answered {
+            background-color: var(--secondary-color);
+            color: white;
+            border-color: var(--secondary-color);
+        }
+        body.dark-mode .palette-btn {
+            background-color: var(--bg-card);
+            border-color: var(--border-color);
+            color: var(--text-medium);
+        }
+        body.dark-mode .palette-btn:hover:not(.current) {
+            background-color: #2F3640;
+            color: var(--primary-color);
+        }
+        /* Dark Mode Specific Styles for Palette Buttons */
+        body.dark-mode .palette-btn.current {
+            background-color: var(--primary-color); /* Uses lighter purple */
+            color: white;
+            border-color: var(--primary-color);
+        }
+        body.dark-mode .palette-btn.answered {
+            background-color: var(--secondary-color); /* Uses lighter cyan */
+            color: white;
+            border-color: var(--secondary-color);
+        }
+
+        .question-area {
+            text-align: left;
+            margin-bottom: 30px;
+        }
+        .question-area h4 {
+            font-size: 1.7rem;
+            margin-bottom: 25px;
+            color: var(--text-dark);
+        }
+        .options label {
+            display: block;
+            background-color: var(--bg-light);
+            padding: 15px 20px;
+            margin-bottom: 15px;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 1.1rem;
+            color: var(--text-medium);
+            text-align: left;
+        }
+        .options label:hover {
+            background-color: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+        .options input[type="radio"] {
+            margin-right: 15px;
+            accent-color: var(--primary-color);
+            width: 20px;
+            height: 20px;
+            vertical-align: middle;
+        }
+        .options input[type="radio"]:checked + span {
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+        .options input[type="radio"]:checked + span::before {
+            color: var(--primary-color); /* To make checked radio visible */
+        }
+        body.dark-mode .options label {
+            background-color: #2F3640;
+            border-color: #4A5568;
+            color: var(--text-medium);
+        }
+        body.dark-mode .options label:hover {
+            background-color: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+        body.dark-mode .options input[type="radio"]:checked + span {
+            color: var(--text-dark);
+        }
+
+        .navigation-buttons {
+            display: flex;
+            justify-content: center; /* Centered buttons */
+            margin-bottom: 30px;
+        }
+        .navigation-buttons button {
+            padding: 12px 30px;
+            font-size: 1.1rem;
+            border-radius: 8px;
+            font-weight: 600;
+            margin: 0 10px;
+            transition: all 0.3s ease;
+        }
+        .navigation-buttons .btn-primary {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            color: white;
+        }
+        .navigation-buttons .btn-primary:hover:not(:disabled) {
+            background-color: #5544CC;
+            border-color: #5544CC;
+            transform: translateY(-2px);
+        }
+        .navigation-buttons .btn-outline-primary {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+        }
+        .navigation-buttons .btn-outline-primary:hover:not(:disabled) {
+            background-color: var(--primary-color);
+            color: white;
+            transform: translateY(-2px);
+        }
+        .navigation-buttons button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        body.dark-mode .navigation-buttons .btn-primary {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+        body.dark-mode .navigation-buttons .btn-primary:hover:not(:disabled) {
+            background-color: #9A87ED;
+            border-color: #9A87ED;
+        }
+        body.dark-mode .navigation-buttons .btn-outline-primary {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+        }
+        body.dark-mode .navigation-buttons .btn-outline-primary:hover:not(:disabled) {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        /* Result Section */
+        .result-section h2 {
+            font-size: 2.8rem;
+            margin-bottom: 25px;
+            color: var(--primary-color);
+        }
+        .result-stats p {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: var(--text-dark);
+        }
+        .result-stats p strong {
+            color: var(--primary-color);
+        }
+        .result-buttons .btn {
+            padding: 15px 35px;
+            font-size: 1.1rem;
+            border-radius: 8px;
+            font-weight: 600;
+            margin: 10px;
+            transition: all 0.3s ease;
+        }
+        .pass-status {
+            font-weight: 700;
+            font-size: 1.5rem;
+            margin-top: 20px;
+        }
+        .pass-status.pass {
+            color: var(--success-color);
+        }
+        .pass-status.fail {
+            color: var(--danger-color);
+        }
+
+        /* Review Section */
+        .review-section h2 {
+            font-size: 2.2rem;
+            margin-bottom: 25px;
+            color: var(--primary-color);
+        }
+        .review-question-display {
+            text-align: left;
+            margin-bottom: 30px;
+            padding: 20px;
+            background-color: var(--bg-light);
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+        }
+        body.dark-mode .review-question-display {
+            background-color: #2F3640;
+            border-color: #4A5568;
+        }
+
+        .review-question-display h5 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--text-dark);
+        }
+        .review-option-item {
+            display: flex;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px dashed var(--border-color);
+            color: var(--text-medium);
+        }
+        .review-option-item:last-child {
+            border-bottom: none;
+        }
+        .review-option-item i {
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+        .review-option-item.correct {
+            color: var(--success-color);
+            font-weight: 600;
+        }
+        .review-option-item.incorrect {
+            color: var(--danger-color);
+            font-weight: 600;
+        }
+        .review-option-item.selected-correct {
+            color: var(--success-color);
+            font-weight: 600;
+        }
+        .review-option-item.selected-incorrect {
+            color: var(--danger-color);
+            font-weight: 600;
+        }
+        .review-navigation-buttons {
+            margin-top: 30px;
+        }
+        .review-navigation-buttons button {
+            margin: 0 10px;
+        }
+
+        /* --- Floating Buttons (Dark Mode Toggle) --- */
+        #themeToggle {
+            background-color: var(--bg-light);
+            border: 1px solid var(--border-color);
+            color: var(--text-dark);
+            border-radius: 50%;
+            width: 45px;
+            height: 45px;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        #themeToggle:hover {
+            background-color: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+        body.dark-mode #themeToggle {
+            background-color: #2F3640;
+            border-color: #4A5560;
+            color: var(--text-dark);
+        }
+        body.dark-mode #themeToggle:hover {
+            background-color: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 767px) {
+            .password-protection, .quiz-section, .result-section, .review-section {
+                padding: 25px;
+            }
+            .password-protection h2 {
+                font-size: 2rem;
+            }
+            .quiz-header {
+                flex-direction: column;
+                gap: 15px;
+            }
+            .quiz-header h3, .quiz-header .timer {
+                font-size: 1.5rem;
+            }
+            .palette-btn {
+                min-width: 40px; /* Adjust for smaller screens */
+                height: 40px;
+                font-size: 0.9rem;
+            }
+            .question-area h4 {
+                font-size: 1.4rem;
+            }
+            .options label {
+                padding: 12px 15px;
+                font-size: 1rem;
+            }
+            .navigation-buttons button {
+                padding: 10px 20px;
+                font-size: 1rem;
+                margin: 0 5px;
+            }
+            .result-section h2 {
+                font-size: 2.2rem;
+            }
+            .result-stats p {
+                font-size: 1.1rem;
+            }
+            .result-buttons .btn {
+                padding: 12px 25px;
+                font-size: 1rem;
+                margin: 8px;
+            }
+            .review-section h2 {
+                font-size: 1.8rem;
+            }
+            .review-question-display h5 {
+                font-size: 1.3rem;
+            }
+            .review-option-item {
+                font-size: 0.95rem;
+            }
+            .mark-input-group {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .mark-input-group label {
+                text-align: left;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg">
+    <div class="container-fluid container-xl">
+        <a class="navbar-brand" href="#">
+            <i class="fa-solid fa-user-graduate"></i> MDCAT Mock Test
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <button id="themeToggle" class="btn btn-link nav-link">🌙</button>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container mock-test-container d-flex flex-column align-items-center justify-content-center">
+
+    <div id="passwordProtection" class="password-protection">
+        <h2>Enter Password to Start Test</h2>
+        <div class="mb-3">
+            <input type="password" class="form-control form-control-lg" id="testPassword" placeholder="Enter password">
+            <p id="passwordError" class="text-danger mt-2 d-none">Incorrect password. Please try again.</p>
+        </div>
+
+        <h3 class="mt-4 mb-3" style="color: var(--text-dark);">Enter Academic Marks (For Merit Calculation)</h3>
+        <div class="mark-input-group">
+            <label for="sscObtained">SSC Marks:</label>
+            <input type="number" class="form-control" id="sscObtained" placeholder="Obtained" min="0">
+            <span>/</span>
+            <input type="number" class="form-control" id="sscTotal" placeholder="Total" min="1">
+        </div>
+        <p id="sscError" class="input-error d-none">Please enter valid SSC marks (Obtained <= Total, Total > 0).</p>
+
+        <div class="mark-input-group">
+            <label for="fscObtained">F.Sc. Marks:</label>
+            <input type="number" class="form-control" id="fscObtained" placeholder="Obtained" min="0">
+            <span>/</span>
+            <input type="number" class="form-control" id="fscTotal" placeholder="Total" min="1">
+        </div>
+        <p id="fscError" class="input-error d-none">Please enter valid F.Sc. marks (Obtained <= Total, Total > 0).</p>
+
+        <button id="startTestBtn" class="btn btn-primary btn-lg mt-4">Start Test</button>
+    </div>
+
+    <div id="quizSection" class="quiz-section d-none">
+        <div class="quiz-header">
+            <h3 id="questionCounter">Question 1/200</h3>
+            <div class="timer" id="timer"><span class="me-2">Time Left:</span>03:30:00</div>
+        </div>
+
+        <div class="question-area">
+            <h4 id="questionText"></h4>
+            <div class="options" id="optionsContainer">
+                </div>
+        </div>
+
+        <div class="navigation-buttons">
+            <button id="prevBtn" class="btn btn-outline-primary">Previous</button>
+            <button id="nextBtn" class="btn btn-primary">Next</button>
+        </div>
+
+        <div class="question-palette" id="questionPalette">
+            </div>
+    </div>
+
+    <div id="resultSection" class="result-section d-none">
+        <h2>Test Results</h2>
+        <div class="result-stats mb-4">
+            <p>Total Questions: <strong id="totalQuestionsResult"></strong></p>
+            <p>Attempted: <strong id="attemptedQuestionsResult"></strong></p>
+            <p>Correct Answers: <strong id="correctAnswersResult"></strong></p>
+            <p>Incorrect Answers: <strong id="incorrectAnswersResult"></strong></p>
+            <p>Unattempted: <strong id="unattemptedQuestionsResult"></strong></p>
+            <p>Time Taken: <strong id="timeTakenResult"></strong></p>
+            <p class="h4 mt-4">Your MDCAT Score: <strong id="mdcatScorePercentage" class="text-primary"></strong></p>
+            <p class="h4">Aggregate Percentage: <strong id="aggregatePercentage" class="text-primary"></strong></p>
+            <p class="pass-status" id="mdcatPassStatus"></p>
+            <p class="pass-status" id="fscPassStatus"></p>
+            <p class="pass-status" id="overallAdmissionStatus"></p>
+        </div>
+        <div class="result-buttons">
+            <button id="reviewBtn" class="btn btn-info">Review Questions</button>
+            <button id="restartBtn" class="btn btn-success">Restart Test</button>
+            <button id="savePdfBtn" class="btn btn-secondary">Save as PDF</button>
+        </div>
+    </div>
+
+    <div id="reviewSection" class="review-section d-none">
+        <h2 class="mb-4">Review Questions</h2>
+        <div class="review-question-display" id="reviewQuestionDisplay">
+            </div>
+        <div class="review-navigation-buttons d-flex justify-content-between mt-4">
+            <button id="reviewPrevBtn" class="btn btn-outline-primary">Previous</button>
+            <button id="reviewNextBtn" class="btn btn-primary">Next</button>
+        </div>
+        <button id="backToResultsBtn" class="btn btn-secondary mt-4">Back to Results</button>
+    </div>
+
+</div> <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const quizPassword = "mdcattestbymk";
+        const passwordProtection = document.getElementById('passwordProtection');
+        const testPasswordInput = document.getElementById('testPassword');
+        const sscObtainedInput = document.getElementById('sscObtained');
+        const sscTotalInput = document.getElementById('sscTotal');
+        const fscObtainedInput = document.getElementById('fscObtained');
+        const fscTotalInput = document.getElementById('fscTotal');
+        const startTestBtn = document.getElementById('startTestBtn');
+        const passwordError = document.getElementById('passwordError');
+        const sscError = document.getElementById('sscError');
+        const fscError = document.getElementById('fscError');
+
+        const quizSection = document.getElementById('quizSection');
+        const questionCounter = document.getElementById('questionCounter');
+        const timerDisplay = document.getElementById('timer');
+        const questionPalette = document.getElementById('questionPalette');
+        const questionText = document.getElementById('questionText');
+        const optionsContainer = document.getElementById('optionsContainer');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+
+        const resultSection = document.getElementById('resultSection');
+        const totalQuestionsResult = document.getElementById('totalQuestionsResult');
+        const attemptedQuestionsResult = document.getElementById('attemptedQuestionsResult');
+        const correctAnswersResult = document.getElementById('correctAnswersResult');
+        const incorrectAnswersResult = document.getElementById('incorrectAnswersResult');
+        const unattemptedQuestionsResult = document.getElementById('unattemptedQuestionsResult');
+        const timeTakenResult = document.getElementById('timeTakenResult');
+        const mdcatScorePercentageDisplay = document.getElementById('mdcatScorePercentage'); // New
+        const aggregatePercentageDisplay = document.getElementById('aggregatePercentage'); // New
+        const mdcatPassStatus = document.getElementById('mdcatPassStatus'); // New
+        const fscPassStatus = document.getElementById('fscPassStatus'); // New
+        const overallAdmissionStatus = document.getElementById('overallAdmissionStatus'); // New
+        const finalScore = document.getElementById('finalScore'); // This will now show raw score
+        const reviewBtn = document.getElementById('reviewBtn');
+        const restartBtn = document.getElementById('restartBtn');
+        const savePdfBtn = document.getElementById('savePdfBtn');
+
+        const reviewSection = document.getElementById('reviewSection');
+        const reviewQuestionDisplay = document.getElementById('reviewQuestionDisplay');
+        const reviewPrevBtn = document.getElementById('reviewPrevBtn');
+        const reviewNextBtn = document.getElementById('reviewNextBtn');
+        const backToResultsBtn = document.getElementById('backToResultsBtn');
+
+        let currentQuestionIndex = 0;
+        let userAnswers = []; // Stores the index of the selected option for each question
+        let timerInterval;
+        const totalTestDuration = 3.5 * 60 * 60; // 3.5 hours in seconds
+        let timeRemaining = totalTestDuration;
+        let testStartTime; // To record when the test starts
+
+        // Variables for academic marks, initialized to 0 for obtained and 1 for total to prevent division by zero initially.
+        let sscObtainedMarks = 0;
+        let sscTotalMarks = 1;
+        let fscObtainedMarks = 0;
+        let fscTotalMarks = 1;
+
+
+        // Sample Questions (For demonstration, 200 questions logic will be similar)
+        // In a real application, you might fetch these from a backend
+        const questions = [
+         
+  {
+    "question": "What is the basic structural and functional unit of life?",
+    "options": ["Tissue", "Organ", "Cell", "Organ system"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "Which organelle is called the powerhouse of the cell?",
+    "options": ["Ribosome", "Nucleus", "Mitochondria", "Golgi body"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "Proteins are made up of:",
+    "options": ["Nucleotides", "Amino acids", "Fatty acids", "Sugars"],
+    "correctAnswer": 1
+  },
+  {
+    "question": "What is the function of ribosomes?",
+    "options": ["Digestion", "Photosynthesis", "Protein synthesis", "Respiration"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "Which part of the brain controls balance and coordination?",
+    "options": ["Cerebrum", "Cerebellum", "Medulla", "Hypothalamus"],
+    "correctAnswer": 1
+  },
+  {
+    "question": "Which molecule stores genetic information?",
+    "options": ["RNA", "ATP", "Protein", "DNA"],
+    "correctAnswer": 3
+  },
+  {
+    "question": "Which blood cells help in clotting?",
+    "options": ["RBC", "WBC", "Platelets", "Plasma"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "Which organ removes nitrogenous waste from the body?",
+    "options": ["Lungs", "Liver", "Kidneys", "Pancreas"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "Which gas is essential for aerobic respiration?",
+    "options": ["Carbon dioxide", "Oxygen", "Nitrogen", "Hydrogen"],
+    "correctAnswer": 1
+  },
+  {
+    "question": "HIV causes which disease?",
+    "options": ["Cancer", "AIDS", "Hepatitis", "Flu"],
+    "correctAnswer": 1
+  },
+  {
+    "question": "Which carbohydrate is found in plant cell walls?",
+    "options": ["Glucose", "Starch", "Cellulose", "Fructose"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "Which enzyme breaks down starch in the mouth?",
+    "options": ["Pepsin", "Amylase", "Lipase", "Trypsin"],
+    "correctAnswer": 1
+  },
+  {
+    "question": "What is the role of chlorophyll?",
+    "options": ["Respiration", "Protein synthesis", "Photosynthesis", "Digestion"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "The human heart has how many chambers?",
+    "options": ["2", "3", "4", "5"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "The smallest blood vessels are called:",
+    "options": ["Arteries", "Veins", "Capillaries", "Aorta"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "Which hormone controls blood sugar levels?",
+    "options": ["Adrenaline", "Thyroxine", "Insulin", "Testosterone"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "Which organ produces bile?",
+    "options": ["Kidney", "Pancreas", "Gallbladder", "Liver"],
+    "correctAnswer": 3
+  },
+  {
+    "question": "What is the function of alveoli?",
+    "options": ["Absorption of food", "Exchange of gases", "Filtration of blood", "Secretion of hormones"],
+    "correctAnswer": 1
+  },
+  {
+    "question": "Reflex actions are controlled by:",
+    "options": ["Cerebrum", "Cerebellum", "Spinal cord", "Medulla"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "Which structure carries nerve impulses away from the cell body?",
+    "options": ["Dendrite", "Axon", "Synapse", "Nucleus"],
+    "correctAnswer": 1
+  },
+  {
+    "question": "What is the main function of WBCs?",
+    "options": ["Carry oxygen", "Help clot blood", "Fight infection", "Produce insulin"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "Which hormone initiates menstruation?",
+    "options": ["Progesterone", "Estrogen", "FSH", "LH"],
+    "correctAnswer": 1
+  },
+  {
+    "question": "Which protein is found in red blood cells?",
+    "options": ["Keratin", "Collagen", "Myosin", "Hemoglobin"],
+    "correctAnswer": 3
+  },
+  {
+    "question": "Skeletal muscles are under:",
+    "options": ["Voluntary control", "Involuntary control", "Hormonal control", "Reflex control"],
+    "correctAnswer": 0
+  },
+  {
+    "question": "What is the fluid part of blood called?",
+    "options": ["Plasma", "Serum", "WBC", "Platelets"],
+    "correctAnswer": 0
+  },
+  {
+    "question": "Inheritance of traits is studied in:",
+    "options": ["Ecology", "Genetics", "Evolution", "Taxonomy"],
+    "correctAnswer": 1
+  },
+  {
+    "question": "The enzyme that digests proteins in the stomach is:",
+    "options": ["Amylase", "Pepsin", "Lipase", "Trypsin"],
+    "correctAnswer": 1
+  },
+  {
+    "question": "Mendel is known as the father of:",
+    "options": ["Ecology", "Physiology", "Genetics", "Botany"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "Which blood group is universal donor?",
+    "options": ["A", "B", "AB", "O"],
+    "correctAnswer": 3
+  },
+  {
+    "question": "Which structure in kidney filters blood?",
+    "options": ["Nephron", "Glomerulus", "Tubule", "Bowman’s capsule"],
+    "correctAnswer": 1
+  },
+  {
+    "question": "The number of atoms in 1 mole of a substance is:",
+    "options": ["3.01×10^22", "6.022×10^23", "1.6×10^-19", "9.8 m/s^2"],
+    "correctAnswer": 1
+  },
+  {
+    "question": "Which subatomic particle is negatively charged?",
+    "options": ["Proton", "Neutron", "Electron", "Nucleus"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "The mass of 1 mole of water is:",
+    "options": ["16g", "18g", "20g", "12g"],
+    "correctAnswer": 1
+  },
+  {
+    "question": "Which gas law states that pressure is inversely proportional to volume?",
+    "options": ["Charles’s Law", "Boyle’s Law", "Avogadro’s Law", "Graham’s Law"],
+    "correctAnswer": 1
+  },
+  {
+    "question": "Hydrogen bonding is present in:",
+    "options": ["CO2", "H2O", "O2", "CH4"],
+    "correctAnswer": 1
+  },
+  {
+    "question": "Which acid is present in vinegar?",
+    "options": ["Citric acid", "Acetic acid", "Formic acid", "Sulfuric acid"],
+    "correctAnswer": 1
+  },
+  {
+    "question": "What is the pH of pure water?",
+    "options": ["3", "7", "9", "5"],
+    "correctAnswer": 1
+  },
+  {
+    "question": "Which element is a noble gas?",
+    "options": ["Oxygen", "Nitrogen", "Argon", "Chlorine"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "The most electronegative element is:",
+    "options": ["Fluorine", "Chlorine", "Oxygen", "Iodine"],
+    "correctAnswer": 0
+  },
+  {
+    "question": "Which compound has a triple bond?",
+    "options": ["Ethane", "Ethene", "Ethyne", "Methane"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "Which element is the lightest?",
+    "options": ["Oxygen", "Hydrogen", "Helium", "Carbon"],
+    "correctAnswer": 1
+  },
+  {
+    "question": "What is the chemical formula of ammonia?",
+    "options": ["NH4", "NH3", "NO2", "N2O"],
+    "correctAnswer": 1
+  },
+  {
+    "question": "Which of the following is a base?",
+    "options": ["HCl", "NaOH", "H2SO4", "CH3COOH"],
+    "correctAnswer": 1
+  },
+  {
+    "question": "Which particle has no charge?",
+    "options": ["Proton", "Electron", "Neutron", "Nucleus"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "The S.I unit of energy is:",
+    "options": ["Joule", "Calorie", "Watt", "Newton"],
+    "correctAnswer": 0
+  },
+  {
+    "question": "Which compound contains ionic bond?",
+    "options": ["H2O", "NaCl", "CH4", "O2"],
+    "correctAnswer": 1
+  },
+  {
+    "question": "Which group is known as alkali metals?",
+    "options": ["Group I", "Group II", "Group VII", "Group 0"],
+    "correctAnswer": 0
+  },
+  {
+    "question": "Rusting is a type of:",
+    "options": ["Reduction", "Oxidation", "Hydrolysis", "Precipitation"],
+    "correctAnswer": 1
+  },
+  {
+    "question": "Organic compounds mainly contain:",
+    "options": ["Sodium", "Chlorine", "Carbon", "Magnesium"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "Which acid is used in car batteries?",
+    "options": ["Acetic acid", "Hydrochloric acid", "Sulfuric acid", "Nitric acid"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "The unit of force is:",
+    "options": ["Joule", "Newton", "Watt", "Pascal"],
+    "correctAnswer": 1
+  },
+  {
+    "question": "Speed is defined as:",
+    "options": ["Distance/time", "Force × time", "Mass × acceleration", "Displacement/time"],
+    "correctAnswer": 0
+  },
+  {
+    "question": "Acceleration due to gravity on Earth is:",
+    "options": ["8.8 m/s^2", "9.8 m/s^2", "10 m/s^2", "6.8 m/s^2"],
+    "correctAnswer": 1
+  },
+  {
+    "question": "Which quantity is scalar?",
+    "options": ["Force", "Velocity", "Work", "Acceleration"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "Which law explains action and reaction?",
+    "options": ["First", "Second", "Third", "Law of inertia"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "Which instrument measures current?",
+    "options": ["Voltmeter", "Ammeter", "Thermometer", "Galvanometer"],
+    "correctAnswer": 1
+  },
+  {
+    "question": "The frequency of A.C in Pakistan is:",
+    "options": ["50 Hz", "60 Hz", "30 Hz", "100 Hz"],
+    "correctAnswer": 0
+  },
+  {
+    "question": "Sound cannot travel in:",
+    "options": ["Water", "Air", "Vacuum", "Steel"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "Which wave is used in TV remote control?",
+    "options": ["Microwave", "Infrared", "X-ray", "Radio"],
+    "correctAnswer": 1
+  },
+  {
+    "question": "Heat energy is transferred by conduction mainly in:",
+    "options": ["Solids", "Liquids", "Gases", "Vacuum"],
+    "correctAnswer": 0
+  },
+  {
+    "question": "The SI unit of pressure is:",
+    "options": ["Bar", "Pascal", "Newton", "Atmosphere"],
+    "correctAnswer": 1
+  },
+  {
+    "question": "Ohm's law is V =",
+    "options": ["IR", "I/R", "R/I", "VI"],
+    "correctAnswer": 0
+  },
+  {
+    "question": "The device used to convert A.C to D.C is:",
+    "options": ["Rectifier", "Transformer", "Capacitor", "Resistor"],
+    "correctAnswer": 0
+  },
+  {
+    "question": "Which color has the highest frequency?",
+    "options": ["Red", "Blue", "Green", "Violet"],
+    "correctAnswer": 3
+  },
+  {
+    "question": "Which radiation has the shortest wavelength?",
+    "options": ["Infrared", "Ultraviolet", "Microwave", "Gamma rays"],
+    "correctAnswer": 3
+  },
+  {
+    "question": "The time for one complete wave is called:",
+    "options": ["Amplitude", "Frequency", "Wavelength", "Time period"],
+    "correctAnswer": 3
+  },
+  {
+    "question": "Which instrument detects earthquakes?",
+    "options": ["Thermometer", "Barometer", "Seismograph", "Anemometer"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "In convex lens, image formed is:",
+    "options": ["Always virtual", "Always real", "Real or virtual", "Always inverted"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "The flow of electrons is called:",
+    "options": ["Resistance", "Current", "Voltage", "Power"],
+    "correctAnswer": 1
+  },
+  {
+    "question": "What is the speed of light in vacuum?",
+    "options": ["3×10^8 m/s", "3×10^6 m/s", "1.5×10^8 m/s", "3×10^5 m/s"],
+    "correctAnswer": 0
+  },
+  {
+    "question": "Which vitamin is essential for blood clotting?",
+    "options": ["Vitamin A", "Vitamin B", "Vitamin K", "Vitamin D"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "The process by which green plants make their food is:",
+    "options": ["Respiration", "Transpiration", "Photosynthesis", "Digestion"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "In which organelle does aerobic respiration take place?",
+    "options": ["Chloroplast", "Mitochondria", "Nucleus", "Golgi body"],
+    "correctAnswer": 1
+  },
+  {
+    "question": "Which of the following is not a component of the human circulatory system?",
+    "options": ["Heart", "Lungs", "Blood", "Blood vessels"],
+    "correctAnswer": 1
+  },
+  {
+    "question": "Which type of immunity is gained through vaccination?",
+    "options": ["Natural", "Passive", "Active acquired", "Innate"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "A genetic disorder caused by a missing clotting factor is:",
+    "options": ["Anemia", "Hemophilia", "Thalassemia", "Diabetes"],
+    "correctAnswer": 1
+  },
+  {
+    "question": "Which hormone controls the menstrual cycle?",
+    "options": ["Insulin", "Adrenaline", "Estrogen", "Glucagon"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "Which process removes excess water from the body?",
+    "options": ["Digestion", "Respiration", "Excretion", "Absorption"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "What structure in the eye detects light?",
+    "options": ["Iris", "Lens", "Retina", "Cornea"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "The longest part of the human digestive system is:",
+    "options": ["Stomach", "Small intestine", "Large intestine", "Esophagus"],
+    "correctAnswer": 1
+  },
+  {
+    "question": "Which part of the brain regulates heartbeat and breathing?",
+    "options": ["Cerebrum", "Cerebellum", "Medulla", "Thalamus"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "Which protein is responsible for muscle contraction?",
+    "options": ["Myosin", "Actin", "Keratin", "Albumin"],
+    "correctAnswer": 0
+  },
+  {
+    "question": "Which organ regulates body temperature?",
+    "options": ["Liver", "Kidney", "Hypothalamus", "Lungs"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "Which gland secretes growth hormone?",
+    "options": ["Thyroid", "Adrenal", "Pituitary", "Pancreas"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "Which part of nephron performs ultrafiltration?",
+    "options": ["Loop of Henle", "Glomerulus", "Tubule", "Collecting duct"],
+    "correctAnswer": 1
+  },
+  {
+    "question": "Sex chromosomes in males are:",
+    "options": ["XX", "XY", "YY", "XO"],
+    "correctAnswer": 1
+  },
+  {
+    "question": "Which structure transports urine from kidney to bladder?",
+    "options": ["Urethra", "Nephron", "Ureter", "Loop of Henle"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "Red blood cells are produced in the:",
+    "options": ["Liver", "Spleen", "Bone marrow", "Heart"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "Which part of the flower produces pollen?",
+    "options": ["Petal", "Stigma", "Anther", "Ovary"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "Fertilization in humans occurs in the:",
+    "options": ["Uterus", "Ovary", "Fallopian tube", "Vagina"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "Which is the most abundant gas in the Earth's atmosphere?",
+    "options": ["Oxygen", "Carbon dioxide", "Nitrogen", "Argon"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "The process of solid directly changing into gas is:",
+    "options": ["Fusion", "Sublimation", "Condensation", "Evaporation"],
+    "correctAnswer": 1
+  },
+  {
+    "question": "Which metal is liquid at room temperature?",
+    "options": ["Iron", "Mercury", "Aluminum", "Lead"],
+    "correctAnswer": 1
+  },
+  {
+    "question": "Which substance turns blue litmus paper red?",
+    "options": ["Base", "Acid", "Salt", "Alcohol"],
+    "correctAnswer": 1
+  },
+  {
+    "question": "The bond between two non-metals is:",
+    "options": ["Ionic", "Covalent", "Metallic", "Hydrogen"],
+    "correctAnswer": 1
+  },
+  {
+    "question": "The chemical formula of calcium carbonate is:",
+    "options": ["CaO", "CaCl2", "CaCO3", "Ca(OH)2"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "Atomic number is the number of:",
+    "options": ["Electrons", "Neutrons", "Protons", "Ions"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "Which group in the periodic table contains noble gases?",
+    "options": ["Group 1", "Group 7", "Group 18", "Group 17"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "NaOH is a:",
+    "options": ["Salt", "Acid", "Base", "Solvent"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "The nucleus of an atom contains:",
+    "options": ["Protons only", "Electrons and neutrons", "Protons and neutrons", "Electrons only"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "Rate of reaction is affected by:",
+    "options": ["Color", "Mass", "Temperature", "Volume"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "Water is a:",
+    "options": ["Element", "Compound", "Mixture", "Atom"],
+    "correctAnswer": 1
+  },
+  {
+    "question": "Which element is used in making nuclear bombs?",
+    "options": ["Uranium", "Calcium", "Lead", "Zinc"],
+    "correctAnswer": 0
+  },
+  {
+    "question": "A solution with pH less than 7 is:",
+    "options": ["Neutral", "Basic", "Acidic", "Alkaline"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "Which compound is responsible for hardness of water?",
+    "options": ["NaCl", "MgSO4", "CaCO3", "HCl"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "The anion in NaCl is:",
+    "options": ["Na+", "Cl-", "Na-", "Cl+"],
+    "correctAnswer": 1
+  },
+  {
+    "question": "Which hydrocarbon has a triple bond?",
+    "options": ["Alkane", "Alkene", "Aromatic", "Alkyne"],
+    "correctAnswer": 3
+  },
+  {
+    "question": "Litmus is a type of:",
+    "options": ["Salt", "Indicator", "Acid", "Base"],
+    "correctAnswer": 1
+  },
+  {
+    "question": "Which process separates components based on boiling point?",
+    "options": ["Filtration", "Evaporation", "Distillation", "Chromatography"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "The symbol of lead is:",
+    "options": ["Pb", "P", "Pd", "L"],
+    "correctAnswer": 0
+  },
+  {
+    "question": "Force acting on unit area is called:",
+    "options": ["Work", "Power", "Pressure", "Energy"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "The instrument used to measure atmospheric pressure is:",
+    "options": ["Thermometer", "Hygrometer", "Barometer", "Ammeter"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "Heat is a form of:",
+    "options": ["Matter", "Energy", "Force", "Pressure"],
+    "correctAnswer": 1
+  },
+  {
+    "question": "Which law states that energy cannot be created or destroyed?",
+    "options": ["Ohm’s law", "Newton’s law", "Law of conservation of energy", "Hooke’s law"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "1 kilowatt-hour is equal to:",
+    "options": ["3600 J", "3.6×10^6 J", "1000 J", "360 J"],
+    "correctAnswer": 1
+  },
+  {
+    "question": "The SI unit of electric charge is:",
+    "options": ["Ampere", "Volt", "Coulomb", "Ohm"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "An electric current produces:",
+    "options": ["Sound", "Light", "Magnetic field", "Heat only"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "What does a transformer do?",
+    "options": ["Stores charge", "Measures voltage", "Changes voltage", "Generates electricity"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "The path followed by projectile is called:",
+    "options": ["Circle", "Straight line", "Parabola", "Ellipse"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "The device that stores electrical energy is called:",
+    "options": ["Transistor", "Resistor", "Capacitor", "Inductor"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "What is the unit of frequency?",
+    "options": ["Decibel", "Meter", "Hertz", "Volt"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "Which mirror is used in car side mirrors?",
+    "options": ["Plane", "Concave", "Convex", "Parabolic"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "The phenomenon of light bending is called:",
+    "options": ["Reflection", "Refraction", "Diffraction", "Dispersion"],
+    "correctAnswer": 1
+  },
+  {
+    "question": "Which color of light has the longest wavelength?",
+    "options": ["Red", "Blue", "Green", "Violet"],
+    "correctAnswer": 0
+  },
+  {
+    "question": "The main source of energy for Earth is:",
+    "options": ["Wind", "Water", "Sun", "Fuel"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "Speed of sound in air is approximately:",
+    "options": ["330 m/s", "3×10^8 m/s", "1000 m/s", "1500 m/s"],
+    "correctAnswer": 0
+  },
+  {
+    "question": "Which type of lens is thicker at the center?",
+    "options": ["Concave", "Convex", "Plane", "Flat"],
+    "correctAnswer": 1
+  },
+  {
+    "question": "What is the acceleration in free fall?",
+    "options": ["1 m/s²", "5 m/s²", "9.8 m/s²", "15 m/s²"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "The SI unit of work is:",
+    "options": ["Joule", "Watt", "Newton", "Pascal"],
+    "correctAnswer": 0
+  },
+  {
+    "question": "The mirror used by dentists is:",
+    "options": ["Plane", "Convex", "Concave", "None"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "Choose the correct synonym for 'Rapid':",
+    "options": ["Slow", "Fast", "Dull", "Lazy"],
+    "correctAnswer": 1
+  },
+  {
+    "question": "Choose the correct antonym for 'Expand':",
+    "options": ["Increase", "Enlarge", "Contract", "Spread"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "Fill in the blank: She ___ going to school.",
+    "options": ["am", "is", "are", "were"],
+    "correctAnswer": 1
+  },
+  {
+    "question": "Choose the correct preposition: He jumped ___ the river.",
+    "options": ["on", "in", "into", "onto"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "Identify the adjective: The sky was dark and cloudy.",
+    "options": ["Sky", "Was", "Dark", "And"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "Choose the correct spelling:",
+    "options": ["Recieve", "Receive", "Receeve", "Recive"],
+    "correctAnswer": 1
+  },
+  {
+    "question": "Choose the passive voice: 'She wrote a letter.'",
+    "options": ["A letter is written", "A letter was written by her", "She writes letter", "She has written letter"],
+    "correctAnswer": 1
+  },
+  {
+    "question": "Pick the correct indirect speech: He said, 'I am tired.'",
+    "options": ["He said he was tired", "He said I am tired", "He said that I was tired", "He told he tired"],
+    "correctAnswer": 0
+  },
+  {
+    "question": "Choose the correct pronoun: ___ are coming with us.",
+    "options": ["Them", "They", "Their", "Theirs"],
+    "correctAnswer": 1
+  },
+  {
+    "question": "Identify the noun: Honesty is the best policy.",
+    "options": ["Best", "Policy", "Is", "Honesty"],
+    "correctAnswer": 3
+  },
+  {
+    "question": "If A = 1, B = 2, ..., then what is the sum of letters in 'DOG'?",
+    "options": ["20", "26", "24", "22"],
+    "correctAnswer": 1
+  },
+  {
+    "question": "What comes next in the series: 2, 4, 8, 16, ?",
+    "options": ["18", "24", "30", "32"],
+    "correctAnswer": 3
+  },
+  {
+    "question": "All roses are flowers. Some flowers fade quickly. What can be concluded?",
+    "options": ["All roses fade quickly", "Some roses are not flowers", "Some flowers are roses", "Some roses may fade quickly"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "Which number completes the series: 3, 6, 9, 12, ?",
+    "options": ["14", "15", "18", "16"],
+    "correctAnswer": 1
+  },
+  {
+    "question": "Statement: All humans are mammals. Conclusion: All mammals are humans.",
+    "options": ["True", "False", "Uncertain", "Cannot say"],
+    "correctAnswer": 1
+  },
+  {
+    "question": "What comes next in the pattern: Z, X, V, T, ?",
+    "options": ["R", "S", "Q", "U"],
+    "correctAnswer": 0
+  },
+  {
+    "question": "Find the odd one out: Apple, Banana, Carrot, Mango",
+    "options": ["Apple", "Banana", "Carrot", "Mango"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "A is the sister of B. B is the brother of C. C is the son of D. How is D related to A?",
+    "options": ["Father", "Mother", "Parent", "Uncle"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "If ALL = 36, BAT = 43, then CAT = ?",
+    "options": ["42", "46", "41", "44"],
+    "correctAnswer": 3
+  },
+  {
+    "question": "Which figure logically follows: ●▲■, ▲■●, ■●▲, ?",
+    "options": ["■▲●", "▲●■", "●■▲", "■●▲"],
+    "correctAnswer": 1
+  },
+  {
+    "question": "Which day comes three days after Monday?",
+    "options": ["Thursday", "Friday", "Wednesday", "Sunday"],
+    "correctAnswer": 0
+  },
+  {
+    "question": "Which is the odd one out: Circle, Triangle, Square, Sphere?",
+    "options": ["Circle", "Sphere", "Triangle", "Square"],
+    "correctAnswer": 1
+  },
+  {
+    "question": "If 1=5, 2=25, 3=325, then 4=?",
+    "options": ["4325", "425", "435", "432"],
+    "correctAnswer": 0
+  },
+  {
+    "question": "Which letter is two places right of G in English alphabet?",
+    "options": ["H", "I", "J", "K"],
+    "correctAnswer": 1
+  },
+  {
+    "question": "If 5 + 3 = 28, 9 + 1 = 810, then 8 + 6 = ?",
+    "options": ["86", "814", "48", "88"],
+    "correctAnswer": 1
+  },
+  {
+    "question": "A clock shows 3:15. What is the angle between hour and minute hand?",
+    "options": ["0°", "7.5°", "30°", "60°"],
+    "correctAnswer": 1
+  },
+  {
+    "question": "Which number is missing? 4, 9, 16, ?, 36",
+    "options": ["20", "25", "30", "32"],
+    "correctAnswer": 1
+  },
+  {
+    "question": "What is the mirror image of 'MBD'?",
+    "options": ["DMB", "BMD", "qvd", "None"],
+    "correctAnswer": 3
+  },
+  {
+    "question": "If South becomes East, what does East become?",
+    "options": ["North", "South", "West", "Same"],
+    "correctAnswer": 0
+  },
+  {
+    "question": "Which figure is different: □, △, ◯, ▲",
+    "options": ["□", "△", "◯", "▲"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "Which planet is known as the Red Planet?",
+    "options": ["Earth", "Jupiter", "Mars", "Venus"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "Which vitamin is synthesized in skin by sunlight?",
+    "options": ["A", "B", "C", "D"],
+    "correctAnswer": 3
+  },
+  {
+    "question": "Which of the following is not a greenhouse gas?",
+    "options": ["CO2", "CH4", "O2", "N2O"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "Which of these is not a noble gas?",
+    "options": ["Neon", "Helium", "Argon", "Hydrogen"],
+    "correctAnswer": 3
+  },
+  {
+    "question": "Which unit is used to measure electric power?",
+    "options": ["Volt", "Watt", "Ohm", "Ampere"],
+    "correctAnswer": 1
+  },
+  {
+    "question": "What is the chemical formula of methane?",
+    "options": ["CH3", "CH4", "C2H6", "CO2"],
+    "correctAnswer": 1
+  },
+  {
+    "question": "The process of joining monomers to form polymers is called:",
+    "options": ["Hydrolysis", "Polymerization", "Glycolysis", "Crystallization"],
+    "correctAnswer": 1
+  },
+  {
+    "question": "Which blood group is universal recipient?",
+    "options": ["A", "B", "AB", "O"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "Which organ helps in voice production?",
+    "options": ["Pharynx", "Larynx", "Trachea", "Bronchi"],
+    "correctAnswer": 1
+  },
+  {
+    "question": "Which layer of skin has pigment cells?",
+    "options": ["Dermis", "Epidermis", "Subcutaneous", "Basement membrane"],
+    "correctAnswer": 1
+  },
+  {
+    "question": "The process of cell division in somatic cells is:",
+    "options": ["Meiosis", "Binary fission", "Mitosis", "Budding"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "Which one is an excretory organ?",
+    "options": ["Liver", "Pancreas", "Lung", "Skin"],
+    "correctAnswer": 3
+  },
+  {
+    "question": "DNA replication occurs in which phase of cell cycle?",
+    "options": ["G1", "G2", "S", "M"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "Which of the following is a polysaccharide?",
+    "options": ["Glucose", "Fructose", "Sucrose", "Starch"],
+    "correctAnswer": 3
+  },
+  {
+    "question": "In which organ is urea produced?",
+    "options": ["Kidney", "Liver", "Bladder", "Pancreas"],
+    "correctAnswer": 1
+  },
+  {
+    "question": "A balanced chemical equation obeys:",
+    "options": ["Law of gravity", "Law of reflection", "Law of conservation of mass", "Law of inertia"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "Unit of sound intensity is:",
+    "options": ["Decibel", "Hertz", "Joule", "Tesla"],
+    "correctAnswer": 0
+  },
+  {
+    "question": "Which wave is used in medical imaging?",
+    "options": ["Gamma rays", "Microwaves", "X-rays", "Radio waves"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "Which gas is used in light bulbs?",
+    "options": ["Hydrogen", "Nitrogen", "Argon", "Oxygen"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "Which gland is called the master gland?",
+    "options": ["Thyroid", "Pancreas", "Pituitary", "Adrenal"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "Which of the following is an example of an oligosaccharide?",
+    "options": ["Glucose", "Starch", "Sucrose", "Glycogen"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "What is the primary function of the Golgi apparatus in a cell?",
+    "options": ["Protein synthesis", "Energy production", "Modifying and packaging proteins", "DNA replication"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "Which part of the human brain is responsible for regulating involuntary functions like breathing and heart rate?",
+    "options": ["Cerebrum", "Cerebellum", "Medulla Oblongata", "Hypothalamus"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "Which of the following factors does NOT significantly affect enzyme activity?",
+    "options": ["Temperature", "pH", "Substrate concentration", "Presence of light"],
+    "correctAnswer": 3
+  },
+  {
+    "question": "Lamarck's theory of evolution is based on the concept of:",
+    "options": ["Natural selection", "Inheritance of acquired characters", "Genetic mutation", "Common descent"],
+    "correctAnswer": 1
+  },
+  {
+    "question": "Which of the following sexually transmitted diseases is caused by a bacterium?",
+    "options": ["Herpes", "HIV/AIDS", "Gonorrhea", "HPV"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "What type of muscle tissue is responsible for the rhythmic contractions of the heart?",
+    "options": ["Skeletal muscle", "Smooth muscle", "Cardiac muscle", "Voluntary muscle"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "In a dihybrid cross, Mendel's Law of Independent Assortment states that alleles for different traits segregate independently during gamete formation. What is the expected phenotypic ratio for a dihybrid cross involving two unlinked genes?",
+    "options": ["3:1", "1:2:1", "9:3:3:1", "1:1:1:1"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "Which component of the human circulatory system carries oxygenated blood away from the heart to the rest of the body?",
+    "options": ["Veins", "Capillaries", "Arteries", "Lymphatic vessels"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "According to the kinetic molecular theory, which of the following statements is true for an ideal gas?",
+    "options": ["Gas particles have significant volume.", "There are strong attractive forces between gas particles.", "Gas particles move in random, continuous motion.", "Collisions between gas particles are inelastic."],
+    "correctAnswer": 2
+  },
+  {
+    "question": "What is the SI unit for the ideal gas constant (R)?",
+    "options": ["Joule/mole·Kelvin", "Liter·atm/mole·Kelvin", "Pascal·m³/mole·Kelvin", "All of the above"],
+    "correctAnswer": 0
+  },
+  {
+    "question": "Which type of intermolecular force is responsible for the relatively high boiling point of water?",
+    "options": ["London Dispersion Forces", "Dipole-Dipole Forces", "Hydrogen Bonding", "Ionic Bonds"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "In an exothermic reaction, the enthalpy change (ΔH) is:",
+    "options": ["Positive", "Negative", "Zero", "Dependent on temperature"],
+    "correctAnswer": 1
+  },
+  {
+    "question": "What is the oxidation number of sulfur in H₂SO₄?",
+    "options": ["+2", "+4", "+6", "-2"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "Which of the following is a scalar quantity?",
+    "options": ["Velocity", "Acceleration", "Force", "Work"],
+    "correctAnswer": 3
+  },
+  {
+    "question": "A projectile is launched horizontally from a height. Ignoring air resistance, what is true about its horizontal velocity?",
+    "options": ["It continuously increases.", "It continuously decreases.", "It remains constant.", "It becomes zero at maximum height."],
+    "correctAnswer": 2
+  },
+  {
+    "question": "According to Bernoulli's principle, an increase in the speed of a fluid is accompanied by a decrease in what?",
+    "options": ["Density", "Viscosity", "Pressure", "Temperature"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "Which of the following best defines a 'transverse wave'?",
+    "options": ["A wave in which particles of the medium oscillate parallel to the direction of wave propagation.", "A wave that requires a medium for its propagation.", "A wave in which particles of the medium oscillate perpendicular to the direction of wave propagation.", "A wave that transfers matter as well as energy."],
+    "correctAnswer": 2
+  },
+  {
+    "question": "Choose the word that is an antonym of 'benevolent'.",
+    "options": ["Kind", "Generous", "Malicious", "Compassionate"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "If all A are B, and no B are C, then which of the following statements must be true?",
+    "options": ["All A are C.", "No A are C.", "Some A are C.", "Some B are C."],
+    "correctAnswer": 1
+  }
+
+        ];
+
+        // Initialize userAnswers array with nulls for unattempted questions
+        for (let i = 0; i < questions.length; i++) {
+            userAnswers.push(null);
+        }
+
+        // --- Password Protection & Mark Input Logic ---
+        function validateMarks() {
+            let isValid = true;
+
+            const sscObt = parseInt(sscObtainedInput.value);
+            const sscTot = parseInt(sscTotalInput.value);
+            const fscObt = parseInt(fscObtainedInput.value);
+            const fscTot = parseInt(fscTotalInput.value);
+
+            // Validate SSC marks
+            if (isNaN(sscObt) || isNaN(sscTot) || sscObt < 0 || sscTot < 1 || sscObt > sscTot) {
+                sscError.classList.remove('d-none');
+                isValid = false;
+            } else {
+                sscError.classList.add('d-none');
+                sscObtainedMarks = sscObt;
+                sscTotalMarks = sscTot;
+            }
+
+            // Validate F.Sc. marks
+            if (isNaN(fscObt) || isNaN(fscTot) || fscObt < 0 || fscTot < 1 || fscObt > fscTot) {
+                fscError.classList.remove('d-none');
+                isValid = false;
+            } else {
+                fscError.classList.add('d-none');
+                fscObtainedMarks = fscObt;
+                fscTotalMarks = fscTot;
+            }
+            return isValid;
+        }
+
+
+        startTestBtn.addEventListener('click', () => {
+            const passwordCorrect = testPasswordInput.value === quizPassword;
+            const marksValid = validateMarks(); // This function also updates ssc/fsc marks variables
+
+            if (!passwordCorrect) {
+                passwordError.classList.remove('d-none');
+            } else {
+                passwordError.classList.add('d-none');
+            }
+
+            if (passwordCorrect && marksValid) {
+                passwordProtection.classList.add('d-none');
+                quizSection.classList.remove('d-none');
+                startQuiz();
+            }
+        });
+
+        testPasswordInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                startTestBtn.click();
+            }
+        });
+
+        sscObtainedInput.addEventListener('input', validateMarks);
+        sscTotalInput.addEventListener('input', validateMarks);
+        fscObtainedInput.addEventListener('input', validateMarks);
+        fscTotalInput.addEventListener('input', validateMarks);
+
+        // --- Quiz Logic ---
+        function startQuiz() {
+            testStartTime = Date.now(); // Record start time
+            startTimer();
+            generateQuestionPalette();
+            loadQuestion(currentQuestionIndex);
+        }
+
+        function startTimer() {
+            timerInterval = setInterval(() => {
+                timeRemaining--;
+                const hours = Math.floor(timeRemaining / 3600);
+                const minutes = Math.floor((timeRemaining % 3600) / 60);
+                const seconds = timeRemaining % 60;
+
+                timerDisplay.innerHTML =
+                    `<span class="me-2">Time Left:</span>${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+
+                if (timeRemaining <= 0) {
+                    clearInterval(timerInterval);
+                    submitQuiz(); // Auto-submit when time runs out
+                }
+            }, 1000);
+        }
+
+        function generateQuestionPalette() {
+            questionPalette.innerHTML = '';
+            for (let i = 0; i < questions.length; i++) {
+                const button = document.createElement('button');
+                button.classList.add('palette-btn');
+                button.textContent = i + 1;
+                button.addEventListener('click', () => {
+                    loadQuestion(i);
+                });
+                questionPalette.appendChild(button);
+            }
+            updatePaletteButtons();
+        }
+
+        function updatePaletteButtons() {
+            const paletteButtons = questionPalette.children;
+            for (let i = 0; i < paletteButtons.length; i++) {
+                paletteButtons[i].classList.remove('current', 'answered');
+                if (i === currentQuestionIndex) {
+                    paletteButtons[i].classList.add('current');
+                }
+                if (userAnswers[i] !== null) {
+                    paletteButtons[i].classList.add('answered');
+                }
+            }
+            // Scroll to the current question in the palette
+            const currentButton = paletteButtons[currentQuestionIndex];
+            if (currentButton) {
+                currentButton.scrollIntoView({ behavior: 'smooth', inline: 'center' });
+            }
+        }
+
+        function loadQuestion(index) {
+            currentQuestionIndex = index;
+            const question = questions[currentQuestionIndex];
+
+            questionCounter.textContent = `Question ${currentQuestionIndex + 1}/${questions.length}`;
+            questionText.textContent = question.question;
+            optionsContainer.innerHTML = '';
+
+            question.options.forEach((option, i) => {
+                const label = document.createElement('label');
+                const input = document.createElement('input');
+                input.type = 'radio';
+                input.name = 'questionOptions';
+                input.value = i;
+                if (userAnswers[currentQuestionIndex] === i) {
+                    input.checked = true;
+                }
+                input.addEventListener('change', (e) => {
+                    userAnswers[currentQuestionIndex] = parseInt(e.target.value);
+                    updatePaletteButtons(); // Mark as answered
+                });
+                const span = document.createElement('span');
+                span.textContent = option;
+                label.appendChild(input);
+                label.appendChild(span);
+                optionsContainer.appendChild(label);
+            });
+
+            // Update navigation buttons
+            prevBtn.disabled = currentQuestionIndex === 0;
+            if (currentQuestionIndex === questions.length - 1) {
+                nextBtn.textContent = 'Submit Quiz';
+            } else {
+                nextBtn.textContent = 'Next';
+            }
+            updatePaletteButtons();
+        }
+
+        prevBtn.addEventListener('click', () => {
+            if (currentQuestionIndex > 0) {
+                loadQuestion(currentQuestionIndex - 1);
+            }
+        });
+
+        nextBtn.addEventListener('click', () => {
+            if (currentQuestionIndex < questions.length - 1) {
+                loadQuestion(currentQuestionIndex + 1);
+            } else {
+                submitQuiz();
+            }
+        });
+
+        function submitQuiz() {
+            clearInterval(timerInterval);
+            quizSection.classList.add('d-none');
+            resultSection.classList.remove('d-none');
+            displayResults();
+        }
+
+        function displayResults() {
+            let correctCount = 0;
+            let attemptedCount = 0;
+
+            userAnswers.forEach((answer, i) => {
+                if (answer !== null) {
+                    attemptedCount++;
+                    if (answer === questions[i].correctAnswer) {
+                        correctCount++;
+                    }
+                }
+            });
+
+            const incorrectCount = attemptedCount - correctCount;
+            const unattemptedCount = questions.length - attemptedCount;
+
+            const timeEnded = Date.now();
+            const durationMs = timeEnded - testStartTime;
+            const hoursTaken = Math.floor(durationMs / (1000 * 60 * 60));
+            const minutesTaken = Math.floor((durationMs % (1000 * 60 * 60)) / (1000 * 60));
+            const secondsTaken = Math.floor((durationMs % (1000 * 60)) / 1000);
+            timeTakenResult.textContent = `${String(hoursTaken).padStart(2, '0')}:${String(minutesTaken).padStart(2, '0')}:${String(secondsTaken).padStart(2, '0')}`;
+
+            totalQuestionsResult.textContent = questions.length;
+            attemptedQuestionsResult.textContent = attemptedCount;
+            correctAnswersResult.textContent = correctCount;
+            incorrectAnswersResult.textContent = incorrectCount;
+            unattemptedQuestionsResult.textContent = unattemptedCount;
+            // The finalScore element was meant for a raw score, now mdcatScorePercentage will show the percentage.
+            // finalScore.textContent = `${correctCount} / ${questions.length}`;
+
+            // --- MDCAT Percentage & Pass/Fail ---
+            const mdcatScore = correctCount; // Assuming 1 mark per correct answer
+            const mdcatTotalMarks = questions.length;
+            const mdcatPercentage = mdcatTotalMarks > 0 ? (mdcatScore / mdcatTotalMarks) * 100 : 0;
+            mdcatScorePercentageDisplay.textContent = `${mdcatPercentage.toFixed(2)}%`;
+
+            if (mdcatPercentage >= 55) {
+                mdcatPassStatus.textContent = "MDCAT Status: Passed (≥ 55% required)";
+                mdcatPassStatus.classList.remove('fail');
+                mdcatPassStatus.classList.add('pass');
+            } else {
+                mdcatPassStatus.textContent = `MDCAT Status: Failed (Current: ${mdcatPercentage.toFixed(2)}%, Min 55% required)`;
+                mdcatPassStatus.classList.remove('pass');
+                mdcatPassStatus.classList.add('fail');
+            }
+
+            // --- F.Sc. Percentage & Pass/Fail ---
+            const fscPercentage = fscTotalMarks > 0 ? (fscObtainedMarks / fscTotalMarks) * 100 : 0;
+            if (fscPercentage >= 60) {
+                fscPassStatus.textContent = `F.Sc. Status: Passed (${fscPercentage.toFixed(2)}% - ≥ 60% required)`;
+                fscPassStatus.classList.remove('fail');
+                fscPassStatus.classList.add('pass');
+            } else {
+                fscPassStatus.textContent = `F.Sc. Status: Failed (Current: ${fscPercentage.toFixed(2)}%, Min 60% required)`;
+                fscPassStatus.classList.remove('pass');
+                fscPassStatus.classList.add('fail');
+            }
+
+            // --- Aggregate Percentage Calculation ---
+            const sscPercentage = sscTotalMarks > 0 ? (sscObtainedMarks / sscTotalMarks) * 100 : 0;
+
+            const aggregatePercentage =
+                (mdcatPercentage * 0.50) +
+                (fscPercentage * 0.40) +
+                (sscPercentage * 0.10);
+
+            aggregatePercentageDisplay.textContent = `${aggregatePercentage.toFixed(2)}%`;
+
+            // --- Overall Admission Status ---
+            if (mdcatPercentage >= 55 && fscPercentage >= 60) {
+                overallAdmissionStatus.textContent = "Overall Admission Eligibility: Eligible (Congratulations!)";
+                overallAdmissionStatus.classList.remove('fail');
+                overallAdmissionStatus.classList.add('pass');
+            } else {
+                overallAdmissionStatus.textContent = "Overall Admission Eligibility: Not Eligible (MDCAT or F.Sc. requirements not met)";
+                overallAdmissionStatus.classList.remove('pass');
+                overallAdmissionStatus.classList.add('fail');
+            }
+        }
+
+        restartBtn.addEventListener('click', () => {
+            location.reload(); // Simple way to restart for now
+        });
+
+        savePdfBtn.addEventListener('click', () => {
+            window.print();
+        });
+
+        // --- Review Mode Logic ---
+        let currentReviewQuestionIndex = 0;
+
+        reviewBtn.addEventListener('click', () => {
+            resultSection.classList.add('d-none');
+            reviewSection.classList.remove('d-none');
+            loadReviewQuestion(0);
+        });
+
+        function loadReviewQuestion(index) {
+            currentReviewQuestionIndex = index;
+            const question = questions[currentReviewQuestionIndex];
+            const userAnswer = userAnswers[currentReviewQuestionIndex];
+            const correctAnswer = question.correctAnswer;
+
+            reviewQuestionDisplay.innerHTML = `
+                <h5>Question ${currentReviewQuestionIndex + 1}/${questions.length}: ${question.question}</h5>
+                <div id="reviewOptions"></div>
+            `;
+            const reviewOptionsContainer = document.getElementById('reviewOptions');
+
+            question.options.forEach((option, i) => {
+                const optionDiv = document.createElement('div');
+                optionDiv.classList.add('review-option-item');
+
+                let iconClass = 'fa-regular fa-circle'; // Default for unselected
+                let optionTextClass = '';
+
+                if (i === correctAnswer) {
+                    // This is the correct answer
+                    optionDiv.classList.add('correct');
+                    iconClass = 'fa-solid fa-circle-check';
+                }
+
+                if (userAnswer === i) {
+                    // This is the user's selected answer
+                    if (userAnswer === correctAnswer) {
+                        // User selected the correct answer
+                        optionDiv.classList.add('selected-correct');
+                        optionTextClass = 'text-success';
+                    } else {
+                        // User selected an incorrect answer
+                        optionDiv.classList.add('selected-incorrect');
+                        optionTextClass = 'text-danger';
+                        iconClass = 'fa-solid fa-circle-xmark';
+                    }
+                }
+
+                optionDiv.innerHTML = `
+                    <i class="${iconClass}"></i>
+                    <span class="${optionTextClass}">${option}</span>
+                `;
+
+                reviewOptionsContainer.appendChild(optionDiv);
+            });
+
+            // Display "Your Answer: Incorrect" or "Your Answer: Correct"
+            if (userAnswer !== null) {
+                const statusMessage = document.createElement('p');
+                statusMessage.style.marginTop = '15px';
+                if (userAnswer === correctAnswer) {
+                    statusMessage.innerHTML = `<i class="fa-solid fa-circle-check text-success"></i> <span class="text-success">Your Answer: Correct</span>`;
+                } else {
+                    statusMessage.innerHTML = `<i class="fa-solid fa-circle-xmark text-danger"></i> <span class="text-danger">Your Answer: Incorrect</span>`;
+                }
+                reviewQuestionDisplay.appendChild(statusMessage);
+            } else {
+                 const statusMessage = document.createElement('p');
+                statusMessage.style.marginTop = '15px';
+                statusMessage.innerHTML = `<i class="fa-solid fa-minus-circle text-warning"></i> <span class="text-warning">You did not answer this question.</span>`;
+                reviewQuestionDisplay.appendChild(statusMessage);
+            }
+
+
+            // Update review navigation buttons
+            reviewPrevBtn.disabled = currentReviewQuestionIndex === 0;
+            reviewNextBtn.disabled = currentReviewQuestionIndex === questions.length - 1;
+        }
+
+        reviewPrevBtn.addEventListener('click', () => {
+            if (currentReviewQuestionIndex > 0) {
+                loadReviewQuestion(currentReviewQuestionIndex - 1);
+            }
+        });
+
+        reviewNextBtn.addEventListener('click', () => {
+            if (currentReviewQuestionIndex < questions.length - 1) {
+                loadReviewQuestion(currentReviewQuestionIndex + 1);
+            }
+        });
+
+        backToResultsBtn.addEventListener('click', () => {
+            reviewSection.classList.add('d-none');
+            resultSection.classList.remove('d-none');
+        });
+
+        // --- Dark Mode Toggle ---
+        const themeToggle = document.getElementById('themeToggle');
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
+            document.body.classList.add('dark-mode');
+            themeToggle.textContent = '☀️';
+        } else {
+            themeToggle.textContent = '🌙';
+        }
+
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            const isDark = document.body.classList.contains('dark-mode');
+            themeToggle.textContent = isDark ? '☀️' : '🌙';
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        });
+    });
+</script>
+</body>
+</html>
