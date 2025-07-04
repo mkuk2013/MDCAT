@@ -3,76 +3,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MDCAT Mock Test</title>
+    <title>MDCAT Mock Test - Modern UI</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Lato:wght@300;400;600&display=swap" rel="stylesheet">
+    <!-- Updated Fonts for a more modern look -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
-        /* --- Design Variables --- */
+        /* --- Design Variables (Refined) --- */
         :root {
             --primary-color: #6C5CE7; /* Muted Purple */
             --secondary-color: #00BCD4; /* Cyan/Teal Accent */
             --text-dark: #2F3640; /* Very Dark Gray */
             --text-medium: #57606F; /* Medium Gray */
             --text-light: #8E96A3; /* Light Gray */
-            --bg-light: #F4F7F6; /* Soft Light Gray/Blue */
+            --bg-light: #F8F9FA; /* Lighter background */
             --bg-card: #FFFFFF; /* Pure White Card Background */
-            --border-color: #ECEFF1; /* Very Light Gray Border */
-            --shadow-light: rgba(0, 0, 0, 0.06);
-            --shadow-medium: rgba(0, 0, 0, 0.12);
+            --border-color: #E0E0E0; /* Softer border */
+            --shadow-light: rgba(0, 0, 0, 0.08); /* Softer shadow */
+            --shadow-medium: rgba(0, 0, 0, 0.15); /* Slightly stronger shadow */
             --gradient-start: #6C5CE7;
             --gradient-end: #8D7EFF; /* Lighter purple for gradient */
             --success-color: #28a745;
             --danger-color: #dc3545;
-            --warning-color: #ffc107; /* Added for warnings */
+            --warning-color: #ffc107;
 
-            /* Notice specific colors */
-            --notice-bg: #E3F2FD; /* Light Blue for notices */
-            --notice-text: #1976D2; /* Darker Blue for notice text */
-            --notice-border: #90CAF9; /* Medium Blue for notice border */
+            /* New UI specific */
+            --card-border-radius: 16px; /* More rounded */
+            --input-border-radius: 10px;
+            --button-border-radius: 10px;
         }
 
-        /* --- Dark Mode Variables --- */
+        /* --- Dark Mode Variables (Refined) --- */
         body.dark-mode {
             --primary-color: #A797F0; /* Lighter Purple for Dark Mode */
             --secondary-color: #4DD0E1; /* Lighter Cyan for Dark Mode */
             --text-dark: #E0E0E0;
             --text-medium: #B0B7C6;
             --text-light: #8A93A2;
-            --bg-light: #262B33; /* Dark background */
-            --bg-card: #343D48; /* Darker card background */
-            --border-color: #4A5568;
-            --shadow-light: rgba(0, 0, 0, 0.4);
-            --shadow-medium: rgba(0, 0, 0, 0.6);
+            --bg-light: #212529; /* Darker background */
+            --bg-card: #2C3034; /* Darker card background */
+            --border-color: #495057;
+            --shadow-light: rgba(0, 0, 0, 0.3);
+            --shadow-medium: rgba(0, 0, 0, 0.5);
             --gradient-start: #343D48;
             --gradient-end: #262B33;
-            --success-color: #28a745; /* Green remains same for visibility */
-            --danger-color: #dc3545; /* Red remains same for visibility */
-            --warning-color: #ffc107; /* Yellow remains same for visibility */
-
-            /* Notice specific colors for dark mode */
-            --notice-bg: #3A475C;
-            --notice-text: #E0E0E0;
-            --notice-border: #66A3FF;
+            --success-color: #28a745;
+            --danger-color: #dc3545;
+            --warning-color: #ffc107;
         }
 
-        /* --- Base Styles --- */
+        /* --- Base Styles (Updated Fonts) --- */
         body {
-            font-family: 'Lato', sans-serif;
+            font-family: 'Open Sans', sans-serif; /* Body text font */
             background-color: var(--bg-light);
             color: var(--text-medium);
             line-height: 1.7;
             font-size: 16px;
             overflow-x: hidden;
             scroll-behavior: smooth;
-            scroll-padding-top: 100px; /* Offset for fixed navbar */
+            scroll-padding-top: 100px;
+            transition: background-color 0.3s ease, color 0.3s ease; /* Smooth theme transition */
         }
 
         h1, h2, h3, h4, h5, h6 {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Poppins', sans-serif; /* Headings font */
             color: var(--text-dark);
             font-weight: 700;
             line-height: 1.2;
+            transition: color 0.3s ease;
         }
 
         a {
@@ -84,10 +82,10 @@
             color: var(--secondary-color);
         }
 
-        /* --- Navbar --- */
+        /* --- Navbar (Subtle Refinements) --- */
         .navbar {
             background-color: var(--bg-card);
-            box-shadow: 0 4px 15px var(--shadow-light);
+            box-shadow: 0 4px 12px var(--shadow-light);
             position: sticky;
             top: 0;
             z-index: 1020;
@@ -113,6 +111,9 @@
             transition: all 0.3s ease;
             padding: 0.5rem 0;
         }
+        .navbar-nav .nav-link:hover {
+            color: var(--primary-color);
+        }
         .navbar-toggler {
             border: none;
         }
@@ -123,7 +124,7 @@
         /* Dark Mode Navbar */
         body.dark-mode .navbar {
             background-color: var(--bg-card);
-            box-shadow: 0 4px 20px var(--shadow-medium);
+            box-shadow: 0 4px 15px var(--shadow-medium);
         }
         body.dark-mode .navbar-brand {
             color: var(--primary-color) !important;
@@ -138,9 +139,9 @@
             color: var(--primary-color);
         }
 
-        /* --- Main Content Area --- */
+        /* --- Main Content Area (Card Styling) --- */
         .mock-test-container {
-            min-height: calc(100vh - 120px); /* Adjust based on navbar/footer height */
+            min-height: calc(100vh - 120px);
             padding: 40px 0;
             display: flex;
             align-items: center;
@@ -149,20 +150,20 @@
 
         .password-protection, .quiz-section, .result-section, .review-section {
             background-color: var(--bg-card);
-            border-radius: 15px;
-            box-shadow: 0 10px 30px var(--shadow-light);
+            border-radius: var(--card-border-radius);
+            box-shadow: 0 12px 25px var(--shadow-light); /* Softer, larger shadow */
             padding: 40px;
             max-width: 900px;
             width: 100%;
             text-align: center;
             border: 1px solid var(--border-color);
+            transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
         }
         body.dark-mode .password-protection, body.dark-mode .quiz-section, body.dark-mode .result-section, body.dark-mode .review-section {
             background-color: var(--bg-card);
-            box-shadow: 0 10px 30px var(--shadow-medium);
+            box-shadow: 0 12px 25px var(--shadow-medium);
             border: 1px solid var(--border-color);
         }
-
 
         /* Password Section */
         .password-protection h2 {
@@ -171,10 +172,18 @@
             color: var(--primary-color);
         }
         .password-protection .form-control {
-            border-radius: 8px;
+            border-radius: var(--input-border-radius);
             padding: 12px 15px;
             font-size: 1.1rem;
-            border-color: var(--border-color);
+            border: 1px solid var(--border-color);
+            background-color: var(--bg-light); /* Input background */
+            color: var(--text-dark);
+            transition: border-color 0.3s ease, background-color 0.3s ease;
+        }
+        .password-protection .form-control:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.25rem rgba(108, 92, 231, 0.25);
+            background-color: var(--bg-card); /* Lighter on focus */
         }
         body.dark-mode .password-protection .form-control {
             background-color: #2F3640;
@@ -182,29 +191,33 @@
             border-color: #4A5568;
         }
         body.dark-mode .password-protection .form-control::placeholder {
-            color: var(--text-medium);
+            color: var(--text-light);
         }
         .password-protection .btn-primary {
             background-color: var(--primary-color);
             border-color: var(--primary-color);
             padding: 12px 30px;
             font-size: 1.1rem;
-            border-radius: 8px;
+            border-radius: var(--button-border-radius);
             font-weight: 600;
             transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(108, 92, 231, 0.3); /* Button shadow */
         }
         .password-protection .btn-primary:hover {
             background-color: #5544CC;
             border-color: #5544CC;
             transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(108, 92, 231, 0.4);
         }
         body.dark-mode .password-protection .btn-primary {
             background-color: var(--primary-color);
             border-color: var(--primary-color);
+            box-shadow: 0 4px 10px rgba(167, 151, 240, 0.3);
         }
         body.dark-mode .password-protection .btn-primary:hover {
             background-color: #9A87ED;
             border-color: #9A87ED;
+            box-shadow: 0 6px 15px rgba(167, 151, 240, 0.4);
         }
         .mark-input-group {
             display: flex;
@@ -254,108 +267,103 @@
             color: var(--danger-color);
             background-color: var(--bg-light);
             padding: 8px 15px;
-            border-radius: 8px;
+            border-radius: var(--input-border-radius);
+            border: 1px solid var(--border-color);
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
         }
         body.dark-mode .quiz-header .timer {
             background-color: #2F3640;
             color: var(--danger-color);
+            border-color: #4A5568;
         }
 
         .question-palette {
-            margin-top: 30px; /* Moved to bottom, so use margin-top */
-            padding: 20px;
+            margin-top: 30px;
+            padding: 15px; /* Reduced padding */
             background-color: var(--bg-light);
-            border-radius: 10px;
+            border-radius: var(--card-border-radius);
             border: 1px solid var(--border-color);
-            display: flex; /* Changed from grid to flex */
-            flex-wrap: nowrap; /* Keep items in a single row */
-            overflow-x: auto; /* Enable horizontal scrolling */
-            gap: 10px; /* Spacing between buttons */
-            -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
-            scroll-behavior: smooth; /* Smooth scroll on click */
-            padding-bottom: 10px; /* Add some padding for scrollbar */
+            display: flex;
+            flex-wrap: nowrap;
+            overflow-x: auto;
+            gap: 8px; /* Reduced gap */
+            -webkit-overflow-scrolling: touch;
+            scroll-behavior: smooth;
+            padding-bottom: 10px;
+            box-shadow: inset 0 1px 5px rgba(0,0,0,0.05); /* Subtle inner shadow */
         }
         body.dark-mode .question-palette {
             background-color: #2F3640;
             border-color: #4A5568;
+            box-shadow: inset 0 1px 5px rgba(0,0,0,0.2);
         }
-        /* Hide scrollbar for Chrome, Safari and Opera */
-        .question-palette::-webkit-scrollbar {
-            height: 8px;
-        }
-
-        /* Track */
-        .question-palette::-webkit-scrollbar-track {
-            background: var(--bg-card);
-            border-radius: 10px;
-        }
-
-        /* Handle */
-        .question-palette::-webkit-scrollbar-thumb {
-            background: var(--primary-color);
-            border-radius: 10px;
-        }
-
-        /* Handle on hover */
-        .question-palette::-webkit-scrollbar-thumb:hover {
-            background: #5544CC;
-        }
-
-        /* For Firefox */
-        .question-palette {
-            scrollbar-width: thin;
-            scrollbar-color: var(--primary-color) var(--bg-card);
-        }
+        /* Scrollbar styling */
+        .question-palette::-webkit-scrollbar { height: 8px; }
+        .question-palette::-webkit-scrollbar-track { background: var(--bg-card); border-radius: 10px; }
+        .question-palette::-webkit-scrollbar-thumb { background: var(--primary-color); border-radius: 10px; }
+        .question-palette::-webkit-scrollbar-thumb:hover { background: #5544CC; }
+        .question-palette { scrollbar-width: thin; scrollbar-color: var(--primary-color) var(--bg-card); }
 
 
         .palette-btn {
-            min-width: 45px; /* Ensures minimum width */
-            height: 45px;
+            min-width: 42px; /* Slightly smaller */
+            height: 42px;
             display: flex;
-            flex-shrink: 0; /* Prevent shrinking */
+            flex-shrink: 0;
             align-items: center;
             justify-content: center;
             background-color: var(--bg-card);
             border: 1px solid var(--border-color);
-            border-radius: 8px;
+            border-radius: 8px; /* Slightly less rounded */
             font-weight: 600;
             color: var(--text-medium);
             cursor: pointer;
             transition: all 0.2s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05); /* Subtle shadow */
         }
         .palette-btn:hover:not(.current) {
-            background-color: var(--bg-light);
-            color: var(--primary-color);
+            background-color: var(--primary-color); /* Hover to primary */
+            color: white;
+            border-color: var(--primary-color);
+            transform: translateY(-1px);
+            box-shadow: 0 3px 8px rgba(108, 92, 231, 0.2);
         }
         .palette-btn.current {
             background-color: var(--primary-color);
             color: white;
             border-color: var(--primary-color);
+            box-shadow: 0 3px 8px rgba(108, 92, 231, 0.3);
+            transform: scale(1.05); /* Slight pop */
         }
         .palette-btn.answered {
             background-color: var(--secondary-color);
             color: white;
             border-color: var(--secondary-color);
+            box-shadow: 0 2px 5px rgba(0, 188, 212, 0.2);
         }
         body.dark-mode .palette-btn {
             background-color: var(--bg-card);
             border-color: var(--border-color);
             color: var(--text-medium);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
         }
         body.dark-mode .palette-btn:hover:not(.current) {
-            background-color: #2F3640;
-            color: var(--primary-color);
-        }
-        /* Dark Mode Specific Styles for Palette Buttons */
-        body.dark-mode .palette-btn.current {
-            background-color: var(--primary-color); /* Uses lighter purple */
+            background-color: var(--primary-color);
             color: white;
             border-color: var(--primary-color);
+            box-shadow: 0 3px 8px rgba(167, 151, 240, 0.3);
+        }
+        body.dark-mode .palette-btn.current {
+            background-color: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+            box-shadow: 0 3px 8px rgba(167, 151, 240, 0.4);
         }
         body.dark-mode .palette-btn.answered {
-            background-color: var(--secondary-color); /* Uses lighter cyan */
+            background-color: var(--secondary-color);
             color: white;
             border-color: var(--secondary-color);
+            box-shadow: 0 2px 5px rgba(77, 208, 225, 0.3);
         }
 
         .question-area {
@@ -368,22 +376,26 @@
             color: var(--text-dark);
         }
         .options label {
-            display: block;
+            display: flex; /* Use flexbox for alignment */
+            align-items: center;
             background-color: var(--bg-light);
             padding: 15px 20px;
             margin-bottom: 15px;
-            border-radius: 10px;
+            border-radius: var(--input-border-radius);
             border: 1px solid var(--border-color);
             cursor: pointer;
             transition: all 0.2s ease;
             font-size: 1.1rem;
             color: var(--text-medium);
             text-align: left;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.03); /* Subtle shadow */
         }
         .options label:hover {
             background-color: var(--primary-color);
             color: white;
             border-color: var(--primary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(108, 92, 231, 0.2);
         }
         .options input[type="radio"] {
             margin-right: 15px;
@@ -391,23 +403,27 @@
             width: 20px;
             height: 20px;
             vertical-align: middle;
+            flex-shrink: 0; /* Prevent radio button from shrinking */
         }
         .options input[type="radio"]:checked + span {
             font-weight: 700;
-            color: var(--text-dark);
+            color: var(--text-dark); /* Keep text dark for contrast */
         }
-        .options input[type="radio"]:checked + span::before {
-            color: var(--primary-color); /* To make checked radio visible */
+        .options label:hover input[type="radio"]:checked + span,
+        .options label:hover span {
+            color: white; /* Text color on hover */
         }
         body.dark-mode .options label {
             background-color: #2F3640;
             border-color: #4A5568;
             color: var(--text-medium);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
         body.dark-mode .options label:hover {
             background-color: var(--primary-color);
             color: white;
             border-color: var(--primary-color);
+            box-shadow: 0 4px 10px rgba(167, 151, 240, 0.3);
         }
         body.dark-mode .options input[type="radio"]:checked + span {
             color: var(--text-dark);
@@ -415,16 +431,17 @@
 
         .navigation-buttons {
             display: flex;
-            justify-content: center; /* Centered buttons */
+            justify-content: center;
             margin-bottom: 30px;
         }
         .navigation-buttons button {
             padding: 12px 30px;
             font-size: 1.1rem;
-            border-radius: 8px;
+            border-radius: var(--button-border-radius);
             font-weight: 600;
             margin: 0 10px;
             transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
         .navigation-buttons .btn-primary {
             background-color: var(--primary-color);
@@ -435,19 +452,23 @@
             background-color: #5544CC;
             border-color: #5544CC;
             transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(108, 92, 231, 0.4);
         }
         .navigation-buttons .btn-outline-primary {
             border-color: var(--primary-color);
             color: var(--primary-color);
+            background-color: transparent;
         }
         .navigation-buttons .btn-outline-primary:hover:not(:disabled) {
             background-color: var(--primary-color);
             color: white;
             transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(108, 92, 231, 0.4);
         }
         .navigation-buttons button:disabled {
-            opacity: 0.6;
+            opacity: 0.5;
             cursor: not-allowed;
+            box-shadow: none;
         }
         body.dark-mode .navigation-buttons .btn-primary {
             background-color: var(--primary-color);
@@ -480,13 +501,44 @@
         .result-stats p strong {
             color: var(--primary-color);
         }
+        /* Score Visualization */
+        .score-bar-container {
+            width: 80%;
+            margin: 20px auto;
+            background-color: var(--bg-light);
+            border-radius: 10px;
+            height: 25px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .score-bar {
+            height: 100%;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            border-radius: 10px;
+            text-align: center;
+            color: white;
+            font-weight: 600;
+            line-height: 25px;
+            transition: width 1s ease-out;
+        }
+        body.dark-mode .score-bar-container {
+            background-color: #2F3640;
+            border-color: #4A5568;
+        }
+
         .result-buttons .btn {
             padding: 15px 35px;
             font-size: 1.1rem;
-            border-radius: 8px;
+            border-radius: var(--button-border-radius);
             font-weight: 600;
             margin: 10px;
             transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        .result-buttons .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.2);
         }
         .pass-status {
             font-weight: 700;
@@ -511,12 +563,14 @@
             margin-bottom: 30px;
             padding: 20px;
             background-color: var(--bg-light);
-            border-radius: 10px;
+            border-radius: var(--card-border-radius);
             border: 1px solid var(--border-color);
+            box-shadow: inset 0 1px 5px rgba(0,0,0,0.05);
         }
         body.dark-mode .review-question-display {
             background-color: #2F3640;
             border-color: #4A5568;
+            box-shadow: inset 0 1px 5px rgba(0,0,0,0.2);
         }
 
         .review-question-display h5 {
@@ -530,6 +584,7 @@
             padding: 10px 0;
             border-bottom: 1px dashed var(--border-color);
             color: var(--text-medium);
+            transition: color 0.2s ease;
         }
         .review-option-item:last-child {
             border-bottom: none;
@@ -537,6 +592,7 @@
         .review-option-item i {
             margin-right: 10px;
             font-size: 1.2rem;
+            flex-shrink: 0;
         }
         .review-option-item.correct {
             color: var(--success-color);
@@ -549,10 +605,18 @@
         .review-option-item.selected-correct {
             color: var(--success-color);
             font-weight: 600;
+            background-color: rgba(40, 167, 69, 0.05); /* Light green background */
+            border-radius: 5px;
+            padding: 10px;
+            margin: 5px 0;
         }
         .review-option-item.selected-incorrect {
             color: var(--danger-color);
             font-weight: 600;
+            background-color: rgba(220, 53, 69, 0.05); /* Light red background */
+            border-radius: 5px;
+            padding: 10px;
+            margin: 5px 0;
         }
         .review-navigation-buttons {
             margin-top: 30px;
@@ -575,21 +639,25 @@
             justify-content: center;
             cursor: pointer;
             transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
         #themeToggle:hover {
             background-color: var(--primary-color);
             color: white;
             border-color: var(--primary-color);
+            box-shadow: 0 4px 12px rgba(108, 92, 231, 0.3);
         }
         body.dark-mode #themeToggle {
             background-color: #2F3640;
             border-color: #4A5560;
             color: var(--text-dark);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
         }
         body.dark-mode #themeToggle:hover {
             background-color: var(--primary-color);
             color: white;
             border-color: var(--primary-color);
+            box-shadow: 0 4px 12px rgba(167, 151, 240, 0.4);
         }
 
         /* Responsive Adjustments */
@@ -608,7 +676,7 @@
                 font-size: 1.5rem;
             }
             .palette-btn {
-                min-width: 40px; /* Adjust for smaller screens */
+                min-width: 40px;
                 height: 40px;
                 font-size: 0.9rem;
             }
@@ -651,14 +719,18 @@
             .mark-input-group label {
                 text-align: left;
             }
+            .score-bar-container {
+                width: 95%; /* Adjust for smaller screens */
+            }
         }
 
         /* Footer styles */
         .footer {
-            background-color: var(--bg-card) !important; /* Use existing design variable */
+            background-color: var(--bg-card) !important;
             color: var(--text-medium) !important;
             border-top: 1px solid var(--border-color);
-            padding: 20px 0; /* Add some padding */
+            padding: 20px 0;
+            transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
         }
 
         .footer-links a {
@@ -667,28 +739,125 @@
         }
 
         .footer-links a:hover {
-            color: var(--primary-color) !important; /* Hover effect */
+            color: var(--primary-color) !important;
         }
 
-        /* Force footer text to white in dark mode */
         body.dark-mode .footer .text-muted {
-            color: #FFFFFF !important;
-        }
-
-        /* Dark mode adjustments for footer */
-        body.dark-mode .footer {
-            background-color: var(--bg-card) !important; /* Corrected: Use --bg-card, which is redefined for dark mode */
-            color: var(--text-dark) !important; /* This will now be white */
-            border-top-color: var(--border-color); /* Corrected: Use --border-color, which is redefined for dark mode */
-        }
-
-        body.dark-mode .footer-links a {
             color: var(--text-dark) !important; /* Links will also be white in dark mode */
         }
 
-        body.dark-mode .footer-links a:hover {
-            color: var(--primary-color) !important; /* Use the dark mode --primary-color for hover */
+        body.dark-mode .footer {
+            background-color: var(--bg-card) !important;
+            color: var(--text-dark) !important;
+            border-top-color: var(--border-color);
         }
+
+        body.dark-mode .footer-links a {
+            color: var(--text-dark) !important;
+        }
+
+        body.dark-mode .footer-links a:hover {
+            color: var(--primary-color) !important;
+        }
+
+        /* --- Print Styles for PDF Export --- */
+        @media print {
+            body {
+                background-color: #fff !important; /* Force white background */
+                color: #000 !important; /* Force black text */
+                -webkit-print-color-adjust: exact; /* Ensure background colors are printed */
+                print-color-adjust: exact;
+            }
+
+            /* Hide elements not needed in print */
+            .navbar,
+            #themeToggle,
+            .navigation-buttons, /* Hide quiz navigation buttons */
+            .question-palette, /* Hide question palette */
+            .result-buttons, /* Hide result action buttons */
+            .footer {
+                display: none !important;
+            }
+
+            /* Ensure main content is visible and well-formatted */
+            .mock-test-container {
+                padding: 20px !important;
+                min-height: auto !important;
+                display: block !important; /* Change to block for print flow */
+            }
+
+            .password-protection,
+            .quiz-section,
+            .result-section,
+            .review-section {
+                box-shadow: none !important; /* Remove shadows */
+                border: none !important; /* Remove borders */
+                padding: 0 !important; /* Remove padding to use full width */
+                max-width: 100% !important; /* Use full width */
+                width: 100% !important;
+                text-align: left !important; /* Align text left for readability */
+            }
+
+            /* Specific adjustments for result and review sections */
+            #resultSection,
+            #reviewSection {
+                display: block !important; /* Ensure these are visible if active */
+                position: static !important; /* Remove any fixed/absolute positioning */
+                margin: 0 auto !important; /* Center content */
+            }
+
+            .result-stats p,
+            .review-question-display h5,
+            .review-option-item {
+                color: #000 !important; /* Ensure text is black */
+            }
+
+            .pass-status.pass {
+                color: #28a745 !important; /* Keep success color */
+            }
+            .pass-status.fail {
+                color: #dc3545 !important; /* Keep danger color */
+            }
+
+            /* Ensure review question options are clearly visible */
+            .review-option-item {
+                border-bottom: 1px solid #eee !important; /* Light border for separation */
+                padding: 5px 0 !important;
+            }
+            .review-option-item i {
+                color: #000 !important; /* Ensure icons are visible */
+            }
+            .review-option-item.correct i,
+            .review-option-item.selected-correct i {
+                color: #28a745 !important; /* Green checkmark */
+            }
+            .review-option-item.incorrect i,
+            .review-option-item.selected-incorrect i {
+                color: #dc3545 !important; /* Red x-mark */
+            }
+
+            /* Page breaks for review questions if many */
+            .review-question-display {
+                page-break-inside: avoid; /* Avoid breaking inside a question block */
+                margin-bottom: 15px;
+            }
+            /* Hide score bar in print as it's a visual element */
+            .score-bar-container {
+                display: none !important;
+            }
+        }
+
+        @media (prefers-color-scheme: dark) {
+  .dark-mode-support {
+    background-color: #212529 !important;
+    color: #f8f9fa !important;
+  }
+
+  .dark-mode-support a {
+    color: #66b2ff !important;
+  }
+}
+
     </style>
 </head>
 <body>
@@ -718,9 +887,15 @@
         <div class="mb-3">
             <input type="password" class="form-control form-control-lg" id="testPassword" placeholder="Enter password">
             <p id="passwordError" class="text-danger mt-2 d-none">Incorrect password. Please try again.</p>
-            <p class="mt-2 text-muted">
-              NOTICE: All tests are password protected. For password, please contact on WhatsApp: <a href="wa.me/+923480358640" >+92348 0358640</a>
-            </p>
+           <div class="mt-4 mb-3 px-3 py-3 rounded shadow-sm bg-light text-dark dark-mode-support">
+  <p class="mb-0 fw-bold">
+    🔔 <strong>NOTICE:</strong> All tests are password protected.<br>
+    For password, please contact on WhatsApp:
+    <a href="https://wa.me/+923480358640" class="text-primary text-decoration-none">
+      +92348 0358640
+    </a>
+  </p>
+</div>
         </div>
 
         <h3 class="mt-4 mb-3" style="color: var(--text-dark);">Enter Academic Marks (For Merit Calculation)</h3>
@@ -774,6 +949,10 @@
             <p>Unattempted: <strong id="unattemptedQuestionsResult"></strong></p>
             <p>Time Taken: <strong id="timeTakenResult"></strong></p>
             <p class="h4 mt-4">Your MDCAT Score: <strong id="mdcatScorePercentage" class="text-primary"></strong></p>
+            <!-- Score Visualization -->
+            <div class="score-bar-container">
+                <div class="score-bar" id="mdcatScoreBar"></div>
+            </div>
             <p class="h4">Aggregate Percentage: <strong id="aggregatePercentage" class="text-primary"></strong></p>
             <p class="pass-status" id="mdcatPassStatus"></p>
             <p class="pass-status" id="fscPassStatus"></p>
@@ -850,6 +1029,7 @@
         const unattemptedQuestionsResult = document.getElementById('unattemptedQuestionsResult');
         const timeTakenResult = document.getElementById('timeTakenResult');
         const mdcatScorePercentageDisplay = document.getElementById('mdcatScorePercentage'); // New
+        const mdcatScoreBar = document.getElementById('mdcatScoreBar'); // New element for visualization
         const aggregatePercentageDisplay = document.getElementById('aggregatePercentage'); // New
         const mdcatPassStatus = document.getElementById('mdcatPassStatus'); // New
         const fscPassStatus = document.getElementById('fscPassStatus'); // New
@@ -2103,6 +2283,11 @@
             const mdcatTotalMarks = questions.length;
             const mdcatPercentage = mdcatTotalMarks > 0 ? (mdcatScore / mdcatTotalMarks) * 100 : 0;
             mdcatScorePercentageDisplay.textContent = `${mdcatPercentage.toFixed(2)}%`;
+
+            // Update score bar
+            mdcatScoreBar.style.width = `${mdcatPercentage}%`;
+            mdcatScoreBar.textContent = `${mdcatPercentage.toFixed(2)}%`;
+
 
             if (mdcatPercentage >= 55) {
                 mdcatPassStatus.textContent = "MDCAT Status: Passed (≥ 55% required)";
