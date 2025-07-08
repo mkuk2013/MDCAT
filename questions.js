@@ -1,918 +1,1002 @@
-const quizData = [
-  // BIOLOGY: Q1–Q30
-  {
+const originalQuestions = [
+       {
     "question": "What is the basic structural and functional unit of life?",
-    "option": ["Tissue", "Organ", "Cell", "Organ system"],
-    "correct": "Cell"
+    "options": ["Tissue", "Organ", "Cell", "Organ system"],
+    "correctAnswer": 2
   },
   {
     "question": "Which organelle is called the powerhouse of the cell?",
-    "option": ["Ribosome", "Nucleus", "Mitochondria", "Golgi body"],
-    "correct": "Mitochondria"
+    "options": ["Ribosome", "Nucleus", "Mitochondria", "Golgi body"],
+    "correctAnswer": 2
   },
   {
     "question": "Proteins are made up of:",
-    "option": ["Nucleotides", "Amino acids", "Fatty acids", "Sugars"],
-    "correct": "Amino acids"
+    "options": ["Nucleotides", "Amino acids", "Fatty acids", "Sugars"],
+    "correctAnswer": 1
   },
   {
     "question": "What is the function of ribosomes?",
-    "option": ["Digestion", "Photosynthesis", "Protein synthesis", "Respiration"],
-    "correct": "Protein synthesis"
+    "options": ["Digestion", "Photosynthesis", "Protein synthesis", "Respiration"],
+    "correctAnswer": 2
   },
   {
     "question": "Which part of the brain controls balance and coordination?",
-    "option": ["Cerebrum", "Cerebellum", "Medulla", "Hypothalamus"],
-    "correct": "Cerebellum"
+    "options": ["Cerebrum", "Cerebellum", "Medulla", "Hypothalamus"],
+    "correctAnswer": 1
   },
   {
     "question": "Which molecule stores genetic information?",
-    "option": ["RNA", "ATP", "Protein", "DNA"],
-    "correct": "DNA"
+    "options": ["RNA", "ATP", "Protein", "DNA"],
+    "correctAnswer": 3
   },
   {
     "question": "Which blood cells help in clotting?",
-    "option": ["RBC", "WBC", "Platelets", "Plasma"],
-    "correct": "Platelets"
+    "options": ["RBC", "WBC", "Platelets", "Plasma"],
+    "correctAnswer": 2
   },
   {
     "question": "Which organ removes nitrogenous waste from the body?",
-    "option": ["Lungs", "Liver", "Kidneys", "Pancreas"],
-    "correct": "Kidneys"
+    "options": ["Lungs", "Liver", "Kidneys", "Pancreas"],
+    "correctAnswer": 2
   },
   {
     "question": "Which gas is essential for aerobic respiration?",
-    "option": ["Carbon dioxide", "Oxygen", "Nitrogen", "Hydrogen"],
-    "correct": "Oxygen"
+    "options": ["Carbon dioxide", "Oxygen", "Nitrogen", "Hydrogen"],
+    "correctAnswer": 1
   },
   {
     "question": "HIV causes which disease?",
-    "option": ["Cancer", "AIDS", "Hepatitis", "Flu"],
-    "correct": "AIDS"
+    "options": ["Cancer", "AIDS", "Hepatitis", "Flu"],
+    "correctAnswer": 1
   },
   {
     "question": "Which carbohydrate is found in plant cell walls?",
-    "option": ["Glucose", "Starch", "Cellulose", "Fructose"],
-    "correct": "Cellulose"
+    "options": ["Glucose", "Starch", "Cellulose", "Fructose"],
+    "correctAnswer": 2
   },
   {
     "question": "Which enzyme breaks down starch in the mouth?",
-    "option": ["Pepsin", "Amylase", "Lipase", "Trypsin"],
-    "correct": "Amylase"
+    "options": ["Pepsin", "Amylase", "Lipase", "Trypsin"],
+    "correctAnswer": 1
   },
   {
     "question": "What is the role of chlorophyll?",
-    "option": ["Respiration", "Protein synthesis", "Photosynthesis", "Digestion"],
-    "correct": "Photosynthesis"
+    "options": ["Respiration", "Protein synthesis", "Photosynthesis", "Digestion"],
+    "correctAnswer": 2
   },
   {
     "question": "The human heart has how many chambers?",
-    "option": ["2", "3", "4", "5"],
-    "correct": "4"
+    "options": ["2", "3", "4", "5"],
+    "correctAnswer": 2
   },
   {
     "question": "The smallest blood vessels are called:",
-    "option": ["Arteries", "Veins", "Capillaries", "Aorta"],
-    "correct": "Capillaries"
+    "options": ["Arteries", "Veins", "Capillaries", "Aorta"],
+    "correctAnswer": 2
   },
   {
     "question": "Which hormone controls blood sugar levels?",
-    "option": ["Adrenaline", "Thyroxine", "Insulin", "Testosterone"],
-    "correct": "Insulin"
+    "options": ["Adrenaline", "Thyroxine", "Insulin", "Testosterone"],
+    "correctAnswer": 2
   },
   {
     "question": "Which organ produces bile?",
-    "option": ["Kidney", "Pancreas", "Gallbladder", "Liver"],
-    "correct": "Liver"
+    "options": ["Kidney", "Pancreas", "Gallbladder", "Liver"],
+    "correctAnswer": 3
   },
   {
     "question": "What is the function of alveoli?",
-    "option": ["Absorption of food", "Exchange of gases", "Filtration of blood", "Secretion of hormones"],
-    "correct": "Exchange of gases"
+    "options": ["Absorption of food", "Exchange of gases", "Filtration of blood", "Secretion of hormones"],
+    "correctAnswer": 1
   },
   {
     "question": "Reflex actions are controlled by:",
-    "option": ["Cerebrum", "Cerebellum", "Spinal cord", "Medulla"],
-    "correct": "Spinal cord"
+    "options": ["Cerebrum", "Cerebellum", "Spinal cord", "Medulla"],
+    "correctAnswer": 2
   },
   {
     "question": "Which structure carries nerve impulses away from the cell body?",
-    "option": ["Dendrite", "Axon", "Synapse", "Nucleus"],
-    "correct": "Axon"
+    "options": ["Dendrite", "Axon", "Synapse", "Nucleus"],
+    "correctAnswer": 1
   },
   {
     "question": "What is the main function of WBCs?",
-    "option": ["Carry oxygen", "Help clot blood", "Fight infection", "Produce insulin"],
-    "correct": "Fight infection"
+    "options": ["Carry oxygen", "Help clot blood", "Fight infection", "Produce insulin"],
+    "correctAnswer": 2
   },
   {
     "question": "Which hormone initiates menstruation?",
-    "option": ["Progesterone", "Estrogen", "FSH", "LH"],
-    "correct": "Estrogen"
+    "options": ["Progesterone", "Estrogen", "FSH", "LH"],
+    "correctAnswer": 1
   },
   {
     "question": "Which protein is found in red blood cells?",
-    "option": ["Keratin", "Collagen", "Myosin", "Hemoglobin"],
-    "correct": "Hemoglobin"
+    "options": ["Keratin", "Collagen", "Myosin", "Hemoglobin"],
+    "correctAnswer": 3
   },
   {
     "question": "Skeletal muscles are under:",
-    "option": ["Voluntary control", "Involuntary control", "Hormonal control", "Reflex control"],
-    "correct": "Voluntary control"
+    "options": ["Voluntary control", "Involuntary control", "Hormonal control", "Reflex control"],
+    "correctAnswer": 0
   },
   {
     "question": "What is the fluid part of blood called?",
-    "option": ["Plasma", "Serum", "WBC", "Platelets"],
-    "correct": "Plasma"
+    "options": ["Plasma", "Serum", "WBC", "Platelets"],
+    "correctAnswer": 0
   },
   {
     "question": "Inheritance of traits is studied in:",
-    "option": ["Ecology", "Genetics", "Evolution", "Taxonomy"],
-    "correct": "Genetics"
+    "options": ["Ecology", "Genetics", "Evolution", "Taxonomy"],
+    "correctAnswer": 1
   },
   {
     "question": "The enzyme that digests proteins in the stomach is:",
-    "option": ["Amylase", "Pepsin", "Lipase", "Trypsin"],
-    "correct": "Pepsin"
+    "options": ["Amylase", "Pepsin", "Lipase", "Trypsin"],
+    "correctAnswer": 1
   },
   {
     "question": "Mendel is known as the father of:",
-    "option": ["Ecology", "Physiology", "Genetics", "Botany"],
-    "correct": "Genetics"
+    "options": ["Ecology", "Physiology", "Genetics", "Botany"],
+    "correctAnswer": 2
   },
   {
     "question": "Which blood group is universal donor?",
-    "option": ["A", "B", "AB", "O"],
-    "correct": "O"
+    "options": ["A", "B", "AB", "O"],
+    "correctAnswer": 3
   },
   {
     "question": "Which structure in kidney filters blood?",
-    "option": ["Nephron", "Glomerulus", "Tubule", "Bowman’s capsule"],
-    "correct": "Glomerulus"
+    "options": ["Nephron", "Glomerulus", "Tubule", "Bowman’s capsule"],
+    "correctAnswer": 1
   },
-
-  // CHEMISTRY: Q31–Q50
   {
     "question": "The number of atoms in 1 mole of a substance is:",
-    "option": ["3.01×10^22", "6.022×10^23", "1.6×10^-19", "9.8 m/s^2"],
-    "correct": "6.022×10^23"
+    "options": ["3.01×10^22", "6.022×10^23", "1.6×10^-19", "9.8 m/s^2"],
+    "correctAnswer": 1
   },
   {
     "question": "Which subatomic particle is negatively charged?",
-    "option": ["Proton", "Neutron", "Electron", "Nucleus"],
-    "correct": "Electron"
+    "options": ["Proton", "Neutron", "Electron", "Nucleus"],
+    "correctAnswer": 2
   },
   {
     "question": "The mass of 1 mole of water is:",
-    "option": ["16g", "18g", "20g", "12g"],
-    "correct": "18g"
+    "options": ["16g", "18g", "20g", "12g"],
+    "correctAnswer": 1
   },
   {
     "question": "Which gas law states that pressure is inversely proportional to volume?",
-    "option": ["Charles’s Law", "Boyle’s Law", "Avogadro’s Law", "Graham’s Law"],
-    "correct": "Boyle’s Law"
+    "options": ["Charles’s Law", "Boyle’s Law", "Avogadro’s Law", "Graham’s Law"],
+    "correctAnswer": 1
   },
   {
     "question": "Hydrogen bonding is present in:",
-    "option": ["CO2", "H2O", "O2", "CH4"],
-    "correct": "H2O"
+    "options": ["CO2", "H2O", "O2", "CH4"],
+    "correctAnswer": 1
   },
   {
     "question": "Which acid is present in vinegar?",
-    "option": ["Citric acid", "Acetic acid", "Formic acid", "Sulfuric acid"],
-    "correct": "Acetic acid"
+    "options": ["Citric acid", "Acetic acid", "Formic acid", "Sulfuric acid"],
+    "correctAnswer": 1
   },
   {
     "question": "What is the pH of pure water?",
-    "option": ["3", "7", "9", "5"],
-    "correct": "7"
+    "options": ["3", "7", "9", "5"],
+    "correctAnswer": 1
   },
   {
     "question": "Which element is a noble gas?",
-    "option": ["Oxygen", "Nitrogen", "Argon", "Chlorine"],
-    "correct": "Argon"
+    "options": ["Oxygen", "Nitrogen", "Argon", "Chlorine"],
+    "correctAnswer": 2
   },
   {
     "question": "The most electronegative element is:",
-    "option": ["Fluorine", "Chlorine", "Oxygen", "Iodine"],
-    "correct": "Fluorine"
+    "options": ["Fluorine", "Chlorine", "Oxygen", "Iodine"],
+    "correctAnswer": 0
   },
   {
     "question": "Which compound has a triple bond?",
-    "option": ["Ethane", "Ethene", "Ethyne", "Methane"],
-    "correct": "Ethyne"
+    "options": ["Ethane", "Ethene", "Ethyne", "Methane"],
+    "correctAnswer": 2
   },
   {
     "question": "Which element is the lightest?",
-    "option": ["Oxygen", "Hydrogen", "Helium", "Carbon"],
-    "correct": "Hydrogen"
+    "options": ["Oxygen", "Hydrogen", "Helium", "Carbon"],
+    "correctAnswer": 1
   },
   {
     "question": "What is the chemical formula of ammonia?",
-    "option": ["NH4", "NH3", "NO2", "N2O"],
-    "correct": "NH3"
+    "options": ["NH4", "NH3", "NO2", "N2O"],
+    "correctAnswer": 1
   },
   {
     "question": "Which of the following is a base?",
-    "option": ["HCl", "NaOH", "H2SO4", "CH3COOH"],
-    "correct": "NaOH"
+    "options": ["HCl", "NaOH", "H2SO4", "CH3COOH"],
+    "correctAnswer": 1
   },
   {
     "question": "Which particle has no charge?",
-    "option": ["Proton", "Electron", "Neutron", "Nucleus"],
-    "correct": "Neutron"
+    "options": ["Proton", "Electron", "Neutron", "Nucleus"],
+    "correctAnswer": 2
   },
   {
     "question": "The S.I unit of energy is:",
-    "option": ["Joule", "Calorie", "Watt", "Newton"],
-    "correct": "Joule"
+    "options": ["Joule", "Calorie", "Watt", "Newton"],
+    "correctAnswer": 0
   },
   {
     "question": "Which compound contains ionic bond?",
-    "option": ["H2O", "NaCl", "CH4", "O2"],
-    "correct": "NaCl"
+    "options": ["H2O", "NaCl", "CH4", "O2"],
+    "correctAnswer": 1
   },
   {
     "question": "Which group is known as alkali metals?",
-    "option": ["Group I", "Group II", "Group VII", "Group 0"],
-    "correct": "Group I"
+    "options": ["Group I", "Group II", "Group VII", "Group 0"],
+    "correctAnswer": 0
   },
   {
     "question": "Rusting is a type of:",
-    "option": ["Reduction", "Oxidation", "Hydrolysis", "Precipitation"],
-    "correct": "Oxidation"
+    "options": ["Reduction", "Oxidation", "Hydrolysis", "Precipitation"],
+    "correctAnswer": 1
   },
   {
     "question": "Organic compounds mainly contain:",
-    "option": ["Sodium", "Chlorine", "Carbon", "Magnesium"],
-    "correct": "Carbon"
+    "options": ["Sodium", "Chlorine", "Carbon", "Magnesium"],
+    "correctAnswer": 2
   },
   {
     "question": "Which acid is used in car batteries?",
-    "option": ["Acetic acid", "Hydrochloric acid", "Sulfuric acid", "Nitric acid"],
-    "correct": "Sulfuric acid"
+    "options": ["Acetic acid", "Hydrochloric acid", "Sulfuric acid", "Nitric acid"],
+    "correctAnswer": 2
   },
-
-  // PHYSICS: Q51–Q70
   {
     "question": "The unit of force is:",
-    "option": ["Joule", "Newton", "Watt", "Pascal"],
-    "correct": "Newton"
+    "options": ["Joule", "Newton", "Watt", "Pascal"],
+    "correctAnswer": 1
   },
   {
     "question": "Speed is defined as:",
-    "option": ["Distance/time", "Force × time", "Mass × acceleration", "Displacement/time"],
-    "correct": "Distance/time"
+    "options": ["Distance/time", "Force × time", "Mass × acceleration", "Displacement/time"],
+    "correctAnswer": 0
   },
   {
     "question": "Acceleration due to gravity on Earth is:",
-    "option": ["8.8 m/s^2", "9.8 m/s^2", "10 m/s^2", "6.8 m/s^2"],
-    "correct": "9.8 m/s^2"
+    "options": ["8.8 m/s^2", "9.8 m/s^2", "10 m/s^2", "6.8 m/s^2"],
+    "correctAnswer": 1
   },
   {
     "question": "Which quantity is scalar?",
-    "option": ["Force", "Velocity", "Work", "Acceleration"],
-    "correct": "Work"
+    "options": ["Force", "Velocity", "Work", "Acceleration"],
+    "correctAnswer": 2
   },
   {
     "question": "Which law explains action and reaction?",
-    "option": ["First", "Second", "Third", "Law of inertia"],
-    "correct": "Third"
+    "options": ["First", "Second", "Third", "Law of inertia"],
+    "correctAnswer": 2
   },
   {
     "question": "Which instrument measures current?",
-    "option": ["Voltmeter", "Ammeter", "Thermometer", "Galvanometer"],
-    "correct": "Ammeter"
+    "options": ["Voltmeter", "Ammeter", "Thermometer", "Galvanometer"],
+    "correctAnswer": 1
   },
   {
     "question": "The frequency of A.C in Pakistan is:",
-    "option": ["50 Hz", "60 Hz", "30 Hz", "100 Hz"],
-    "correct": "50 Hz"
+    "options": ["50 Hz", "60 Hz", "30 Hz", "100 Hz"],
+    "correctAnswer": 0
   },
   {
     "question": "Sound cannot travel in:",
-    "option": ["Water", "Air", "Vacuum", "Steel"],
-    "correct": "Vacuum"
+    "options": ["Water", "Air", "Vacuum", "Steel"],
+    "correctAnswer": 2
   },
   {
     "question": "Which wave is used in TV remote control?",
-    "option": ["Microwave", "Infrared", "X-ray", "Radio"],
-    "correct": "Infrared"
+    "options": ["Microwave", "Infrared", "X-ray", "Radio"],
+    "correctAnswer": 1
   },
   {
     "question": "Heat energy is transferred by conduction mainly in:",
-    "option": ["Solids", "Liquids", "Gases", "Vacuum"],
-    "correct": "Solids"
+    "options": ["Solids", "Liquids", "Gases", "Vacuum"],
+    "correctAnswer": 0
   },
   {
     "question": "The SI unit of pressure is:",
-    "option": ["Bar", "Pascal", "Newton", "Atmosphere"],
-    "correct": "Pascal"
+    "options": ["Bar", "Pascal", "Newton", "Atmosphere"],
+    "correctAnswer": 1
   },
   {
     "question": "Ohm's law is V =",
-    "option": ["IR", "I/R", "R/I", "VI"],
-    "correct": "IR"
+    "options": ["IR", "I/R", "R/I", "VI"],
+    "correctAnswer": 0
   },
   {
     "question": "The device used to convert A.C to D.C is:",
-    "option": ["Rectifier", "Transformer", "Capacitor", "Resistor"],
-    "correct": "Rectifier"
+    "options": ["Rectifier", "Transformer", "Capacitor", "Resistor"],
+    "correctAnswer": 0
   },
   {
     "question": "Which color has the highest frequency?",
-    "option": ["Red", "Blue", "Green", "Violet"],
-    "correct": "Violet"
+    "options": ["Red", "Blue", "Green", "Violet"],
+    "correctAnswer": 3
   },
   {
     "question": "Which radiation has the shortest wavelength?",
-    "option": ["Infrared", "Ultraviolet", "Microwave", "Gamma rays"],
-    "correct": "Gamma rays"
+    "options": ["Infrared", "Ultraviolet", "Microwave", "Gamma rays"],
+    "correctAnswer": 3
   },
   {
     "question": "The time for one complete wave is called:",
-    "option": ["Amplitude", "Frequency", "Wavelength", "Time period"],
-    "correct": "Time period"
+    "options": ["Amplitude", "Frequency", "Wavelength", "Time period"],
+    "correctAnswer": 3
   },
   {
     "question": "Which instrument detects earthquakes?",
-    "option": ["Thermometer", "Barometer", "Seismograph", "Anemometer"],
-    "correct": "Seismograph"
+    "options": ["Thermometer", "Barometer", "Seismograph", "Anemometer"],
+    "correctAnswer": 2
   },
   {
     "question": "In convex lens, image formed is:",
-    "option": ["Always virtual", "Always real", "Real or virtual", "Always inverted"],
-    "correct": "Real or virtual"
+    "options": ["Always virtual", "Always real", "Real or virtual", "Always inverted"],
+    "correctAnswer": 2
   },
   {
     "question": "The flow of electrons is called:",
-    "option": ["Resistance", "Current", "Voltage", "Power"],
-    "correct": "Current"
+    "options": ["Resistance", "Current", "Voltage", "Power"],
+    "correctAnswer": 1
   },
   {
     "question": "What is the speed of light in vacuum?",
-    "option": ["3×10^8 m/s", "3×10^6 m/s", "1.5×10^8 m/s", "3×10^5 m/s"],
-    "correct": "3×10^8 m/s"
-  }
-
-,
+    "options": ["3×10^8 m/s", "3×10^6 m/s", "1.5×10^8 m/s", "3×10^5 m/s"],
+    "correctAnswer": 0
+  },
   {
     "question": "Which vitamin is essential for blood clotting?",
-    "option": ["Vitamin A", "Vitamin B", "Vitamin K", "Vitamin D"],
-    "correct": "Vitamin K"
+    "options": ["Vitamin A", "Vitamin B", "Vitamin K", "Vitamin D"],
+    "correctAnswer": 2
   },
   {
     "question": "The process by which green plants make their food is:",
-    "option": ["Respiration", "Transpiration", "Photosynthesis", "Digestion"],
-    "correct": "Photosynthesis"
+    "options": ["Respiration", "Transpiration", "Photosynthesis", "Digestion"],
+    "correctAnswer": 2
   },
   {
     "question": "In which organelle does aerobic respiration take place?",
-    "option": ["Chloroplast", "Mitochondria", "Nucleus", "Golgi body"],
-    "correct": "Mitochondria"
+    "options": ["Chloroplast", "Mitochondria", "Nucleus", "Golgi body"],
+    "correctAnswer": 1
   },
   {
     "question": "Which of the following is not a component of the human circulatory system?",
-    "option": ["Heart", "Lungs", "Blood", "Blood vessels"],
-    "correct": "Lungs"
+    "options": ["Heart", "Lungs", "Blood", "Blood vessels"],
+    "correctAnswer": 1
   },
   {
     "question": "Which type of immunity is gained through vaccination?",
-    "option": ["Natural", "Passive", "Active acquired", "Innate"],
-    "correct": "Active acquired"
+    "options": ["Natural", "Passive", "Active acquired", "Innate"],
+    "correctAnswer": 2
   },
   {
     "question": "A genetic disorder caused by a missing clotting factor is:",
-    "option": ["Anemia", "Hemophilia", "Thalassemia", "Diabetes"],
-    "correct": "Hemophilia"
+    "options": ["Anemia", "Hemophilia", "Thalassemia", "Diabetes"],
+    "correctAnswer": 1
   },
   {
     "question": "Which hormone controls the menstrual cycle?",
-    "option": ["Insulin", "Adrenaline", "Estrogen", "Glucagon"],
-    "correct": "Estrogen"
+    "options": ["Insulin", "Adrenaline", "Estrogen", "Glucagon"],
+    "correctAnswer": 2
   },
   {
     "question": "Which process removes excess water from the body?",
-    "option": ["Digestion", "Respiration", "Excretion", "Absorption"],
-    "correct": "Excretion"
+    "options": ["Digestion", "Respiration", "Excretion", "Absorption"],
+    "correctAnswer": 2
   },
   {
     "question": "What structure in the eye detects light?",
-    "option": ["Iris", "Lens", "Retina", "Cornea"],
-    "correct": "Retina"
+    "options": ["Iris", "Lens", "Retina", "Cornea"],
+    "correctAnswer": 2
   },
   {
     "question": "The longest part of the human digestive system is:",
-    "option": ["Stomach", "Small intestine", "Large intestine", "Esophagus"],
-    "correct": "Small intestine"
+    "options": ["Stomach", "Small intestine", "Large intestine", "Esophagus"],
+    "correctAnswer": 1
   },
   {
     "question": "Which part of the brain regulates heartbeat and breathing?",
-    "option": ["Cerebrum", "Cerebellum", "Medulla", "Thalamus"],
-    "correct": "Medulla"
+    "options": ["Cerebrum", "Cerebellum", "Medulla", "Thalamus"],
+    "correctAnswer": 2
   },
   {
     "question": "Which protein is responsible for muscle contraction?",
-    "option": ["Myosin", "Actin", "Keratin", "Albumin"],
-    "correct": "Myosin"
+    "options": ["Myosin", "Actin", "Keratin", "Albumin"],
+    "correctAnswer": 0
   },
   {
     "question": "Which organ regulates body temperature?",
-    "option": ["Liver", "Kidney", "Hypothalamus", "Lungs"],
-    "correct": "Hypothalamus"
+    "options": ["Liver", "Kidney", "Hypothalamus", "Lungs"],
+    "correctAnswer": 2
   },
   {
     "question": "Which gland secretes growth hormone?",
-    "option": ["Thyroid", "Adrenal", "Pituitary", "Pancreas"],
-    "correct": "Pituitary"
+    "options": ["Thyroid", "Adrenal", "Pituitary", "Pancreas"],
+    "correctAnswer": 2
   },
   {
     "question": "Which part of nephron performs ultrafiltration?",
-    "option": ["Loop of Henle", "Glomerulus", "Tubule", "Collecting duct"],
-    "correct": "Glomerulus"
+    "options": ["Loop of Henle", "Glomerulus", "Tubule", "Collecting duct"],
+    "correctAnswer": 1
   },
   {
     "question": "Sex chromosomes in males are:",
-    "option": ["XX", "XY", "YY", "XO"],
-    "correct": "XY"
+    "options": ["XX", "XY", "YY", "XO"],
+    "correctAnswer": 1
   },
   {
     "question": "Which structure transports urine from kidney to bladder?",
-    "option": ["Urethra", "Nephron", "Ureter", "Loop of Henle"],
-    "correct": "Ureter"
+    "options": ["Urethra", "Nephron", "Ureter", "Loop of Henle"],
+    "correctAnswer": 2
   },
   {
     "question": "Red blood cells are produced in the:",
-    "option": ["Liver", "Spleen", "Bone marrow", "Heart"],
-    "correct": "Bone marrow"
+    "options": ["Liver", "Spleen", "Bone marrow", "Heart"],
+    "correctAnswer": 2
   },
   {
     "question": "Which part of the flower produces pollen?",
-    "option": ["Petal", "Stigma", "Anther", "Ovary"],
-    "correct": "Anther"
+    "options": ["Petal", "Stigma", "Anther", "Ovary"],
+    "correctAnswer": 2
   },
   {
     "question": "Fertilization in humans occurs in the:",
-    "option": ["Uterus", "Ovary", "Fallopian tube", "Vagina"],
-    "correct": "Fallopian tube"
+    "options": ["Uterus", "Ovary", "Fallopian tube", "Vagina"],
+    "correctAnswer": 2
   },
-
-  // CHEMISTRY: Q91–Q110
   {
     "question": "Which is the most abundant gas in the Earth's atmosphere?",
-    "option": ["Oxygen", "Carbon dioxide", "Nitrogen", "Argon"],
-    "correct": "Nitrogen"
+    "options": ["Oxygen", "Carbon dioxide", "Nitrogen", "Argon"],
+    "correctAnswer": 2
   },
   {
     "question": "The process of solid directly changing into gas is:",
-    "option": ["Fusion", "Sublimation", "Condensation", "Evaporation"],
-    "correct": "Sublimation"
+    "options": ["Fusion", "Sublimation", "Condensation", "Evaporation"],
+    "correctAnswer": 1
   },
   {
     "question": "Which metal is liquid at room temperature?",
-    "option": ["Iron", "Mercury", "Aluminum", "Lead"],
-    "correct": "Mercury"
+    "options": ["Iron", "Mercury", "Aluminum", "Lead"],
+    "correctAnswer": 1
   },
   {
     "question": "Which substance turns blue litmus paper red?",
-    "option": ["Base", "Acid", "Salt", "Alcohol"],
-    "correct": "Acid"
+    "options": ["Base", "Acid", "Salt", "Alcohol"],
+    "correctAnswer": 1
   },
   {
     "question": "The bond between two non-metals is:",
-    "option": ["Ionic", "Covalent", "Metallic", "Hydrogen"],
-    "correct": "Covalent"
+    "options": ["Ionic", "Covalent", "Metallic", "Hydrogen"],
+    "correctAnswer": 1
   },
   {
     "question": "The chemical formula of calcium carbonate is:",
-    "option": ["CaO", "CaCl2", "CaCO3", "Ca(OH)2"],
-    "correct": "CaCO3"
+    "options": ["CaO", "CaCl2", "CaCO3", "Ca(OH)2"],
+    "correctAnswer": 2
   },
   {
     "question": "Atomic number is the number of:",
-    "option": ["Electrons", "Neutrons", "Protons", "Ions"],
-    "correct": "Protons"
+    "options": ["Electrons", "Neutrons", "Protons", "Ions"],
+    "correctAnswer": 2
   },
   {
     "question": "Which group in the periodic table contains noble gases?",
-    "option": ["Group 1", "Group 7", "Group 18", "Group 17"],
-    "correct": "Group 18"
+    "options": ["Group 1", "Group 7", "Group 18", "Group 17"],
+    "correctAnswer": 2
   },
   {
     "question": "NaOH is a:",
-    "option": ["Salt", "Acid", "Base", "Solvent"],
-    "correct": "Base"
+    "options": ["Salt", "Acid", "Base", "Solvent"],
+    "correctAnswer": 2
   },
   {
     "question": "The nucleus of an atom contains:",
-    "option": ["Protons only", "Electrons and neutrons", "Protons and neutrons", "Electrons only"],
-    "correct": "Protons and neutrons"
+    "options": ["Protons only", "Electrons and neutrons", "Protons and neutrons", "Electrons only"],
+    "correctAnswer": 2
   },
   {
     "question": "Rate of reaction is affected by:",
-    "option": ["Color", "Mass", "Temperature", "Volume"],
-    "correct": "Temperature"
+    "options": ["Color", "Mass", "Temperature", "Volume"],
+    "correctAnswer": 2
   },
   {
     "question": "Water is a:",
-    "option": ["Element", "Compound", "Mixture", "Atom"],
-    "correct": "Compound"
+    "options": ["Element", "Compound", "Mixture", "Atom"],
+    "correctAnswer": 1
   },
   {
     "question": "Which element is used in making nuclear bombs?",
-    "option": ["Uranium", "Calcium", "Lead", "Zinc"],
-    "correct": "Uranium"
+    "options": ["Uranium", "Calcium", "Lead", "Zinc"],
+    "correctAnswer": 0
   },
   {
     "question": "A solution with pH less than 7 is:",
-    "option": ["Neutral", "Basic", "Acidic", "Alkaline"],
-    "correct": "Acidic"
+    "options": ["Neutral", "Basic", "Acidic", "Alkaline"],
+    "correctAnswer": 2
   },
   {
     "question": "Which compound is responsible for hardness of water?",
-    "option": ["NaCl", "MgSO4", "CaCO3", "HCl"],
-    "correct": "CaCO3"
+    "options": ["NaCl", "MgSO4", "CaCO3", "HCl"],
+    "correctAnswer": 2
   },
   {
     "question": "The anion in NaCl is:",
-    "option": ["Na+", "Cl-", "Na-", "Cl+"],
-    "correct": "Cl-"
+    "options": ["Na+", "Cl-", "Na-", "Cl+"],
+    "correctAnswer": 1
   },
   {
     "question": "Which hydrocarbon has a triple bond?",
-    "option": ["Alkane", "Alkene", "Aromatic", "Alkyne"],
-    "correct": "Alkyne"
+    "options": ["Alkane", "Alkene", "Aromatic", "Alkyne"],
+    "correctAnswer": 3
   },
   {
     "question": "Litmus is a type of:",
-    "option": ["Salt", "Indicator", "Acid", "Base"],
-    "correct": "Indicator"
+    "options": ["Salt", "Indicator", "Acid", "Base"],
+    "correctAnswer": 1
   },
   {
     "question": "Which process separates components based on boiling point?",
-    "option": ["Filtration", "Evaporation", "Distillation", "Chromatography"],
-    "correct": "Distillation"
+    "options": ["Filtration", "Evaporation", "Distillation", "Chromatography"],
+    "correctAnswer": 2
   },
   {
     "question": "The symbol of lead is:",
-    "option": ["Pb", "P", "Pd", "L"],
-    "correct": "Pb"
+    "options": ["Pb", "P", "Pd", "L"],
+    "correctAnswer": 0
   },
-
-  // PHYSICS: Q111–Q130
   {
     "question": "Force acting on unit area is called:",
-    "option": ["Work", "Power", "Pressure", "Energy"],
-    "correct": "Pressure"
+    "options": ["Work", "Power", "Pressure", "Energy"],
+    "correctAnswer": 2
   },
   {
     "question": "The instrument used to measure atmospheric pressure is:",
-    "option": ["Thermometer", "Hygrometer", "Barometer", "Ammeter"],
-    "correct": "Barometer"
+    "options": ["Thermometer", "Hygrometer", "Barometer", "Ammeter"],
+    "correctAnswer": 2
   },
   {
     "question": "Heat is a form of:",
-    "option": ["Matter", "Energy", "Force", "Pressure"],
-    "correct": "Energy"
+    "options": ["Matter", "Energy", "Force", "Pressure"],
+    "correctAnswer": 1
   },
   {
     "question": "Which law states that energy cannot be created or destroyed?",
-    "option": ["Ohm’s law", "Newton’s law", "Law of conservation of energy", "Hooke’s law"],
-    "correct": "Law of conservation of energy"
+    "options": ["Ohm’s law", "Newton’s law", "Law of conservation of energy", "Hooke’s law"],
+    "correctAnswer": 2
   },
   {
     "question": "1 kilowatt-hour is equal to:",
-    "option": ["3600 J", "3.6×10^6 J", "1000 J", "360 J"],
-    "correct": "3.6×10^6 J"
+    "options": ["3600 J", "3.6×10^6 J", "1000 J", "360 J"],
+    "correctAnswer": 1
   },
   {
     "question": "The SI unit of electric charge is:",
-    "option": ["Ampere", "Volt", "Coulomb", "Ohm"],
-    "correct": "Coulomb"
+    "options": ["Ampere", "Volt", "Coulomb", "Ohm"],
+    "correctAnswer": 2
   },
   {
     "question": "An electric current produces:",
-    "option": ["Sound", "Light", "Magnetic field", "Heat only"],
-    "correct": "Magnetic field"
+    "options": ["Sound", "Light", "Magnetic field", "Heat only"],
+    "correctAnswer": 2
   },
   {
     "question": "What does a transformer do?",
-    "option": ["Stores charge", "Measures voltage", "Changes voltage", "Generates electricity"],
-    "correct": "Changes voltage"
+    "options": ["Stores charge", "Measures voltage", "Changes voltage", "Generates electricity"],
+    "correctAnswer": 2
   },
   {
     "question": "The path followed by projectile is called:",
-    "option": ["Circle", "Straight line", "Parabola", "Ellipse"],
-    "correct": "Parabola"
+    "options": ["Circle", "Straight line", "Parabola", "Ellipse"],
+    "correctAnswer": 2
   },
   {
     "question": "The device that stores electrical energy is called:",
-    "option": ["Transistor", "Resistor", "Capacitor", "Inductor"],
-    "correct": "Capacitor"
+    "options": ["Transistor", "Resistor", "Capacitor", "Inductor"],
+    "correctAnswer": 2
   },
   {
     "question": "What is the unit of frequency?",
-    "option": ["Decibel", "Meter", "Hertz", "Volt"],
-    "correct": "Hertz"
+    "options": ["Decibel", "Meter", "Hertz", "Volt"],
+    "correctAnswer": 2
   },
   {
     "question": "Which mirror is used in car side mirrors?",
-    "option": ["Plane", "Concave", "Convex", "Parabolic"],
-    "correct": "Convex"
+    "options": ["Plane", "Concave", "Convex", "Parabolic"],
+    "correctAnswer": 2
   },
   {
     "question": "The phenomenon of light bending is called:",
-    "option": ["Reflection", "Refraction", "Diffraction", "Dispersion"],
-    "correct": "Refraction"
+    "options": ["Reflection", "Refraction", "Diffraction", "Dispersion"],
+    "correctAnswer": 1
   },
   {
     "question": "Which color of light has the longest wavelength?",
-    "option": ["Red", "Blue", "Green", "Violet"],
-    "correct": "Red"
+    "options": ["Red", "Blue", "Green", "Violet"],
+    "correctAnswer": 0
   },
   {
     "question": "The main source of energy for Earth is:",
-    "option": ["Wind", "Water", "Sun", "Fuel"],
-    "correct": "Sun"
+    "options": ["Wind", "Water", "Sun", "Fuel"],
+    "correctAnswer": 2
   },
   {
     "question": "Speed of sound in air is approximately:",
-    "option": ["330 m/s", "3×10^8 m/s", "1000 m/s", "1500 m/s"],
-    "correct": "330 m/s"
+    "options": ["330 m/s", "3×10^8 m/s", "1000 m/s", "1500 m/s"],
+    "correctAnswer": 0
   },
   {
     "question": "Which type of lens is thicker at the center?",
-    "option": ["Concave", "Convex", "Plane", "Flat"],
-    "correct": "Convex"
+    "options": ["Concave", "Convex", "Plane", "Flat"],
+    "correctAnswer": 1
   },
   {
     "question": "What is the acceleration in free fall?",
-    "option": ["1 m/s²", "5 m/s²", "9.8 m/s²", "15 m/s²"],
-    "correct": "9.8 m/s²"
+    "options": ["1 m/s²", "5 m/s²", "9.8 m/s²", "15 m/s²"],
+    "correctAnswer": 2
   },
   {
     "question": "The SI unit of work is:",
-    "option": ["Joule", "Watt", "Newton", "Pascal"],
-    "correct": "Joule"
+    "options": ["Joule", "Watt", "Newton", "Pascal"],
+    "correctAnswer": 0
   },
   {
     "question": "The mirror used by dentists is:",
-    "option": ["Plane", "Convex", "Concave", "None"],
-    "correct": "Concave"
+    "options": ["Plane", "Convex", "Concave", "None"],
+    "correctAnswer": 2
   },
-
-  // ENGLISH: Q131–Q140
   {
     "question": "Choose the correct synonym for 'Rapid':",
-    "option": ["Slow", "Fast", "Dull", "Lazy"],
-    "correct": "Fast"
+    "options": ["Slow", "Fast", "Dull", "Lazy"],
+    "correctAnswer": 1
   },
   {
     "question": "Choose the correct antonym for 'Expand':",
-    "option": ["Increase", "Enlarge", "Contract", "Spread"],
-    "correct": "Contract"
+    "options": ["Increase", "Enlarge", "Contract", "Spread"],
+    "correctAnswer": 2
   },
   {
     "question": "Fill in the blank: She ___ going to school.",
-    "option": ["am", "is", "are", "were"],
-    "correct": "is"
+    "options": ["am", "is", "are", "were"],
+    "correctAnswer": 1
   },
   {
     "question": "Choose the correct preposition: He jumped ___ the river.",
-    "option": ["on", "in", "into", "onto"],
-    "correct": "into"
+    "options": ["on", "in", "into", "onto"],
+    "correctAnswer": 2
   },
   {
     "question": "Identify the adjective: The sky was dark and cloudy.",
-    "option": ["Sky", "Was", "Dark", "And"],
-    "correct": "Dark"
+    "options": ["Sky", "Was", "Dark", "And"],
+    "correctAnswer": 2
   },
   {
     "question": "Choose the correct spelling:",
-    "option": ["Recieve", "Receive", "Receeve", "Recive"],
-    "correct": "Receive"
+    "options": ["Recieve", "Receive", "Receeve", "Recive"],
+    "correctAnswer": 1
   },
   {
     "question": "Choose the passive voice: 'She wrote a letter.'",
-    "option": ["A letter is written", "A letter was written by her", "She writes letter", "She has written letter"],
-    "correct": "A letter was written by her"
+    "options": ["A letter is written", "A letter was written by her", "She writes letter", "She has written letter"],
+    "correctAnswer": 1
   },
   {
     "question": "Pick the correct indirect speech: He said, 'I am tired.'",
-    "option": ["He said he was tired", "He said I am tired", "He said that I was tired", "He told he tired"],
-    "correct": "He said he was tired"
+    "options": ["He said he was tired", "He said I am tired", "He said that I was tired", "He told he tired"],
+    "correctAnswer": 0
   },
   {
     "question": "Choose the correct pronoun: ___ are coming with us.",
-    "option": ["Them", "They", "Their", "Theirs"],
-    "correct": "They"
+    "options": ["Them", "They", "Their", "Theirs"],
+    "correctAnswer": 1
   },
   {
     "question": "Identify the noun: Honesty is the best policy.",
-    "option": ["Best", "Policy", "Is", "Honesty"],
-    "correct": "Honesty"
-  }
-,
+    "options": ["Best", "Policy", "Is", "Honesty"],
+    "correctAnswer": 3
+  },
   {
     "question": "If A = 1, B = 2, ..., then what is the sum of letters in 'DOG'?",
-    "option": ["20", "26", "24", "22"],
-    "correct": "26"
+    "options": ["20", "26", "24", "22"],
+    "correctAnswer": 1
   },
   {
     "question": "What comes next in the series: 2, 4, 8, 16, ?",
-    "option": ["18", "24", "30", "32"],
-    "correct": "32"
+    "options": ["18", "24", "30", "32"],
+    "correctAnswer": 3
   },
   {
     "question": "All roses are flowers. Some flowers fade quickly. What can be concluded?",
-    "option": ["All roses fade quickly", "Some roses are not flowers", "Some flowers are roses", "Some roses may fade quickly"],
-    "correct": "Some flowers are roses"
+    "options": ["All roses fade quickly", "Some roses are not flowers", "Some flowers are roses", "Some roses may fade quickly"],
+    "correctAnswer": 2
   },
   {
     "question": "Which number completes the series: 3, 6, 9, 12, ?",
-    "option": ["14", "15", "18", "16"],
-    "correct": "15"
+    "options": ["14", "15", "18", "16"],
+    "correctAnswer": 1
   },
   {
     "question": "Statement: All humans are mammals. Conclusion: All mammals are humans.",
-    "option": ["True", "False", "Uncertain", "Cannot say"],
-    "correct": "False"
+    "options": ["True", "False", "Uncertain", "Cannot say"],
+    "correctAnswer": 1
   },
   {
     "question": "What comes next in the pattern: Z, X, V, T, ?",
-    "option": ["R", "S", "Q", "U"],
-    "correct": "R"
+    "options": ["R", "S", "Q", "U"],
+    "correctAnswer": 0
   },
   {
     "question": "Find the odd one out: Apple, Banana, Carrot, Mango",
-    "option": ["Apple", "Banana", "Carrot", "Mango"],
-    "correct": "Carrot"
+    "options": ["Apple", "Banana", "Carrot", "Mango"],
+    "correctAnswer": 2
   },
   {
     "question": "A is the sister of B. B is the brother of C. C is the son of D. How is D related to A?",
-    "option": ["Father", "Mother", "Parent", "Uncle"],
-    "correct": "Parent"
+    "options": ["Father", "Mother", "Parent", "Uncle"],
+    "correctAnswer": 2
   },
   {
     "question": "If ALL = 36, BAT = 43, then CAT = ?",
-    "option": ["42", "46", "41", "44"],
-    "correct": "44"
+    "options": ["42", "46", "41", "44"],
+    "correctAnswer": 3
   },
   {
     "question": "Which figure logically follows: ●▲■, ▲■●, ■●▲, ?",
-    "option": ["■▲●", "▲●■", "●■▲", "■●▲"],
-    "correct": "▲●■"
+    "options": ["■▲●", "▲●■", "●■▲", "■●▲"],
+    "correctAnswer": 1
   },
   {
     "question": "Which day comes three days after Monday?",
-    "option": ["Thursday", "Friday", "Wednesday", "Sunday"],
-    "correct": "Thursday"
+    "options": ["Thursday", "Friday", "Wednesday", "Sunday"],
+    "correctAnswer": 0
   },
   {
     "question": "Which is the odd one out: Circle, Triangle, Square, Sphere?",
-    "option": ["Circle", "Sphere", "Triangle", "Square"],
-    "correct": "Sphere"
+    "options": ["Circle", "Sphere", "Triangle", "Square"],
+    "correctAnswer": 1
   },
   {
     "question": "If 1=5, 2=25, 3=325, then 4=?",
-    "option": ["4325", "425", "435", "432"],
-    "correct": "4325"
+    "options": ["4325", "425", "435", "432"],
+    "correctAnswer": 0
   },
   {
     "question": "Which letter is two places right of G in English alphabet?",
-    "option": ["H", "I", "J", "K"],
-    "correct": "I"
+    "options": ["H", "I", "J", "K"],
+    "correctAnswer": 1
   },
   {
     "question": "If 5 + 3 = 28, 9 + 1 = 810, then 8 + 6 = ?",
-    "option": ["86", "814", "48", "88"],
-    "correct": "814"
+    "options": ["86", "814", "48", "88"],
+    "correctAnswer": 1
   },
   {
     "question": "A clock shows 3:15. What is the angle between hour and minute hand?",
-    "option": ["0°", "7.5°", "30°", "60°"],
-    "correct": "7.5°"
+    "options": ["0°", "7.5°", "30°", "60°"],
+    "correctAnswer": 1
   },
   {
     "question": "Which number is missing? 4, 9, 16, ?, 36",
-    "option": ["20", "25", "30", "32"],
-    "correct": "25"
+    "options": ["20", "25", "30", "32"],
+    "correctAnswer": 1
   },
   {
     "question": "What is the mirror image of 'MBD'?",
-    "option": ["DMB", "BMD", "qvd", "None"],
-    "correct": "None"
+    "options": ["DMB", "BMD", "qvd", "None"],
+    "correctAnswer": 3
   },
   {
     "question": "If South becomes East, what does East become?",
-    "option": ["North", "South", "West", "Same"],
-    "correct": "North"
+    "options": ["North", "South", "West", "Same"],
+    "correctAnswer": 0
   },
   {
     "question": "Which figure is different: □, △, ◯, ▲",
-    "option": ["□", "△", "◯", "▲"],
-    "correct": "◯"
+    "options": ["□", "△", "◯", "▲"],
+    "correctAnswer": 2
   },
-
-  // BONUS MIXED MCQs: Q161–Q200
   {
     "question": "Which planet is known as the Red Planet?",
-    "option": ["Earth", "Jupiter", "Mars", "Venus"],
-    "correct": "Mars"
+    "options": ["Earth", "Jupiter", "Mars", "Venus"],
+    "correctAnswer": 2
   },
   {
     "question": "Which vitamin is synthesized in skin by sunlight?",
-    "option": ["A", "B", "C", "D"],
-    "correct": "D"
+    "options": ["A", "B", "C", "D"],
+    "correctAnswer": 3
   },
   {
     "question": "Which of the following is not a greenhouse gas?",
-    "option": ["CO2", "CH4", "O2", "N2O"],
-    "correct": "O2"
+    "options": ["CO2", "CH4", "O2", "N2O"],
+    "correctAnswer": 2
   },
   {
     "question": "Which of these is not a noble gas?",
-    "option": ["Neon", "Helium", "Argon", "Hydrogen"],
-    "correct": "Hydrogen"
+    "options": ["Neon", "Helium", "Argon", "Hydrogen"],
+    "correctAnswer": 3
   },
   {
     "question": "Which unit is used to measure electric power?",
-    "option": ["Volt", "Watt", "Ohm", "Ampere"],
-    "correct": "Watt"
+    "options": ["Volt", "Watt", "Ohm", "Ampere"],
+    "correctAnswer": 1
   },
   {
     "question": "What is the chemical formula of methane?",
-    "option": ["CH3", "CH4", "C2H6", "CO2"],
-    "correct": "CH4"
+    "options": ["CH3", "CH4", "C2H6", "CO2"],
+    "correctAnswer": 1
   },
   {
     "question": "The process of joining monomers to form polymers is called:",
-    "option": ["Hydrolysis", "Polymerization", "Glycolysis", "Crystallization"],
-    "correct": "Polymerization"
+    "options": ["Hydrolysis", "Polymerization", "Glycolysis", "Crystallization"],
+    "correctAnswer": 1
   },
   {
     "question": "Which blood group is universal recipient?",
-    "option": ["A", "B", "AB", "O"],
-    "correct": "AB"
+    "options": ["A", "B", "AB", "O"],
+    "correctAnswer": 2
   },
   {
     "question": "Which organ helps in voice production?",
-    "option": ["Pharynx", "Larynx", "Trachea", "Bronchi"],
-    "correct": "Larynx"
+    "options": ["Pharynx", "Larynx", "Trachea", "Bronchi"],
+    "correctAnswer": 1
   },
   {
     "question": "Which layer of skin has pigment cells?",
-    "option": ["Dermis", "Epidermis", "Subcutaneous", "Basement membrane"],
-    "correct": "Epidermis"
+    "options": ["Dermis", "Epidermis", "Subcutaneous", "Basement membrane"],
+    "correctAnswer": 1
   },
   {
     "question": "The process of cell division in somatic cells is:",
-    "option": ["Meiosis", "Binary fission", "Mitosis", "Budding"],
-    "correct": "Mitosis"
+    "options": ["Meiosis", "Binary fission", "Mitosis", "Budding"],
+    "correctAnswer": 2
   },
   {
     "question": "Which one is an excretory organ?",
-    "option": ["Liver", "Pancreas", "Lung", "Skin"],
-    "correct": "Skin"
+    "options": ["Liver", "Pancreas", "Lung", "Skin"],
+    "correctAnswer": 3
   },
   {
     "question": "DNA replication occurs in which phase of cell cycle?",
-    "option": ["G1", "G2", "S", "M"],
-    "correct": "S"
+    "options": ["G1", "G2", "S", "M"],
+    "correctAnswer": 2
   },
   {
     "question": "Which of the following is a polysaccharide?",
-    "option": ["Glucose", "Fructose", "Sucrose", "Starch"],
-    "correct": "Starch"
+    "options": ["Glucose", "Fructose", "Sucrose", "Starch"],
+    "correctAnswer": 3
   },
   {
     "question": "In which organ is urea produced?",
-    "option": ["Kidney", "Liver", "Bladder", "Pancreas"],
-    "correct": "Liver"
+    "options": ["Kidney", "Liver", "Bladder", "Pancreas"],
+    "correctAnswer": 1
   },
   {
     "question": "A balanced chemical equation obeys:",
-    "option": ["Law of gravity", "Law of reflection", "Law of conservation of mass", "Law of inertia"],
-    "correct": "Law of conservation of mass"
+    "options": ["Law of gravity", "Law of reflection", "Law of conservation of mass", "Law of inertia"],
+    "correctAnswer": 2
   },
   {
     "question": "Unit of sound intensity is:",
-    "option": ["Decibel", "Hertz", "Joule", "Tesla"],
-    "correct": "Decibel"
+    "options": ["Decibel", "Hertz", "Joule", "Tesla"],
+    "correctAnswer": 0
   },
   {
     "question": "Which wave is used in medical imaging?",
-    "option": ["Gamma rays", "Microwaves", "X-rays", "Radio waves"],
-    "correct": "X-rays"
+    "options": ["Gamma rays", "Microwaves", "X-rays", "Radio waves"],
+    "correctAnswer": 2
   },
   {
     "question": "Which gas is used in light bulbs?",
-    "option": ["Hydrogen", "Nitrogen", "Argon", "Oxygen"],
-    "correct": "Argon"
+    "options": ["Hydrogen", "Nitrogen", "Argon", "Oxygen"],
+    "correctAnswer": 2
   },
   {
     "question": "Which gland is called the master gland?",
-    "option": ["Thyroid", "Pancreas", "Pituitary", "Adrenal"],
-    "correct": "Pituitary"
+    "options": ["Thyroid", "Pancreas", "Pituitary", "Adrenal"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "Which of the following is an example of an oligosaccharide?",
+    "options": ["Glucose", "Starch", "Sucrose", "Glycogen"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "What is the primary function of the Golgi apparatus in a cell?",
+    "options": ["Protein synthesis", "Energy production", "Modifying and packaging proteins", "DNA replication"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "Which part of the human brain is responsible for regulating involuntary functions like breathing and heart rate?",
+    "options": ["Cerebrum", "Cerebellum", "Medulla Oblongata", "Hypothalamus"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "Which of the following factors does NOT significantly affect enzyme activity?",
+    "options": ["Temperature", "pH", "Substrate concentration", "Presence of light"],
+    "correctAnswer": 3
+  },
+  {
+    "question": "Lamarck's theory of evolution is based on the concept of:",
+    "options": ["Natural selection", "Inheritance of acquired characters", "Genetic mutation", "Common descent"],
+    "correctAnswer": 1
+  },
+  {
+    "question": "Which of the following sexually transmitted diseases is caused by a bacterium?",
+    "options": ["Herpes", "HIV/AIDS", "Gonorrhea", "HPV"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "What type of muscle tissue is responsible for the rhythmic contractions of the heart?",
+    "options": ["Skeletal muscle", "Smooth muscle", "Cardiac muscle", "Voluntary muscle"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "In a dihybrid cross, Mendel's Law of Independent Assortment states that alleles for different traits segregate independently during gamete formation. What is the expected phenotypic ratio for a dihybrid cross involving two unlinked genes?",
+    "options": ["3:1", "1:2:1", "9:3:3:1", "1:1:1:1"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "Which component of the human circulatory system carries oxygenated blood away from the heart to the rest of the body?",
+    "options": ["Veins", "Capillaries", "Arteries", "Lymphatic vessels"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "According to the kinetic molecular theory, which of the following statements is true for an ideal gas?",
+    "options": ["Gas particles have significant volume.", "There are strong attractive forces between gas particles.", "Gas particles move in random, continuous motion.", "Collisions between gas particles are inelastic."],
+    "correctAnswer": 2
+  },
+  {
+    "question": "What is the SI unit for the ideal gas constant (R)?",
+    "options": ["Joule/mole·Kelvin", "Liter·atm/mole·Kelvin", "Pascal·m³/mole·Kelvin", "All of the above"],
+    "correctAnswer": 0
+  },
+  {
+    "question": "Which type of intermolecular force is responsible for the relatively high boiling point of water?",
+    "options": ["London Dispersion Forces", "Dipole-Dipole Forces", "Hydrogen Bonding", "Ionic Bonds"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "In an exothermic reaction, the enthalpy change (ΔH) is:",
+    "options": ["Positive", "Negative", "Zero", "Dependent on temperature"],
+    "correctAnswer": 1
+  },
+  {
+    "question": "What is the oxidation number of sulfur in H₂SO₄?",
+    "options": ["+2", "+4", "+6", "-2"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "Which of the following is a scalar quantity?",
+    "options": ["Velocity", "Acceleration", "Force", "Work"],
+    "correctAnswer": 3
+  },
+  {
+    "question": "A projectile is launched horizontally from a height. Ignoring air resistance, what is true about its horizontal velocity?",
+    "options": ["It continuously increases.", "It continuously decreases.", "It remains constant.", "It becomes zero at maximum height."],
+    "correctAnswer": 2
+  },
+  {
+    "question": "According to Bernoulli's principle, an increase in the speed of a fluid is accompanied by a decrease in what?",
+    "options": ["Density", "Viscosity", "Pressure", "Temperature"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "Which of the following best defines a 'transverse wave'?",
+    "options": ["A wave in which particles of the medium oscillate parallel to the direction of wave propagation.", "A wave that requires a medium for its propagation.", "A wave in which particles of the medium oscillate perpendicular to the direction of wave propagation.", "A wave that transfers matter as well as energy."],
+    "correctAnswer": 2
+  },
+  {
+    "question": "Choose the word that is an antonym of 'benevolent'.",
+    "options": ["Kind", "Generous", "Malicious", "Compassionate"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "If all A are B, and no B are C, then which of the following statements must be true?",
+    "options": ["All A are C.", "No A are C.", "Some A are C.", "Some B are C."],
+    "correctAnswer": 1
   }
-];
+    ];

@@ -210,7 +210,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
             <a href="#" class="flex items-center gap-3 text-2xl font-extrabold text-indigo-500 dark:text-blue-400">
                 <i class="fa-solid fa-book-open"></i>
-                <span>MDCAT Mock Test</span>
+                <span>MDCAT Mock Test 2</span>
             </a>
             <div class="flex items-center gap-4">
                 <button id="fullscreenToggle" class="w-10 h-10 rounded-full flex items-center justify-center text-slate-700 bg-slate-200 hover:bg-slate-300 dark:text-slate-300 dark:bg-slate-800 dark:hover:bg-slate-700 transition" title="Toggle Fullscreen">
@@ -495,1008 +495,1017 @@ document.addEventListener("DOMContentLoaded", function () {
     let shuffledOptionsMap = new Map(); // To store shuffled options for each question
 
     // --- Questions Data (Full 200 Questions) ---
-    const originalQuestions = [
-       {
-    "question": "What is the basic structural and functional unit of life?",
-    "options": ["Tissue", "Organ", "Cell", "Organ system"],
-    "correctAnswer": 2
-  },
+   const originalQuestions = [
+  // Biology Questions
   {
-    "question": "Which organelle is called the powerhouse of the cell?",
-    "options": ["Ribosome", "Nucleus", "Mitochondria", "Golgi body"],
-    "correctAnswer": 2
-  },
-  {
-    "question": "Proteins are made up of:",
-    "options": ["Nucleotides", "Amino acids", "Fatty acids", "Sugars"],
+    "question": "Which type of cells lack a true nucleus and membrane-bound organelles?",
+    "options": ["Eukaryotic cells", "Prokaryotic cells", "Plant cells", "Animal cells"],
     "correctAnswer": 1
   },
   {
-    "question": "What is the function of ribosomes?",
-    "options": ["Digestion", "Photosynthesis", "Protein synthesis", "Respiration"],
+    "question": "The process of breaking down glucose to release energy in the absence of oxygen is called:",
+    "options": ["Aerobic respiration", "Photosynthesis", "Fermentation", "Glycolysis"],
     "correctAnswer": 2
   },
   {
-    "question": "Which part of the brain controls balance and coordination?",
-    "options": ["Cerebrum", "Cerebellum", "Medulla", "Hypothalamus"],
+    "question": "Which biological molecule is primarily responsible for carrying genetic information from DNA to ribosomes for protein synthesis?",
+    "options": ["DNA", "RNA", "Protein", "Lipid"],
     "correctAnswer": 1
   },
   {
-    "question": "Which molecule stores genetic information?",
-    "options": ["RNA", "ATP", "Protein", "DNA"],
+    "question": "The 'powerhouse' of the cell, where most ATP is generated, is the:",
+    "options": ["Nucleus", "Ribosome", "Mitochondrion", "Endoplasmic Reticulum"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "Which part of the human brain is responsible for higher-order functions like thought, memory, and voluntary action?",
+    "options": ["Cerebellum", "Brainstem", "Cerebrum", "Medulla Oblongata"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "Enzymes are biological catalysts that speed up biochemical reactions by:",
+    "options": ["Increasing activation energy", "Decreasing activation energy", "Changing the equilibrium of the reaction", "Consuming reactants"],
+    "correctAnswer": 1
+  },
+  {
+    "question": "According to Darwin's theory of natural selection, individuals with advantageous traits are more likely to:",
+    "options": ["Migrate to new environments", "Develop new mutations", "Survive and reproduce", "Become extinct"],
+    "correctAnswer": 2
+  },
+  
+  {
+    "question": "The process by which the kidney filters blood to remove waste products and maintain fluid balance is called:",
+    "options": ["Digestion", "Respiration", "Osmoregulation", "Circulation"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "Which blood component is responsible for oxygen transport?",
+    "options": ["White Blood Cells", "Platelets", "Plasma", "Red Blood Cells"],
     "correctAnswer": 3
   },
   {
-    "question": "Which blood cells help in clotting?",
-    "options": ["RBC", "WBC", "Platelets", "Plasma"],
+    "question": "The lymphatic system plays a crucial role in:",
+    "options": ["Digestion of food", "Gas exchange", "Immunity and fluid balance", "Hormone production"],
     "correctAnswer": 2
   },
   {
-    "question": "Which organ removes nitrogenous waste from the body?",
-    "options": ["Lungs", "Liver", "Kidneys", "Pancreas"],
+    "question": "Which of the following is an example of a sexually transmitted disease caused by a virus?",
+    "options": ["Gonorrhea", "Syphilis", "Herpes", "Chlamydia"],
     "correctAnswer": 2
   },
   {
-    "question": "Which gas is essential for aerobic respiration?",
-    "options": ["Carbon dioxide", "Oxygen", "Nitrogen", "Hydrogen"],
+    "question": "The functional unit of the kidney is the:",
+    "options": ["Nephron", "Ureter", "Bladder", "Urethra"],
+    "correctAnswer": 0
+  },
+  {
+    "question": "Genetic engineering involves the manipulation of:",
+    "options": ["Proteins", "Lipids", "DNA", "Carbohydrates"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "Which organelle is involved in detoxification and lipid synthesis?",
+    "options": ["Rough ER", "Smooth ER", "Lysosome", "Peroxisome"],
     "correctAnswer": 1
   },
   {
-    "question": "HIV causes which disease?",
-    "options": ["Cancer", "AIDS", "Hepatitis", "Flu"],
+    "question": "What is the primary function of ribosomes?",
+    "options": ["Energy production", "Protein synthesis", "Waste disposal", "Cell division"],
     "correctAnswer": 1
   },
   {
-    "question": "Which carbohydrate is found in plant cell walls?",
-    "options": ["Glucose", "Starch", "Cellulose", "Fructose"],
-    "correctAnswer": 2
-  },
-  {
-    "question": "Which enzyme breaks down starch in the mouth?",
-    "options": ["Pepsin", "Amylase", "Lipase", "Trypsin"],
+    "question": "The process of maintaining a stable internal environment in an organism is called:",
+    "options": ["Metabolism", "Homeostasis", "Reproduction", "Evolution"],
     "correctAnswer": 1
   },
   {
-    "question": "What is the role of chlorophyll?",
-    "options": ["Respiration", "Protein synthesis", "Photosynthesis", "Digestion"],
+    "question": "Which part of the flower develops into a fruit after fertilization?",
+    "options": ["Stamen", "Pistil", "Ovary", "Petal"],
     "correctAnswer": 2
   },
   {
-    "question": "The human heart has how many chambers?",
-    "options": ["2", "3", "4", "5"],
+    "question": "Which of the following is a characteristic of viruses?",
+    "options": ["They are prokaryotic cells.", "They have their own metabolic machinery.", "They can only reproduce inside host cells.", "They are composed of cells."],
     "correctAnswer": 2
   },
   {
-    "question": "The smallest blood vessels are called:",
-    "options": ["Arteries", "Veins", "Capillaries", "Aorta"],
+    "question": "The process of gas exchange in the lungs occurs in the:",
+    "options": ["Bronchi", "Trachea", "Alveoli", "Pharynx"],
     "correctAnswer": 2
   },
   {
-    "question": "Which hormone controls blood sugar levels?",
-    "options": ["Adrenaline", "Thyroxine", "Insulin", "Testosterone"],
+    "question": "Which type of immunity is developed after exposure to a pathogen or vaccination?",
+    "options": ["Innate immunity", "Passive immunity", "Active immunity", "Natural immunity"],
     "correctAnswer": 2
   },
   {
-    "question": "Which organ produces bile?",
-    "options": ["Kidney", "Pancreas", "Gallbladder", "Liver"],
+    "question": "The main function of white blood cells (leukocytes) is to:",
+    "options": ["Transport oxygen", "Clot blood", "Fight infection", "Produce hormones"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "Which of the following is a disaccharide?",
+    "options": ["Glucose", "Fructose", "Sucrose", "Glycogen"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "The human heart is a four-chambered organ. Which chamber pumps oxygenated blood to the body?",
+    "options": ["Right atrium", "Left atrium", "Right ventricle", "Left ventricle"],
     "correctAnswer": 3
   },
   {
-    "question": "What is the function of alveoli?",
-    "options": ["Absorption of food", "Exchange of gases", "Filtration of blood", "Secretion of hormones"],
+    "question": "Which part of the nervous system is responsible for involuntary actions like digestion and heartbeat?",
+    "options": ["Somatic nervous system", "Autonomic nervous system", "Central nervous system", "Peripheral nervous system"],
     "correctAnswer": 1
   },
   {
-    "question": "Reflex actions are controlled by:",
-    "options": ["Cerebrum", "Cerebellum", "Spinal cord", "Medulla"],
+    "question": "The process by which plants convert light energy into chemical energy is called:",
+    "options": ["Respiration", "Transpiration", "Photosynthesis", "Fermentation"],
     "correctAnswer": 2
   },
   {
-    "question": "Which structure carries nerve impulses away from the cell body?",
-    "options": ["Dendrite", "Axon", "Synapse", "Nucleus"],
+    "question": "Which of the following is a fat-soluble vitamin?",
+    "options": ["Vitamin C", "Vitamin B12", "Vitamin A", "Folic acid"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "The male reproductive organ that produces sperm is the:",
+    "options": ["Penis", "Testis", "Prostate gland", "Seminal vesicle"],
     "correctAnswer": 1
   },
   {
-    "question": "What is the main function of WBCs?",
-    "options": ["Carry oxygen", "Help clot blood", "Fight infection", "Produce insulin"],
+    "question": "Which of the following is a structural protein found in hair and nails?",
+    "options": ["Hemoglobin", "Insulin", "Keratin", "Actin"],
     "correctAnswer": 2
   },
   {
-    "question": "Which hormone initiates menstruation?",
-    "options": ["Progesterone", "Estrogen", "FSH", "LH"],
+    "question": "The primary site of nutrient absorption in the human digestive system is the:",
+    "options": ["Stomach", "Large intestine", "Small intestine", "Esophagus"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "Which blood vessel carries deoxygenated blood from the heart to the lungs?",
+    "options": ["Aorta", "Pulmonary artery", "Pulmonary vein", "Vena cava"],
     "correctAnswer": 1
   },
   {
-    "question": "Which protein is found in red blood cells?",
-    "options": ["Keratin", "Collagen", "Myosin", "Hemoglobin"],
-    "correctAnswer": 3
-  },
-  {
-    "question": "Skeletal muscles are under:",
-    "options": ["Voluntary control", "Involuntary control", "Hormonal control", "Reflex control"],
-    "correctAnswer": 0
-  },
-  {
-    "question": "What is the fluid part of blood called?",
-    "options": ["Plasma", "Serum", "WBC", "Platelets"],
-    "correctAnswer": 0
-  },
-  {
-    "question": "Inheritance of traits is studied in:",
-    "options": ["Ecology", "Genetics", "Evolution", "Taxonomy"],
+    "question": "The process of cell division that results in two daughter cells each having the same number and kind of chromosomes as the parent nucleus is called:",
+    "options": ["Meiosis", "Mitosis", "Binary fission", "Budding"],
     "correctAnswer": 1
   },
   {
-    "question": "The enzyme that digests proteins in the stomach is:",
-    "options": ["Amylase", "Pepsin", "Lipase", "Trypsin"],
+    "question": "Which of the following is a common cause of kidney stones?",
+    "options": ["Excessive water intake", "High protein diet", "Accumulation of mineral salts", "Low calcium intake"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "The part of the brain that controls balance and coordination is the:",
+    "options": ["Cerebrum", "Cerebellum", "Medulla oblongata", "Thalamus"],
     "correctAnswer": 1
   },
   {
-    "question": "Mendel is known as the father of:",
-    "options": ["Ecology", "Physiology", "Genetics", "Botany"],
+    "question": "Which of the following is a nitrogenous waste product excreted by the kidneys?",
+    "options": ["Glucose", "Amino acids", "Urea", "Fatty acids"],
     "correctAnswer": 2
   },
   {
-    "question": "Which blood group is universal donor?",
-    "options": ["A", "B", "AB", "O"],
-    "correctAnswer": 3
-  },
-  {
-    "question": "Which structure in kidney filters blood?",
-    "options": ["Nephron", "Glomerulus", "Tubule", "Bowman’s capsule"],
+    "question": "The condition characterized by inflammation of the joints is called:",
+    "options": ["Osteoporosis", "Arthritis", "Scoliosis", "Rickets"],
     "correctAnswer": 1
   },
   {
-    "question": "The number of atoms in 1 mole of a substance is:",
-    "options": ["3.01×10^22", "6.022×10^23", "1.6×10^-19", "9.8 m/s^2"],
+    "question": "Which of the following is an example of a conjugated molecule?",
+    "options": ["Glucose", "Amino acid", "Glycolipid", "Fatty acid"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "The process of thermoregulation in humans primarily involves maintaining a stable:",
+    "options": ["Blood pressure", "Body temperature", "Heart rate", "Blood glucose level"],
     "correctAnswer": 1
   },
   {
-    "question": "Which subatomic particle is negatively charged?",
-    "options": ["Proton", "Neutron", "Electron", "Nucleus"],
-    "correctAnswer": 2
-  },
-  {
-    "question": "The mass of 1 mole of water is:",
-    "options": ["16g", "18g", "20g", "12g"],
+    "question": "Which of the following is a function of the liver?",
+    "options": ["Producing insulin", "Filtering blood and detoxifying chemicals", "Pumping blood", "Producing digestive enzymes"],
     "correctAnswer": 1
   },
   {
-    "question": "Which gas law states that pressure is inversely proportional to volume?",
-    "options": ["Charles’s Law", "Boyle’s Law", "Avogadro’s Law", "Graham’s Law"],
+    "question": "The theory of inheritance of acquired characters was proposed by:",
+    "options": ["Charles Darwin", "Gregor Mendel", "Jean-Baptiste Lamarck", "Alfred Russel Wallace"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "Which of the following is a characteristic of smooth muscles?",
+    "options": ["Voluntary control", "Striated appearance", "Found in walls of internal organs", "Multinucleated cells"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "The X-linked recessive inheritance pattern is observed in diseases like:",
+    "options": ["Down Syndrome", "Hemophilia", "Sickle Cell Anemia", "Cystic Fibrosis"],
     "correctAnswer": 1
   },
   {
-    "question": "Hydrogen bonding is present in:",
-    "options": ["CO2", "H2O", "O2", "CH4"],
-    "correctAnswer": 1
-  },
-  {
-    "question": "Which acid is present in vinegar?",
-    "options": ["Citric acid", "Acetic acid", "Formic acid", "Sulfuric acid"],
-    "correctAnswer": 1
-  },
-  {
-    "question": "What is the pH of pure water?",
-    "options": ["3", "7", "9", "5"],
-    "correctAnswer": 1
-  },
-  {
-    "question": "Which element is a noble gas?",
-    "options": ["Oxygen", "Nitrogen", "Argon", "Chlorine"],
-    "correctAnswer": 2
-  },
-  {
-    "question": "The most electronegative element is:",
-    "options": ["Fluorine", "Chlorine", "Oxygen", "Iodine"],
-    "correctAnswer": 0
-  },
-  {
-    "question": "Which compound has a triple bond?",
-    "options": ["Ethane", "Ethene", "Ethyne", "Methane"],
-    "correctAnswer": 2
-  },
-  {
-    "question": "Which element is the lightest?",
-    "options": ["Oxygen", "Hydrogen", "Helium", "Carbon"],
-    "correctAnswer": 1
-  },
-  {
-    "question": "What is the chemical formula of ammonia?",
-    "options": ["NH4", "NH3", "NO2", "N2O"],
-    "correctAnswer": 1
-  },
-  {
-    "question": "Which of the following is a base?",
-    "options": ["HCl", "NaOH", "H2SO4", "CH3COOH"],
-    "correctAnswer": 1
-  },
-  {
-    "question": "Which particle has no charge?",
-    "options": ["Proton", "Electron", "Neutron", "Nucleus"],
-    "correctAnswer": 2
-  },
-  {
-    "question": "The S.I unit of energy is:",
-    "options": ["Joule", "Calorie", "Watt", "Newton"],
-    "correctAnswer": 0
-  },
-  {
-    "question": "Which compound contains ionic bond?",
-    "options": ["H2O", "NaCl", "CH4", "O2"],
-    "correctAnswer": 1
-  },
-  {
-    "question": "Which group is known as alkali metals?",
-    "options": ["Group I", "Group II", "Group VII", "Group 0"],
-    "correctAnswer": 0
-  },
-  {
-    "question": "Rusting is a type of:",
-    "options": ["Reduction", "Oxidation", "Hydrolysis", "Precipitation"],
-    "correctAnswer": 1
-  },
-  {
-    "question": "Organic compounds mainly contain:",
-    "options": ["Sodium", "Chlorine", "Carbon", "Magnesium"],
-    "correctAnswer": 2
-  },
-  {
-    "question": "Which acid is used in car batteries?",
-    "options": ["Acetic acid", "Hydrochloric acid", "Sulfuric acid", "Nitric acid"],
-    "correctAnswer": 2
-  },
-  {
-    "question": "The unit of force is:",
-    "options": ["Joule", "Newton", "Watt", "Pascal"],
-    "correctAnswer": 1
-  },
-  {
-    "question": "Speed is defined as:",
-    "options": ["Distance/time", "Force × time", "Mass × acceleration", "Displacement/time"],
-    "correctAnswer": 0
-  },
-  {
-    "question": "Acceleration due to gravity on Earth is:",
-    "options": ["8.8 m/s^2", "9.8 m/s^2", "10 m/s^2", "6.8 m/s^2"],
-    "correctAnswer": 1
-  },
-  {
-    "question": "Which quantity is scalar?",
-    "options": ["Force", "Velocity", "Work", "Acceleration"],
-    "correctAnswer": 2
-  },
-  {
-    "question": "Which law explains action and reaction?",
-    "options": ["First", "Second", "Third", "Law of inertia"],
-    "correctAnswer": 2
-  },
-  {
-    "question": "Which instrument measures current?",
-    "options": ["Voltmeter", "Ammeter", "Thermometer", "Galvanometer"],
-    "correctAnswer": 1
-  },
-  {
-    "question": "The frequency of A.C in Pakistan is:",
-    "options": ["50 Hz", "60 Hz", "30 Hz", "100 Hz"],
-    "correctAnswer": 0
-  },
-  {
-    "question": "Sound cannot travel in:",
-    "options": ["Water", "Air", "Vacuum", "Steel"],
-    "correctAnswer": 2
-  },
-  {
-    "question": "Which wave is used in TV remote control?",
-    "options": ["Microwave", "Infrared", "X-ray", "Radio"],
-    "correctAnswer": 1
-  },
-  {
-    "question": "Heat energy is transferred by conduction mainly in:",
-    "options": ["Solids", "Liquids", "Gases", "Vacuum"],
-    "correctAnswer": 0
-  },
-  {
-    "question": "The SI unit of pressure is:",
-    "options": ["Bar", "Pascal", "Newton", "Atmosphere"],
-    "correctAnswer": 1
-  },
-  {
-    "question": "Ohm's law is V =",
-    "options": ["IR", "I/R", "R/I", "VI"],
-    "correctAnswer": 0
-  },
-  {
-    "question": "The device used to convert A.C to D.C is:",
-    "options": ["Rectifier", "Transformer", "Capacitor", "Resistor"],
-    "correctAnswer": 0
-  },
-  {
-    "question": "Which color has the highest frequency?",
-    "options": ["Red", "Blue", "Green", "Violet"],
-    "correctAnswer": 3
-  },
-  {
-    "question": "Which radiation has the shortest wavelength?",
-    "options": ["Infrared", "Ultraviolet", "Microwave", "Gamma rays"],
-    "correctAnswer": 3
-  },
-  {
-    "question": "The time for one complete wave is called:",
-    "options": ["Amplitude", "Frequency", "Wavelength", "Time period"],
-    "correctAnswer": 3
-  },
-  {
-    "question": "Which instrument detects earthquakes?",
-    "options": ["Thermometer", "Barometer", "Seismograph", "Anemometer"],
-    "correctAnswer": 2
-  },
-  {
-    "question": "In convex lens, image formed is:",
-    "options": ["Always virtual", "Always real", "Real or virtual", "Always inverted"],
-    "correctAnswer": 2
-  },
-  {
-    "question": "The flow of electrons is called:",
-    "options": ["Resistance", "Current", "Voltage", "Power"],
-    "correctAnswer": 1
-  },
-  {
-    "question": "What is the speed of light in vacuum?",
-    "options": ["3×10^8 m/s", "3×10^6 m/s", "1.5×10^8 m/s", "3×10^5 m/s"],
-    "correctAnswer": 0
-  },
-  {
-    "question": "Which vitamin is essential for blood clotting?",
-    "options": ["Vitamin A", "Vitamin B", "Vitamin K", "Vitamin D"],
-    "correctAnswer": 2
-  },
-  {
-    "question": "The process by which green plants make their food is:",
-    "options": ["Respiration", "Transpiration", "Photosynthesis", "Digestion"],
-    "correctAnswer": 2
-  },
-  {
-    "question": "In which organelle does aerobic respiration take place?",
-    "options": ["Chloroplast", "Mitochondria", "Nucleus", "Golgi body"],
-    "correctAnswer": 1
-  },
-  {
-    "question": "Which of the following is not a component of the human circulatory system?",
-    "options": ["Heart", "Lungs", "Blood", "Blood vessels"],
-    "correctAnswer": 1
-  },
-  {
-    "question": "Which type of immunity is gained through vaccination?",
-    "options": ["Natural", "Passive", "Active acquired", "Innate"],
-    "correctAnswer": 2
-  },
-  {
-    "question": "A genetic disorder caused by a missing clotting factor is:",
-    "options": ["Anemia", "Hemophilia", "Thalassemia", "Diabetes"],
-    "correctAnswer": 1
-  },
-  {
-    "question": "Which hormone controls the menstrual cycle?",
-    "options": ["Insulin", "Adrenaline", "Estrogen", "Glucagon"],
-    "correctAnswer": 2
-  },
-  {
-    "question": "Which process removes excess water from the body?",
-    "options": ["Digestion", "Respiration", "Excretion", "Absorption"],
-    "correctAnswer": 2
-  },
-  {
-    "question": "What structure in the eye detects light?",
-    "options": ["Iris", "Lens", "Retina", "Cornea"],
-    "correctAnswer": 2
-  },
-  {
-    "question": "The longest part of the human digestive system is:",
-    "options": ["Stomach", "Small intestine", "Large intestine", "Esophagus"],
-    "correctAnswer": 1
-  },
-  {
-    "question": "Which part of the brain regulates heartbeat and breathing?",
-    "options": ["Cerebrum", "Cerebellum", "Medulla", "Thalamus"],
-    "correctAnswer": 2
-  },
-  {
-    "question": "Which protein is responsible for muscle contraction?",
-    "options": ["Myosin", "Actin", "Keratin", "Albumin"],
-    "correctAnswer": 0
-  },
-  {
-    "question": "Which organ regulates body temperature?",
-    "options": ["Liver", "Kidney", "Hypothalamus", "Lungs"],
-    "correctAnswer": 2
-  },
-  {
-    "question": "Which gland secretes growth hormone?",
-    "options": ["Thyroid", "Adrenal", "Pituitary", "Pancreas"],
-    "correctAnswer": 2
-  },
-  {
-    "question": "Which part of nephron performs ultrafiltration?",
-    "options": ["Loop of Henle", "Glomerulus", "Tubule", "Collecting duct"],
-    "correctAnswer": 1
-  },
-  {
-    "question": "Sex chromosomes in males are:",
-    "options": ["XX", "XY", "YY", "XO"],
-    "correctAnswer": 1
-  },
-  {
-    "question": "Which structure transports urine from kidney to bladder?",
-    "options": ["Urethra", "Nephron", "Ureter", "Loop of Henle"],
-    "correctAnswer": 2
-  },
-  {
-    "question": "Red blood cells are produced in the:",
-    "options": ["Liver", "Spleen", "Bone marrow", "Heart"],
-    "correctAnswer": 2
-  },
-  {
-    "question": "Which part of the flower produces pollen?",
-    "options": ["Petal", "Stigma", "Anther", "Ovary"],
-    "correctAnswer": 2
-  },
-  {
-    "question": "Fertilization in humans occurs in the:",
-    "options": ["Uterus", "Ovary", "Fallopian tube", "Vagina"],
-    "correctAnswer": 2
-  },
-  {
-    "question": "Which is the most abundant gas in the Earth's atmosphere?",
-    "options": ["Oxygen", "Carbon dioxide", "Nitrogen", "Argon"],
-    "correctAnswer": 2
-  },
-  {
-    "question": "The process of solid directly changing into gas is:",
-    "options": ["Fusion", "Sublimation", "Condensation", "Evaporation"],
-    "correctAnswer": 1
-  },
-  {
-    "question": "Which metal is liquid at room temperature?",
-    "options": ["Iron", "Mercury", "Aluminum", "Lead"],
-    "correctAnswer": 1
-  },
-  {
-    "question": "Which substance turns blue litmus paper red?",
-    "options": ["Base", "Acid", "Salt", "Alcohol"],
-    "correctAnswer": 1
-  },
-  {
-    "question": "The bond between two non-metals is:",
-    "options": ["Ionic", "Covalent", "Metallic", "Hydrogen"],
-    "correctAnswer": 1
-  },
-  {
-    "question": "The chemical formula of calcium carbonate is:",
-    "options": ["CaO", "CaCl2", "CaCO3", "Ca(OH)2"],
-    "correctAnswer": 2
-  },
-  {
-    "question": "Atomic number is the number of:",
-    "options": ["Electrons", "Neutrons", "Protons", "Ions"],
-    "correctAnswer": 2
-  },
-  {
-    "question": "Which group in the periodic table contains noble gases?",
-    "options": ["Group 1", "Group 7", "Group 18", "Group 17"],
-    "correctAnswer": 2
-  },
-  {
-    "question": "NaOH is a:",
-    "options": ["Salt", "Acid", "Base", "Solvent"],
-    "correctAnswer": 2
-  },
-  {
-    "question": "The nucleus of an atom contains:",
-    "options": ["Protons only", "Electrons and neutrons", "Protons and neutrons", "Electrons only"],
-    "correctAnswer": 2
-  },
-  {
-    "question": "Rate of reaction is affected by:",
-    "options": ["Color", "Mass", "Temperature", "Volume"],
-    "correctAnswer": 2
-  },
-  {
-    "question": "Water is a:",
-    "options": ["Element", "Compound", "Mixture", "Atom"],
-    "correctAnswer": 1
-  },
-  {
-    "question": "Which element is used in making nuclear bombs?",
-    "options": ["Uranium", "Calcium", "Lead", "Zinc"],
-    "correctAnswer": 0
-  },
-  {
-    "question": "A solution with pH less than 7 is:",
-    "options": ["Neutral", "Basic", "Acidic", "Alkaline"],
-    "correctAnswer": 2
-  },
-  {
-    "question": "Which compound is responsible for hardness of water?",
-    "options": ["NaCl", "MgSO4", "CaCO3", "HCl"],
-    "correctAnswer": 2
-  },
-  {
-    "question": "The anion in NaCl is:",
-    "options": ["Na+", "Cl-", "Na-", "Cl+"],
-    "correctAnswer": 1
-  },
-  {
-    "question": "Which hydrocarbon has a triple bond?",
-    "options": ["Alkane", "Alkene", "Aromatic", "Alkyne"],
-    "correctAnswer": 3
-  },
-  {
-    "question": "Litmus is a type of:",
-    "options": ["Salt", "Indicator", "Acid", "Base"],
-    "correctAnswer": 1
-  },
-  {
-    "question": "Which process separates components based on boiling point?",
-    "options": ["Filtration", "Evaporation", "Distillation", "Chromatography"],
-    "correctAnswer": 2
-  },
-  {
-    "question": "The symbol of lead is:",
-    "options": ["Pb", "P", "Pd", "L"],
-    "correctAnswer": 0
-  },
-  {
-    "question": "Force acting on unit area is called:",
-    "options": ["Work", "Power", "Pressure", "Energy"],
-    "correctAnswer": 2
-  },
-  {
-    "question": "The instrument used to measure atmospheric pressure is:",
-    "options": ["Thermometer", "Hygrometer", "Barometer", "Ammeter"],
-    "correctAnswer": 2
-  },
-  {
-    "question": "Heat is a form of:",
-    "options": ["Matter", "Energy", "Force", "Pressure"],
-    "correctAnswer": 1
-  },
-  {
-    "question": "Which law states that energy cannot be created or destroyed?",
-    "options": ["Ohm’s law", "Newton’s law", "Law of conservation of energy", "Hooke’s law"],
-    "correctAnswer": 2
-  },
-  {
-    "question": "1 kilowatt-hour is equal to:",
-    "options": ["3600 J", "3.6×10^6 J", "1000 J", "360 J"],
-    "correctAnswer": 1
-  },
-  {
-    "question": "The SI unit of electric charge is:",
-    "options": ["Ampere", "Volt", "Coulomb", "Ohm"],
-    "correctAnswer": 2
-  },
-  {
-    "question": "An electric current produces:",
-    "options": ["Sound", "Light", "Magnetic field", "Heat only"],
-    "correctAnswer": 2
-  },
-  {
-    "question": "What does a transformer do?",
-    "options": ["Stores charge", "Measures voltage", "Changes voltage", "Generates electricity"],
-    "correctAnswer": 2
-  },
-  {
-    "question": "The path followed by projectile is called:",
-    "options": ["Circle", "Straight line", "Parabola", "Ellipse"],
-    "correctAnswer": 2
-  },
-  {
-    "question": "The device that stores electrical energy is called:",
-    "options": ["Transistor", "Resistor", "Capacitor", "Inductor"],
-    "correctAnswer": 2
-  },
-  {
-    "question": "What is the unit of frequency?",
-    "options": ["Decibel", "Meter", "Hertz", "Volt"],
-    "correctAnswer": 2
-  },
-  {
-    "question": "Which mirror is used in car side mirrors?",
-    "options": ["Plane", "Concave", "Convex", "Parabolic"],
-    "correctAnswer": 2
-  },
-  {
-    "question": "The phenomenon of light bending is called:",
-    "options": ["Reflection", "Refraction", "Diffraction", "Dispersion"],
-    "correctAnswer": 1
-  },
-  {
-    "question": "Which color of light has the longest wavelength?",
-    "options": ["Red", "Blue", "Green", "Violet"],
-    "correctAnswer": 0
-  },
-  {
-    "question": "The main source of energy for Earth is:",
-    "options": ["Wind", "Water", "Sun", "Fuel"],
-    "correctAnswer": 2
-  },
-  {
-    "question": "Speed of sound in air is approximately:",
-    "options": ["330 m/s", "3×10^8 m/s", "1000 m/s", "1500 m/s"],
-    "correctAnswer": 0
-  },
-  {
-    "question": "Which type of lens is thicker at the center?",
-    "options": ["Concave", "Convex", "Plane", "Flat"],
-    "correctAnswer": 1
-  },
-  {
-    "question": "What is the acceleration in free fall?",
-    "options": ["1 m/s²", "5 m/s²", "9.8 m/s²", "15 m/s²"],
-    "correctAnswer": 2
-  },
-  {
-    "question": "The SI unit of work is:",
-    "options": ["Joule", "Watt", "Newton", "Pascal"],
-    "correctAnswer": 0
-  },
-  {
-    "question": "The mirror used by dentists is:",
-    "options": ["Plane", "Convex", "Concave", "None"],
-    "correctAnswer": 2
-  },
-  {
-    "question": "Choose the correct synonym for 'Rapid':",
-    "options": ["Slow", "Fast", "Dull", "Lazy"],
-    "correctAnswer": 1
-  },
-  {
-    "question": "Choose the correct antonym for 'Expand':",
-    "options": ["Increase", "Enlarge", "Contract", "Spread"],
-    "correctAnswer": 2
-  },
-  {
-    "question": "Fill in the blank: She ___ going to school.",
-    "options": ["am", "is", "are", "were"],
-    "correctAnswer": 1
-  },
-  {
-    "question": "Choose the correct preposition: He jumped ___ the river.",
-    "options": ["on", "in", "into", "onto"],
-    "correctAnswer": 2
-  },
-  {
-    "question": "Identify the adjective: The sky was dark and cloudy.",
-    "options": ["Sky", "Was", "Dark", "And"],
-    "correctAnswer": 2
-  },
-  {
-    "question": "Choose the correct spelling:",
-    "options": ["Recieve", "Receive", "Receeve", "Recive"],
-    "correctAnswer": 1
-  },
-  {
-    "question": "Choose the passive voice: 'She wrote a letter.'",
-    "options": ["A letter is written", "A letter was written by her", "She writes letter", "She has written letter"],
-    "correctAnswer": 1
-  },
-  {
-    "question": "Pick the correct indirect speech: He said, 'I am tired.'",
-    "options": ["He said he was tired", "He said I am tired", "He said that I was tired", "He told he tired"],
-    "correctAnswer": 0
-  },
-  {
-    "question": "Choose the correct pronoun: ___ are coming with us.",
-    "options": ["Them", "They", "Their", "Theirs"],
-    "correctAnswer": 1
-  },
-  {
-    "question": "Identify the noun: Honesty is the best policy.",
-    "options": ["Best", "Policy", "Is", "Honesty"],
-    "correctAnswer": 3
-  },
-  {
-    "question": "If A = 1, B = 2, ..., then what is the sum of letters in 'DOG'?",
-    "options": ["20", "26", "24", "22"],
-    "correctAnswer": 1
-  },
-  {
-    "question": "What comes next in the series: 2, 4, 8, 16, ?",
-    "options": ["18", "24", "30", "32"],
-    "correctAnswer": 3
-  },
-  {
-    "question": "All roses are flowers. Some flowers fade quickly. What can be concluded?",
-    "options": ["All roses fade quickly", "Some roses are not flowers", "Some flowers are roses", "Some roses may fade quickly"],
-    "correctAnswer": 2
-  },
-  {
-    "question": "Which number completes the series: 3, 6, 9, 12, ?",
-    "options": ["14", "15", "18", "16"],
-    "correctAnswer": 1
-  },
-  {
-    "question": "Statement: All humans are mammals. Conclusion: All mammals are humans.",
-    "options": ["True", "False", "Uncertain", "Cannot say"],
-    "correctAnswer": 1
-  },
-  {
-    "question": "What comes next in the pattern: Z, X, V, T, ?",
-    "options": ["R", "S", "Q", "U"],
-    "correctAnswer": 0
-  },
-  {
-    "question": "Find the odd one out: Apple, Banana, Carrot, Mango",
-    "options": ["Apple", "Banana", "Carrot", "Mango"],
-    "correctAnswer": 2
-  },
-  {
-    "question": "A is the sister of B. B is the brother of C. C is the son of D. How is D related to A?",
-    "options": ["Father", "Mother", "Parent", "Uncle"],
-    "correctAnswer": 2
-  },
-  {
-    "question": "If ALL = 36, BAT = 43, then CAT = ?",
-    "options": ["42", "46", "41", "44"],
-    "correctAnswer": 3
-  },
-  {
-    "question": "Which figure logically follows: ●▲■, ▲■●, ■●▲, ?",
-    "options": ["■▲●", "▲●■", "●■▲", "■●▲"],
-    "correctAnswer": 1
-  },
-  {
-    "question": "Which day comes three days after Monday?",
-    "options": ["Thursday", "Friday", "Wednesday", "Sunday"],
-    "correctAnswer": 0
-  },
-  {
-    "question": "Which is the odd one out: Circle, Triangle, Square, Sphere?",
-    "options": ["Circle", "Sphere", "Triangle", "Square"],
-    "correctAnswer": 1
-  },
-  {
-    "question": "If 1=5, 2=25, 3=325, then 4=?",
-    "options": ["4325", "425", "435", "432"],
-    "correctAnswer": 0
-  },
-  {
-    "question": "Which letter is two places right of G in English alphabet?",
-    "options": ["H", "I", "J", "K"],
-    "correctAnswer": 1
-  },
-  {
-    "question": "If 5 + 3 = 28, 9 + 1 = 810, then 8 + 6 = ?",
-    "options": ["86", "814", "48", "88"],
-    "correctAnswer": 1
-  },
-  {
-    "question": "A clock shows 3:15. What is the angle between hour and minute hand?",
-    "options": ["0°", "7.5°", "30°", "60°"],
-    "correctAnswer": 1
-  },
-  {
-    "question": "Which number is missing? 4, 9, 16, ?, 36",
-    "options": ["20", "25", "30", "32"],
-    "correctAnswer": 1
-  },
-  {
-    "question": "What is the mirror image of 'MBD'?",
-    "options": ["DMB", "BMD", "qvd", "None"],
-    "correctAnswer": 3
-  },
-  {
-    "question": "If South becomes East, what does East become?",
-    "options": ["North", "South", "West", "Same"],
-    "correctAnswer": 0
-  },
-  {
-    "question": "Which figure is different: □, △, ◯, ▲",
-    "options": ["□", "△", "◯", "▲"],
-    "correctAnswer": 2
-  },
-  {
-    "question": "Which planet is known as the Red Planet?",
-    "options": ["Earth", "Jupiter", "Mars", "Venus"],
-    "correctAnswer": 2
-  },
-  {
-    "question": "Which vitamin is synthesized in skin by sunlight?",
-    "options": ["A", "B", "C", "D"],
-    "correctAnswer": 3
-  },
-  {
-    "question": "Which of the following is not a greenhouse gas?",
-    "options": ["CO2", "CH4", "O2", "N2O"],
-    "correctAnswer": 2
-  },
-  {
-    "question": "Which of these is not a noble gas?",
-    "options": ["Neon", "Helium", "Argon", "Hydrogen"],
-    "correctAnswer": 3
-  },
-  {
-    "question": "Which unit is used to measure electric power?",
-    "options": ["Volt", "Watt", "Ohm", "Ampere"],
-    "correctAnswer": 1
-  },
-  {
-    "question": "What is the chemical formula of methane?",
-    "options": ["CH3", "CH4", "C2H6", "CO2"],
-    "correctAnswer": 1
-  },
-  {
-    "question": "The process of joining monomers to form polymers is called:",
-    "options": ["Hydrolysis", "Polymerization", "Glycolysis", "Crystallization"],
-    "correctAnswer": 1
-  },
-  {
-    "question": "Which blood group is universal recipient?",
-    "options": ["A", "B", "AB", "O"],
-    "correctAnswer": 2
-  },
-  {
-    "question": "Which organ helps in voice production?",
+    "question": "Which part of the human respiratory system is responsible for voice production?",
     "options": ["Pharynx", "Larynx", "Trachea", "Bronchi"],
     "correctAnswer": 1
   },
   {
-    "question": "Which layer of skin has pigment cells?",
-    "options": ["Dermis", "Epidermis", "Subcutaneous", "Basement membrane"],
+    "question": "The process of selective re-absorption in the kidney primarily occurs in the:",
+    "options": ["Glomerulus", "Bowman's capsule", "Renal tubules", "Collecting duct"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "Which of the following is a major component of plant cell walls?",
+    "options": ["Starch", "Glycogen", "Cellulose", "Chitin"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "The main function of the Golgi apparatus is:",
+    "options": ["Protein synthesis", "Lipid synthesis", "Modifying, sorting, and packaging proteins and lipids", "Energy production"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "Which of the following is a common symptom of AIDS?",
+    "options": ["Sudden weight gain", "Increased immunity", "Opportunistic infections", "Improved vision"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "The process by which a nerve impulse travels along an axon is called:",
+    "options": ["Synapsis", "Reflex action", "Action potential", "Neurotransmission"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "Which of the following is a primary function of platelets?",
+    "options": ["Oxygen transport", "Immune response", "Blood clotting", "Hormone production"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "The menstrual cycle is regulated by hormones secreted from the:",
+    "options": ["Thyroid gland", "Adrenal gland", "Pituitary gland and ovaries", "Pancreas"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "Which of the following is a characteristic of cardiac muscles?",
+    "options": ["Voluntary control", "Found in skeletal system", "Striated and involuntary", "Smooth and voluntary"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "Mendel's Law of Segregation states that during gamete formation, the two alleles for a heritable character segregate (separate from each other) during gamete formation and end up in different gametes. This leads to a phenotypic ratio of ______ in a monohybrid cross.",
+    "options": ["1:1", "3:1", "9:3:3:1", "1:2:1"],
     "correctAnswer": 1
   },
   {
-    "question": "The process of cell division in somatic cells is:",
-    "options": ["Meiosis", "Binary fission", "Mitosis", "Budding"],
-    "correctAnswer": 2
-  },
-  {
-    "question": "Which one is an excretory organ?",
-    "options": ["Liver", "Pancreas", "Lung", "Skin"],
-    "correctAnswer": 3
-  },
-  {
-    "question": "DNA replication occurs in which phase of cell cycle?",
-    "options": ["G1", "G2", "S", "M"],
-    "correctAnswer": 2
-  },
-  {
-    "question": "Which of the following is a polysaccharide?",
-    "options": ["Glucose", "Fructose", "Sucrose", "Starch"],
-    "correctAnswer": 3
-  },
-  {
-    "question": "In which organ is urea produced?",
-    "options": ["Kidney", "Liver", "Bladder", "Pancreas"],
+    "question": "The main difference between arteries and veins is that arteries generally carry:",
+    "options": ["Deoxygenated blood away from the heart", "Oxygenated blood away from the heart", "Deoxygenated blood towards the heart", "Oxygenated blood towards the heart"],
     "correctAnswer": 1
   },
   {
-    "question": "A balanced chemical equation obeys:",
-    "options": ["Law of gravity", "Law of reflection", "Law of conservation of mass", "Law of inertia"],
+    "question": "Which of the following is a component of the human digestive system but not directly involved in chemical digestion?",
+    "options": ["Stomach", "Small intestine", "Esophagus", "Pancreas"],
     "correctAnswer": 2
   },
   {
-    "question": "Unit of sound intensity is:",
-    "options": ["Decibel", "Hertz", "Joule", "Tesla"],
+    "question": "The process of breaking down food into smaller molecules that can be absorbed by the body is called:",
+    "options": ["Respiration", "Excretion", "Digestion", "Circulation"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "Which of the following is a water-soluble vitamin?",
+    "options": ["Vitamin D", "Vitamin K", "Vitamin C", "Vitamin A"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "The main function of the human skeletal system is:",
+    "options": ["Producing hormones", "Supporting the body and protecting organs", "Digesting food", "Transporting oxygen"],
+    "correctAnswer": 1
+  },
+  {
+    "question": "Which of the following is an example of an enzyme?",
+    "options": ["Glucose", "Insulin", "Amylase", "Hemoglobin"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "The concept of 'gene linkage' refers to:",
+    "options": ["Genes located on different chromosomes", "Genes located close together on the same chromosome", "Genes that always assort independently", "Genes that control multiple traits"],
+    "correctAnswer": 1
+  },
+  {
+    "question": "Which of the following is a characteristic of prokaryotic cells?",
+    "options": ["Presence of mitochondria", "Presence of chloroplasts", "Absence of a true nucleus", "Presence of a cell wall made of cellulose"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "The process of 'crossing over' during meiosis leads to:",
+    "options": ["Identical daughter cells", "Increased genetic variation", "Decreased chromosome number", "Asexual reproduction"],
+    "correctAnswer": 1
+  },
+
+  // Chemistry Questions
+  {
+    "question": "What is the empirical formula of a compound that contains 40% Carbon, 6.7% Hydrogen, and 53.3% Oxygen by mass? (Atomic mass: C=12, H=1, O=16)",
+    "options": ["CH₂O", "C₂H₄O₂", "CHO", "C₃H₆O₃"],
     "correctAnswer": 0
   },
   {
-    "question": "Which wave is used in medical imaging?",
-    "options": ["Gamma rays", "Microwaves", "X-rays", "Radio waves"],
-    "correctAnswer": 2
-  },
-  {
-    "question": "Which gas is used in light bulbs?",
-    "options": ["Hydrogen", "Nitrogen", "Argon", "Oxygen"],
-    "correctAnswer": 2
-  },
-  {
-    "question": "Which gland is called the master gland?",
-    "options": ["Thyroid", "Pancreas", "Pituitary", "Adrenal"],
-    "correctAnswer": 2
-  },
-  {
-    "question": "Which of the following is an example of an oligosaccharide?",
-    "options": ["Glucose", "Starch", "Sucrose", "Glycogen"],
-    "correctAnswer": 2
-  },
-  {
-    "question": "What is the primary function of the Golgi apparatus in a cell?",
-    "options": ["Protein synthesis", "Energy production", "Modifying and packaging proteins", "DNA replication"],
-    "correctAnswer": 2
-  },
-  {
-    "question": "Which part of the human brain is responsible for regulating involuntary functions like breathing and heart rate?",
-    "options": ["Cerebrum", "Cerebellum", "Medulla Oblongata", "Hypothalamus"],
-    "correctAnswer": 2
-  },
-  {
-    "question": "Which of the following factors does NOT significantly affect enzyme activity?",
-    "options": ["Temperature", "pH", "Substrate concentration", "Presence of light"],
-    "correctAnswer": 3
-  },
-  {
-    "question": "Lamarck's theory of evolution is based on the concept of:",
-    "options": ["Natural selection", "Inheritance of acquired characters", "Genetic mutation", "Common descent"],
+    "question": "Which of the following quantum numbers describes the shape of an atomic orbital?",
+    "options": ["Principal quantum number (n)", "Angular momentum quantum number (l)", "Magnetic quantum number (ml)", "Spin quantum number (ms)"],
     "correctAnswer": 1
   },
   {
-    "question": "Which of the following sexually transmitted diseases is caused by a bacterium?",
-    "options": ["Herpes", "HIV/AIDS", "Gonorrhea", "HPV"],
+    "question": "According to the Kinetic Molecular Theory, the average kinetic energy of gas particles is directly proportional to the:",
+    "options": ["Pressure", "Volume", "Temperature in Celsius", "Absolute temperature (Kelvin)"],
+    "correctAnswer": 3
+  },
+  {
+    "question": "Which of the following is an example of an ionic crystal?",
+    "options": ["Diamond", "Sodium chloride", "Ice", "Graphite"],
+    "correctAnswer": 1
+  },
+  {
+    "question": "The Haber's process is used for the industrial synthesis of:",
+    "options": ["Sulfuric acid", "Ammonia", "Nitric acid", "Ethanol"],
+    "correctAnswer": 1
+  },
+  {
+    "question": "The rate constant (k) in a rate law is dependent on:",
+    "options": ["Concentration of reactants", "Time", "Temperature", "Pressure"],
     "correctAnswer": 2
   },
   {
-    "question": "What type of muscle tissue is responsible for the rhythmic contractions of the heart?",
-    "options": ["Skeletal muscle", "Smooth muscle", "Cardiac muscle", "Voluntary muscle"],
+    "question": "Hess's Law states that the enthalpy change for a reaction is independent of the pathway between the initial and final states. This is a consequence of the fact that enthalpy is a:",
+    "options": ["Path function", "State function", "Extensive property", "Intensive property"],
+    "correctAnswer": 1
+  },
+  {
+    "question": "In the balancing of redox reactions, the oxidation number method involves tracking the change in oxidation numbers of elements. What is the oxidation number of Chromium in K₂Cr₂O₇?",
+    "options": ["+2", "+3", "+6", "+7"],
     "correctAnswer": 2
   },
   {
-    "question": "In a dihybrid cross, Mendel's Law of Independent Assortment states that alleles for different traits segregate independently during gamete formation. What is the expected phenotypic ratio for a dihybrid cross involving two unlinked genes?",
-    "options": ["3:1", "1:2:1", "9:3:3:1", "1:1:1:1"],
+    "question": "Which of the following best describes a sigma (σ) bond?",
+    "options": ["Formed by sideways overlap of p-orbitals", "A weaker bond than a pi bond", "Formed by direct, head-on overlap of atomic orbitals", "Present only in unsaturated compounds"],
     "correctAnswer": 2
   },
   {
-    "question": "Which component of the human circulatory system carries oxygenated blood away from the heart to the rest of the body?",
-    "options": ["Veins", "Capillaries", "Arteries", "Lymphatic vessels"],
+    "question": "The atomic radius generally decreases across a period in the periodic table due to:",
+    "options": ["Increased shielding effect", "Decreased nuclear charge", "Increased effective nuclear charge", "Increased number of electron shells"],
     "correctAnswer": 2
   },
   {
-    "question": "According to the kinetic molecular theory, which of the following statements is true for an ideal gas?",
-    "options": ["Gas particles have significant volume.", "There are strong attractive forces between gas particles.", "Gas particles move in random, continuous motion.", "Collisions between gas particles are inelastic."],
-    "correctAnswer": 2
-  },
-  {
-    "question": "What is the SI unit for the ideal gas constant (R)?",
-    "options": ["Joule/mole·Kelvin", "Liter·atm/mole·Kelvin", "Pascal·m³/mole·Kelvin", "All of the above"],
+    "question": "Which of the following is a functional group isomer of an aldehyde?",
+    "options": ["Ketone", "Alcohol", "Carboxylic acid", "Ether"],
     "correctAnswer": 0
   },
   {
-    "question": "Which type of intermolecular force is responsible for the relatively high boiling point of water?",
-    "options": ["London Dispersion Forces", "Dipole-Dipole Forces", "Hydrogen Bonding", "Ionic Bonds"],
+    "question": "The electrophilic substitution reactions of benzene are characteristic of its:",
+    "options": ["Saturated nature", "High reactivity", "Aromaticity", "Linear structure"],
     "correctAnswer": 2
   },
   {
-    "question": "In an exothermic reaction, the enthalpy change (ΔH) is:",
-    "options": ["Positive", "Negative", "Zero", "Dependent on temperature"],
+    "question": "Which of the following is a nucleophilic substitution reaction?",
+    "options": ["Addition of H₂ to an alkene", "Reaction of an alkyl halide with NaOH", "Combustion of methane", "Nitration of benzene"],
     "correctAnswer": 1
   },
   {
-    "question": "What is the oxidation number of sulfur in H₂SO₄?",
-    "options": ["+2", "+4", "+6", "-2"],
+    "question": "The reaction of an alcohol with a carboxylic acid to form an ester and water is called:",
+    "options": ["Hydrolysis", "Saponification", "Esterification", "Fermentation"],
     "correctAnswer": 2
   },
   {
-    "question": "Which of the following is a scalar quantity?",
-    "options": ["Velocity", "Acceleration", "Force", "Work"],
+    "question": "Which of the following is a characteristic reaction of aldehydes and ketones?",
+    "options": ["Elimination reactions", "Nucleophilic addition reactions", "Electrophilic substitution reactions", "Free radical substitution"],
+    "correctAnswer": 1
+  },
+  {
+    "question": "Proteins are polymers of:",
+    "options": ["Nucleotides", "Monosaccharides", "Amino acids", "Fatty acids"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "Which of the following is a type of adhesive?",
+    "options": ["Polyethylene", "Epoxy resin", "PVC", "Nylon"],
+    "correctAnswer": 1
+  },
+  {
+    "question": "The process of 'nitration' of benzene involves the introduction of a ______ group onto the benzene ring.",
+    "options": ["-OH", "-COOH", "-NO₂", "-Cl"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "Which of the following is an example of a d-block element?",
+    "options": ["Sodium", "Magnesium", "Zinc", "Carbon"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "The boiling point of a liquid is the temperature at which its vapor pressure equals the:",
+    "options": ["Atmospheric pressure", "Critical pressure", "Standard pressure", "Partial pressure"],
+    "correctAnswer": 0
+  },
+  {
+    "question": "Which of the following is a characteristic of an ideal gas?",
+    "options": ["Strong intermolecular forces", "Particles have significant volume", "Elastic collisions between particles", "Particles attract each other"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "The solubility product (Ksp) is a measure of the solubility of a sparingly soluble ionic compound in a saturated solution. A higher Ksp value indicates:",
+    "options": ["Lower solubility", "Higher solubility", "No solubility", "Constant solubility"],
+    "correctAnswer": 1
+  },
+  {
+    "question": "Which of the following is an example of a strong base?",
+    "options": ["Ammonia (NH₃)", "Sodium hydroxide (NaOH)", "Water (H₂O)", "Acetic acid (CH₃COOH)"],
+    "correctAnswer": 1
+  },
+  {
+    "question": "The process of 'hydration' of an alkene involves the addition of:",
+    "options": ["Hydrogen", "Halogen", "Water", "Hydrogen halide"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "Which of the following is a structural isomer of butan-1-ol?",
+    "options": ["Butanal", "Diethyl ether", "Butanoic acid", "Butan-2-ol"],
     "correctAnswer": 3
   },
   {
-    "question": "A projectile is launched horizontally from a height. Ignoring air resistance, what is true about its horizontal velocity?",
-    "options": ["It continuously increases.", "It continuously decreases.", "It remains constant.", "It becomes zero at maximum height."],
-    "correctAnswer": 2
-  },
-  {
-    "question": "According to Bernoulli's principle, an increase in the speed of a fluid is accompanied by a decrease in what?",
-    "options": ["Density", "Viscosity", "Pressure", "Temperature"],
-    "correctAnswer": 2
-  },
-  {
-    "question": "Which of the following best defines a 'transverse wave'?",
-    "options": ["A wave in which particles of the medium oscillate parallel to the direction of wave propagation.", "A wave that requires a medium for its propagation.", "A wave in which particles of the medium oscillate perpendicular to the direction of wave propagation.", "A wave that transfers matter as well as energy."],
-    "correctAnswer": 2
-  },
-  {
-    "question": "Choose the word that is an antonym of 'benevolent'.",
-    "options": ["Kind", "Generous", "Malicious", "Compassionate"],
-    "correctAnswer": 2
-  },
-  {
-    "question": "If all A are B, and no B are C, then which of the following statements must be true?",
-    "options": ["All A are C.", "No A are C.", "Some A are C.", "Some B are C."],
+    "question": "The term 'molecular polarity' is determined by the presence of polar bonds and the:",
+    "options": ["Number of atoms", "Molecular shape", "Bond energy", "Atomic mass"],
     "correctAnswer": 1
+  },
+  {
+    "question": "Which of the following is an example of an addition polymer?",
+    "options": ["Nylon", "Polyester", "Polyvinyl chloride (PVC)", "Protein"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "The reaction of an alkane with a halogen in the presence of UV light is an example of:",
+    "options": ["Addition reaction", "Substitution reaction", "Elimination reaction", "Rearrangement reaction"],
+    "correctAnswer": 1
+  },
+  {
+    "question": "Which of the following is a characteristic of a buffer solution?",
+    "options": ["It resists changes in pH upon addition of small amounts of acid or base.", "It has a pH of exactly 7.", "It is always a strong acid or strong base solution.", "It is highly corrosive."],
+    "correctAnswer": 0
+  },
+  {
+    "question": "The process of 'saponification' involves the hydrolysis of an ester in the presence of a strong base to produce:",
+    "options": ["Alcohol and carboxylic acid", "Soap and glycerol", "Aldehyde and ketone", "Ether and water"],
+    "correctAnswer": 1
+  },
+  {
+    "question": "Which of the following is a characteristic of a covalent bond?",
+    "options": ["Transfer of electrons", "Sharing of electrons", "Attraction between ions", "Formation of metallic lattice"],
+    "correctAnswer": 1
+  },
+  {
+    "question": "What is the oxidation state of oxygen in peroxides (e.g., H₂O₂)?",
+    "options": ["0", "-1", "-2", "+1"],
+    "correctAnswer": 1
+  },
+  {
+    "question": "According to the Aufbau principle, electrons fill atomic orbitals in order of:",
+    "options": ["Increasing energy", "Decreasing energy", "Increasing spin", "Decreasing spin"],
+    "correctAnswer": 0
+  },
+  {
+    "question": "Which of the following is an example of a coordinate covalent bond?",
+    "options": ["H₂", "NaCl", "NH₄⁺", "CH₄"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "The phenomenon of 'isomerism' in organic chemistry refers to compounds with the same molecular formula but different:",
+    "options": ["Empirical formula", "Molar mass", "Structural formulas", "Physical states"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "Which of the following is a strong oxidizing agent?",
+    "options": ["KMnO₄", "Na", "H₂", "Cl⁻"],
+    "correctAnswer": 0
+  },
+  {
+    "question": "The term 'enthalpy of formation' refers to the enthalpy change when one mole of a compound is formed from its elements in their standard states. It is denoted by:",
+    "options": ["ΔHrxn", "ΔHsol", "ΔHf°", "ΔHcomb"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "Which of the following is a characteristic of a molecular solid?",
+    "options": ["High melting point", "Conducts electricity well", "Held together by intermolecular forces", "Forms a crystal lattice of ions"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "The process of 'halogenation' of an alkane involves the substitution of a hydrogen atom by a:",
+    "options": ["Oxygen atom", "Nitrogen atom", "Halogen atom", "Carbon atom"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "Which of the following is an example of a carboxylic acid derivative?",
+    "options": ["Aldehyde", "Ketone", "Ester", "Alcohol"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "The term 'zwitterion' refers to an amino acid that has:",
+    "options": ["Only a positive charge", "Only a negative charge", "Both a positive and a negative charge", "No charge"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "Which of the following is a common use of dyes?",
+    "options": ["Fuel", "Coloring textiles", "Solvent", "Lubricant"],
+    "correctAnswer": 1
+  },
+  {
+    "question": "The process of 'cracking' in petroleum refining involves:",
+    "options": ["Combining small hydrocarbons", "Breaking down large hydrocarbons into smaller ones", "Separating hydrocarbons by boiling point", "Adding hydrogen to hydrocarbons"],
+    "correctAnswer": 1
+  },
+  {
+    "question": "Which of the following is an example of a Lewis acid?",
+    "options": ["NH₃", "H₂O", "BF₃", "OH⁻"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "The phenomenon of 'delocalization' of electrons is characteristic of:",
+    "options": ["Saturated hydrocarbons", "Ionic compounds", "Aromatic compounds", "Alkyl halides"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "Which of the following is a characteristic of a strong electrolyte?",
+    "options": ["Does not conduct electricity", "Partially ionizes in solution", "Completely ionizes in solution", "Forms a precipitate"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "The 'functional group' in organic chemistry is a specific group of atoms within a molecule that is responsible for the characteristic chemical reactions of that molecule. Which of the following is the functional group for ketones?",
+    "options": ["-OH", "-CHO", ">C=O", "-COOH"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "Which of the following is a common industrial application of enzymes?",
+    "options": ["Production of plastics", "Fermentation in brewing", "Synthesis of ammonia", "Extraction of metals"],
+    "correctAnswer": 1
+  },
+  {
+    "question": "The 'bond energy' is the energy required to break one mole of a particular type of bond in the gaseous state. A higher bond energy indicates a ______ bond.",
+    "options": ["Weaker", "Stronger", "Longer", "Shorter"],
+    "correctAnswer": 1
+  },
+  {
+    "question": "Which of the following is a characteristic of a reversible reaction?",
+    "options": ["Proceeds in one direction only", "Reaches completion quickly", "Products can react to form reactants", "Always releases heat"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "The 'common ion effect' is observed when the addition of a common ion to a saturated solution of a sparingly soluble salt causes the solubility of the salt to:",
+    "options": ["Increase", "Decrease", "Remain unchanged", "Become zero"],
+    "correctAnswer": 1
+  },
+  {
+    "question": "Which of the following is an example of a primary amine?",
+    "options": ["(CH₃)₃N", "CH₃NH₂", "(CH₃)₂NH", "C₆H₅NHC₂H₅"],
+    "correctAnswer": 1
+  },
+  {
+    "question": "The 'rate of reaction' in chemical kinetics is defined as the change in concentration of a reactant or product per unit time. It is influenced by factors such as temperature, concentration, and:",
+    "options": ["Color of the solution", "Mass of the container", "Presence of a catalyst", "Volume of the reaction vessel"],
+    "correctAnswer": 2
+  },
+
+  // Physics Questions
+  {
+    "question": "The SI unit of work is:",
+    "options": ["Watt", "Joule", "Newton", "Pascal"],
+    "correctAnswer": 1
+  },
+  {
+    "question": "According to Newton's Second Law of Motion, force is directly proportional to:",
+    "options": ["Velocity", "Acceleration", "Displacement", "Time"],
+    "correctAnswer": 1
+  },
+  {
+    "question": "The SI unit of angular velocity is:",
+    "options": ["Revolutions per second", "Degrees per second", "Radians per second", "Meters per second"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "Bernoulli's principle is based on the conservation of:",
+    "options": ["Mass", "Momentum", "Energy", "Pressure"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "Which of the following types of waves can travel through a vacuum?",
+    "options": ["Sound waves", "Water waves", "Electromagnetic waves", "Seismic waves"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "The phenomenon of forming stationary waves in a stretched string depends on the string's length, tension, and:",
+    "options": ["Temperature", "Density", "Material", "Amplitude"],
+    "correctAnswer": 1
+  },
+  {
+    "question": "The internal energy of an ideal gas depends only on its:",
+    "options": ["Pressure", "Volume", "Temperature", "Density"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "Electric field lines originate from ______ charges and terminate on ______ charges.",
+    "options": ["Negative, positive", "Positive, negative", "Neutral, positive", "Positive, neutral"],
+    "correctAnswer": 1
+  },
+  {
+    "question": "The capacitance of a parallel plate capacitor is directly proportional to the area of the plates and inversely proportional to the:",
+    "options": ["Voltage across plates", "Charge on plates", "Distance between plates", "Dielectric constant"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "Ohm's Law states that the current flowing through a conductor between two points is directly proportional to the voltage across the two points and inversely proportional to the:",
+    "options": ["Power", "Resistance", "Energy", "Charge"],
+    "correctAnswer": 1
+  },
+  {
+    "question": "The magnetic field lines around a current-carrying wire form:",
+    "options": ["Straight lines", "Concentric circles", "Spirals", "Parallel lines"],
+    "correctAnswer": 1
+  },
+  {
+    "question": "Faraday's Law of Electromagnetic Induction states that the magnitude of the induced electromotive force (EMF) is proportional to the rate of change of:",
+    "options": ["Electric field", "Magnetic field", "Magnetic flux", "Current"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "Which of the following is a characteristic of alternating current (AC)?",
+    "options": ["Flows in one direction only", "Has constant voltage", "Changes direction periodically", "Produced by batteries"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "The photoelectric effect demonstrates the particle nature of light, where light energy is absorbed in discrete packets called:",
+    "options": ["Electrons", "Protons", "Neutrons", "Photons"],
+    "correctAnswer": 3
+  },
+  {
+    "question": "Atomic spectra are produced when electrons in atoms transition between different energy levels, emitting or absorbing:",
+    "options": ["Protons", "Neutrons", "Photons", "Electrons"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "The half-life of a radioactive isotope is the time it takes for ______ of the radioactive nuclei in a sample to decay.",
+    "options": ["One-quarter", "Half", "Three-quarters", "All"],
+    "correctAnswer": 1
+  },
+  {
+    "question": "Which of the following is a medical use of radiation?",
+    "options": ["Sterilization of food", "Power generation", "Diagnostic imaging (e.g., X-rays)", "Industrial welding"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "The SI unit of electric current is:",
+    "options": ["Volt", "Ohm", "Ampere", "Watt"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "Which of the following is an example of a scalar product of two vectors?",
+    "options": ["Force", "Velocity", "Work", "Acceleration"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "The range of a projectile launched from the ground is maximum when the launch angle is:",
+    "options": ["0 degrees", "30 degrees", "45 degrees", "90 degrees"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "The phenomenon of resonance occurs when the frequency of an applied force matches the ______ of a system.",
+    "options": ["Amplitude", "Wavelength", "Natural frequency", "Period"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "Which of the following is a characteristic of a transverse wave?",
+    "options": ["Particles oscillate parallel to wave propagation", "Requires a medium to travel", "Particles oscillate perpendicular to wave propagation", "Transfers matter as well as energy"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "The SI unit of pressure is:",
+    "options": ["Atmosphere", "Bar", "Pascal", "Torr"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "Which of the following is a characteristic of an ideal gas?",
+    "options": ["Particles attract each other strongly", "Particles have significant volume", "Collisions between particles are perfectly elastic", "Particles move in an ordered manner"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "The phenomenon of 'diffraction' refers to the:",
+    "options": ["Bending of light as it passes through a medium", "Bending of light around obstacles or through small openings", "Reflection of light from a surface", "Splitting of light into its component colors"],
+    "correctAnswer": 1
+  },
+  {
+    "question": "Which of the following is an application of total internal reflection?",
+    "options": ["Magnifying glass", "Concave mirror", "Optical fibers", "Periscope"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "The SI unit of magnetic flux is:",
+    "options": ["Tesla", "Weber", "Henry", "Ampere"],
+    "correctAnswer": 1
+  },
+  {
+    "question": "Which of the following is a characteristic of a series circuit?",
+    "options": ["Voltage is the same across all components", "Current is the same through all components", "Total resistance is less than the smallest individual resistance", "Components are connected in parallel"],
+    "correctAnswer": 1
+  },
+  {
+    "question": "The concept of 'electric potential' at a point is defined as the work done in bringing a unit positive charge from infinity to that point. It is a ______ quantity.",
+    "options": ["Vector", "Scalar", "Tensor", "Pseudo-vector"],
+    "correctAnswer": 1
+  },
+  {
+    "question": "Which of the following is a characteristic of a nuclear fission reaction?",
+    "options": ["Two light nuclei combine to form a heavier nucleus", "A heavy nucleus splits into two or more lighter nuclei", "Protons and neutrons are exchanged", "Electrons are transferred between atoms"],
+    "correctAnswer": 1
+  },
+  {
+    "question": "The SI unit of electric charge density is:",
+    "options": ["Coulomb per meter", "Coulomb per square meter", "Coulomb per cubic meter", "Coulomb per volt"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "Which of the following is a characteristic of a uniform electric field?",
+    "options": ["Electric field lines are curved", "Electric field lines are parallel and equally spaced", "Electric field strength varies with position", "Electric potential is constant everywhere"],
+    "correctAnswer": 1
+  },
+  {
+    "question": "The phenomenon of 'polarization' of light refers to the restriction of light waves to vibrate in a single plane. This property is characteristic of ______ waves.",
+    "options": ["Longitudinal", "Transverse", "Sound", "Mechanical"],
+    "correctAnswer": 1
+  },
+  {
+    "question": "Which of the following is an application of the Doppler effect?",
+    "options": ["Fiber optics", "Medical ultrasound imaging", "Telescopes", "Microscopes"],
+    "correctAnswer": 1
+  },
+  {
+    "question": "The SI unit of magnetic field strength is:",
+    "options": ["Tesla", "Ampere-turn per meter", "Weber", "Henry"],
+    "correctAnswer": 1
+  },
+  {
+    "question": "Which of the following is a characteristic of a parallel circuit?",
+    "options": ["Current is the same through all components", "Voltage is the same across all components", "Total resistance is the sum of individual resistances", "Components are connected in series"],
+    "correctAnswer": 1
+  },
+  {
+    "question": "The 'work function' in the photoelectric effect is the minimum energy required to:",
+    "options": ["Ionize an atom", "Excite an electron to a higher energy level", "Eject an electron from a metal surface", "Create a photon"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "Which of the following is a characteristic of a nuclear fusion reaction?",
+    "options": ["A heavy nucleus splits into lighter nuclei", "Two light nuclei combine to form a heavier nucleus", "Involves the decay of radioactive isotopes", "Requires low temperatures and pressures"],
+    "correctAnswer": 1
+  },
+  {
+    "question": "The SI unit of power of a lens is:",
+    "options": ["Meter", "Centimeter", "Diopter", "Focal length"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "Which of the following is a characteristic of a simple harmonic motion (SHM)?",
+    "options": ["Constant velocity", "Constant acceleration", "Restoring force proportional to displacement", "Motion in a circle"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "The 'terminal velocity' of an object falling through a fluid is reached when the gravitational force is balanced by the:",
+    "options": ["Buoyant force only", "Drag force only", "Buoyant force and drag force", "Normal force"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "Which of the following is an example of a standing wave?",
+    "options": ["Ocean waves", "Sound waves in a pipe", "Light waves from the sun", "Radio waves from an antenna"],
+    "correctAnswer": 1
+  },
+  {
+    "question": "The 'refractive index' of a medium is a measure of how much the speed of light is reduced in that medium compared to its speed in a vacuum. It is a ______ quantity.",
+    "options": ["Vector", "Scalar", "Dimensionless", "Unitless"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "Which of the following is a characteristic of a conductor?",
+    "options": ["High electrical resistivity", "Low electrical conductivity", "Allows free flow of electrons", "Does not allow heat transfer"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "The 'internal resistance' of a battery causes the terminal voltage to be ______ than its electromotive force (EMF) when current is drawn.",
+    "options": ["Greater", "Less", "Equal", "Independent"],
+    "correctAnswer": 1
+  },
+  {
+    "question": "Which of the following is an application of electromagnetic induction?",
+    "options": ["Electric motor", "Generator", "Transformer", "All of the above"],
+    "correctAnswer": 3
+  },
+  {
+    "question": "The 'Compton effect' demonstrates the particle nature of X-rays, where X-ray photons scatter off electrons, resulting in a change in:",
+    "options": ["Frequency", "Wavelength", "Speed", "Direction"],
+    "correctAnswer": 1
+  },
+  {
+    "question": "Which of the following is a characteristic of a semiconductor?",
+    "options": ["Very high conductivity", "Very low conductivity", "Conductivity between conductors and insulators", "Does not conduct electricity at all"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "The 'mass-energy equivalence' principle, stated by Einstein, is given by the equation:",
+    "options": ["F=ma", "E=mc²", "V=IR", "P=W/t"],
+    "correctAnswer": 1
+  },
+  {
+    "question": "Which of the following is a biological effect of radiation?",
+    "options": ["Increased cell growth", "DNA damage", "Improved vision", "Enhanced nutrient absorption"],
+    "correctAnswer": 1
+  },
+  {
+    "question": "The 'principle of conservation of momentum' states that in an isolated system, the total momentum remains constant. This applies to:",
+    "options": ["Only elastic collisions", "Only inelastic collisions", "Both elastic and inelastic collisions", "Only explosions"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "Which of the following is a characteristic of a concave lens?",
+    "options": ["Thicker at the center", "Converges light rays", "Forms only real images", "Thinner at the center and diverges light rays"],
+    "correctAnswer": 3
+  },
+  {
+    "question": "The 'Doppler effect' explains the apparent change in frequency of a wave due to the relative motion between the source and the:",
+    "options": ["Medium", "Observer", "Wavelength", "Amplitude"],
+    "correctAnswer": 1
+  },
+  {
+    "question": "Which of the following is a characteristic of a gas at STP (Standard Temperature and Pressure)?",
+    "options": ["Temperature of 0°C and pressure of 1 atm", "Temperature of 25°C and pressure of 1 atm", "Temperature of 0 K and pressure of 1 atm", "Temperature of 273.15 K and pressure of 101.325 kPa"],
+    "correctAnswer": 3
+  },
+  {
+    "question": "The 'Brewster's angle' is the angle of incidence at which light reflected from a surface is completely polarized. This phenomenon is related to:",
+    "options": ["Diffraction", "Interference", "Refraction", "Reflection"],
+    "correctAnswer": 3
+  },
+  {
+    "question": "Which of the following is a characteristic of a superconductor?",
+    "options": ["Zero electrical resistance below a critical temperature", "High electrical resistance at all temperatures", "Only conducts electricity at high temperatures", "Used as an insulator"],
+    "correctAnswer": 0
+  },
+  {
+    "question": "The 'Snell's Law' describes the relationship between the angles of incidence and refraction for light passing through an interface between two different media. It involves the:",
+    "options": ["Speed of light", "Wavelength of light", "Refractive indices of the media", "Frequency of light"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "Which of the following is a characteristic of a standing wave?",
+    "options": ["Transfers energy", "Has fixed nodes and antinodes", "Travels through space", "Has continuously changing amplitude"],
+    "correctAnswer": 1
+  },
+  {
+    "question": "The 'principle of moments' states that for an object to be in rotational equilibrium, the sum of clockwise moments about any point must be equal to the sum of ______ moments about the same point.",
+    "options": ["Anticlockwise", "Linear", "Translational", "Net"],
+    "correctAnswer": 0
+  },
+  {
+    "question": "Which of the following is a characteristic of a nuclear reactor?",
+    "options": ["Uses nuclear fusion to generate power", "Uses controlled nuclear fission to generate power", "Produces only radioactive waste", "Does not require fuel"],
+    "correctAnswer": 1
+  },
+  {
+    "question": "The 'Rutherford model' of the atom proposed that:",
+    "options": ["Electrons orbit the nucleus in fixed energy levels", "Atoms are indivisible spheres", "The atom has a small, dense, positively charged nucleus", "Electrons are embedded in a positively charged sphere"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "Which of the following is a characteristic of a black body radiator?",
+    "options": ["Reflects all incident radiation", "Absorbs all incident radiation", "Emits radiation only at specific wavelengths", "Has a temperature of 0 K"],
+    "correctAnswer": 1
+  },
+
+  // English Questions
+  {
+    "question": "Choose the most appropriate synonym for 'proficient'.",
+    "options": ["Incompetent", "Skilled", "Amateur", "Clumsy"],
+    "correctAnswer": 1
+  },
+  {
+    "question": "Identify the type of sentence: 'What a wonderful surprise!'",
+    "options": ["Declarative", "Interrogative", "Imperative", "Exclamatory"],
+    "correctAnswer": 3
+  },
+  {
+    "question": "Which of the following is an example of a correlative conjunction?",
+    "options": ["And", "But", "Neither...nor", "Or"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "Choose the correct verb tense to complete the sentence: 'She ___ her homework before dinner yesterday.'",
+    "options": ["do", "does", "did", "done"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "Convert the following into direct speech: 'He told me that he was tired.'",
+    "options": ["He said, \"I am tired.\"", "He said, \"He is tired.\"", "He told me, \"I was tired.\"", "He said, \"I was tired.\""],
+    "correctAnswer": 0
+  },
+  {
+    "question": "Which word is an antonym of 'augment'?",
+    "options": ["Increase", "Expand", "Decrease", "Enlarge"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "Fill in the blank with the appropriate pronoun: 'The book is ___ on the table.'",
+    "options": ["its", "it's", "their", "there"],
+    "correctAnswer": 0
+  },
+  {
+    "question": "Identify the gerund phrase in the sentence: 'Swimming in the ocean is my favorite activity.'",
+    "options": ["Swimming in the ocean", "in the ocean", "my favorite activity", "is my favorite"],
+    "correctAnswer": 0
+  },
+  {
+    "question": "Which of the following sentences uses correct capitalization?",
+    "options": ["I live in new york city.", "I live in New York City.", "i live in new york city.", "I live in New york city."],
+    "correctAnswer": 1
+  },
+  {
+    "question": "Choose the word that means 'to make something impure or less effective'.",
+    "options": ["Purify", "Enhance", "Contaminate", "Improve"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "What is the correct spelling?",
+    "options": ["Occasion", "Occassion", "Ocassion", "Ocasion"],
+    "correctAnswer": 0
+  },
+  {
+    "question": "Identify the collective noun: 'A ___ of lions.'",
+    "options": ["Herd", "Pack", "Pride", "Flock"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "Choose the sentence with correct parallel structure:",
+    "options": ["She enjoys hiking, swimming, and to cycle.", "She enjoys hiking, swimming, and cycling.", "She enjoys to hike, to swim, and cycling.", "She enjoys hiking, to swim, and to cycle."],
+    "correctAnswer": 1
+  },
+  {
+    "question": "Which of the following is an example of a metaphor?",
+    "options": ["The world is like a stage.", "The world is a stage.", "He runs like a cheetah.", "She is as brave as a lion."],
+    "correctAnswer": 1
+  },
+  {
+    "question": "Choose the correct punctuation for a list of items:",
+    "options": ["I need milk, eggs, and bread.", "I need milk; eggs; and bread.", "I need milk eggs and bread.", "I need: milk, eggs, and bread."],
+    "correctAnswer": 0
+  },
+  {
+    "question": "Identify the adverb of manner: 'He spoke softly to the child.'",
+    "options": ["He", "spoke", "softly", "child"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "Which of the following is an example of an oxymoron?",
+    "options": ["Jumbo shrimp", "As busy as a bee", "The early bird catches the worm", "Break a leg"],
+    "correctAnswer": 0
+  },
+  {
+    "question": "Choose the correct possessive pronoun: 'The cat licked ___ paw.'",
+    "options": ["it's", "its", "their", "his"],
+    "correctAnswer": 1
+  },
+  {
+    "question": "The literary device that involves a contrast between what is said and what is actually meant is called:",
+    "options": ["Irony", "Simile", "Metaphor", "Hyperbole"],
+    "correctAnswer": 0
+  },
+  {
+    "question": "Which of the following is a common error in pronoun usage?",
+    "options": ["Subject-verb agreement", "Dangling modifier", "Ambiguous pronoun reference", "Run-on sentence"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "Choose the word that means 'to make something better or more bearable'.",
+    "options": ["Worsen", "Aggravate", "Ameliorate", "Deteriorate"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "Identify the correct use of a dash:",
+    "options": ["He bought a car-a red one.", "He bought a car - a red one.", "He bought a car a red one.", "He bought a car, a red one."],
+    "correctAnswer": 0
+  },
+  {
+    "question": "Which of the following is an example of a compound-complex sentence?",
+    "options": ["She sings and he dances.", "Although she sings, he dances.", "She sings, and he dances when he is happy.", "She sings when she is happy."],
+    "correctAnswer": 2
+  },
+  {
+    "question": "Choose the word that means 'to express strong disapproval or disagreement'.",
+    "options": ["Approve", "Commend", "Censure", "Praise"],
+    "correctAnswer": 2
+  },
+  {
+    "question": "Identify the type of clause: 'who lives next door' in the sentence 'The man who lives next door is friendly.'",
+    "options": ["Independent clause", "Adverbial clause", "Adjective clause", "Noun clause"],
+    "correctAnswer": 2
   }
-    ];
+];
+
     // This assumes all your questions have 4 options and one correct answer.
     // Ensure this data structure is consistent.
 
