@@ -1859,7 +1859,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
 
         const unattemptedCount = shuffledQuestions.length - attemptedCount;
-        const mdcatRawScore = (correctCount * 5) - (incorrectCount * 1); // Assuming 5 marks for correct, -1 for incorrect
+        const mdcatRawScore = (correctCount * 5) - (incorrectCount * 0); // Assuming 5 marks for correct, 0 for incorrect
 
         // MDCAT score percentage calculation
         const maxMdcatScore = shuffledQuestions.length * 5;
