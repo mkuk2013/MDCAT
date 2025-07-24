@@ -141,7 +141,7 @@
                 border: 1px solid #ccc !important;
                 background-color: #f9f9f9 !important;
             }
-             .status-pill p, .status-pill strong, .status-pill span,
+             .status-pill p, .status-pill strong, .status-pill p, .status-pill span,
              .review-option-item p, .review-option-item i {
                  color: #000 !important;
             }
@@ -491,8 +491,8 @@ document.addEventListener("DOMContentLoaded", function () {
     let testStartTime;
     let sscObtainedMarks = 0, sscTotalMarks = 1, fscObtainedMarks = 0, fscTotalMarks = 1;
     let currentReviewQuestionIndex = 0; // Added for review section navigation
-    let shuffledQuestions = []; // To store shuffled questions
-    let shuffledOptionsMap = new Map(); // To store shuffled options for each question
+    let shuffledQuestions = []; // To store questions (now in original order)
+    let shuffledOptionsMap = new Map(); // To store options (now in original order)
 
     // --- Questions Data (Full 200 Questions) ---
    const originalQuestions = [
@@ -1515,14 +1515,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // --- Utility Functions ---
-    function shuffleArray(array) {
-        for (let i = array.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [array[i], array[j]] = [array[j], array[i]];
-        }
-        return array;
-    }
-
+    // `shuffleArray` function ko hata diya gaya hai kyunki ab questions aur options shuffle nahi honge.
     function formatTime(seconds) {
         const h = String(Math.floor(seconds / 3600)).padStart(2, '0');
         const m = String(Math.floor((seconds % 3600) / 60)).padStart(2, '0');
@@ -1681,24 +1674,24 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function displayQuestion() {
-        const question = shuffledQuestions[currentQuestionIndex];
+        const question = shuffledQuestions[currentQuestionIndex]; // Ab 'shuffledQuestions' mein original order hai
         questionCounter.textContent = `Question ${currentQuestionIndex + 1}/${shuffledQuestions.length}`;
         questionText.innerHTML = `${currentQuestionIndex + 1}. ${question.question}`;
-        optionsContainer.innerHTML = ''; // Clear previous options
+        optionsContainer.innerHTML = ''; // Pichle options clear karein
 
-        // Get shuffled options for the current question
-        const shuffledOptions = shuffledOptionsMap.get(currentQuestionIndex);
+        // Options (ab original order mein) current question ke liye
+        const optionsToDisplay = shuffledOptionsMap.get(currentQuestionIndex);
 
-        shuffledOptions.forEach((option, originalIndex) => {
+        optionsToDisplay.forEach((option, originalIndex) => { // originalIndex yahan optionsToDisplay array ke andar ka index hai
             const optionDiv = document.createElement('div');
             optionDiv.classList.add('flex', 'items-center', 'gap-3', 'bg-slate-100', 'dark:bg-slate-700', 'p-4', 'rounded-lg', 'cursor-pointer', 'transition-all', 'duration-150', 'ease-in-out', 'hover:bg-slate-200', 'dark:hover:bg-slate-600');
-            optionDiv.dataset.originalIndex = originalIndex; // Store original index to map back to correctAnswer
+            optionDiv.dataset.originalIndex = originalIndex; // original index store karein correctAnswer se map karne ke liye
 
             const radio = document.createElement('input');
             radio.type = 'radio';
             radio.name = 'questionOptions';
-            radio.id = `option${originalIndex}`; // Use originalIndex for unique ID
-            radio.value = originalIndex; // Store original index as value
+            radio.id = `option${originalIndex}`; // Unique ID ke liye originalIndex use karein
+            radio.value = originalIndex; // Value ke roop mein original index store karein
             radio.classList.add('appearance-none', 'w-4', 'h-4', 'border-2', 'border-slate-400', 'dark:border-slate-500', 'rounded-full', 'checked:bg-indigo-500', 'checked:border-indigo-500', 'dark:checked:bg-blue-400', 'dark:checked:border-blue-400', 'relative', 'flex-shrink-0', 'cursor-pointer');
             radio.style.setProperty('--tw-ring-color', 'rgba(99, 102, 241, 0.5)'); // Custom property for ring color
             radio.style.setProperty('--tw-ring-offset-color', 'var(--bg-slate-100)'); // Custom property for ring offset color
@@ -1720,18 +1713,18 @@ document.addEventListener("DOMContentLoaded", function () {
             label.textContent = option;
 
             optionDiv.appendChild(radio);
-            radio.appendChild(checkedIndicator); // Append indicator inside radio for positioning
+            radio.appendChild(checkedIndicator); // Indicator ko radio ke andar append karein positioning ke liye
             optionDiv.appendChild(label);
             optionsContainer.appendChild(optionDiv);
 
             optionDiv.addEventListener('click', () => {
                 radio.checked = true;
-                userAnswers[currentQuestionIndex] = parseInt(optionDiv.dataset.originalIndex); // Store original index of selected option
+                userAnswers[currentQuestionIndex] = parseInt(optionDiv.dataset.originalIndex); // Selected option ka original index store karein
                 updatePaletteButton(currentQuestionIndex, 'attempted');
                 highlightSelectedOption(optionDiv);
             });
 
-            // Check if this option was previously selected by the user
+            // Check karein agar yeh option pehle se user ne select kiya tha
             if (userAnswers[currentQuestionIndex] === originalIndex) {
                 radio.checked = true;
                 highlightSelectedOption(optionDiv);
@@ -1739,7 +1732,7 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         });
 
-        // Update navigation buttons
+        // Navigation buttons update karein
         prevBtn.disabled = currentQuestionIndex === 0;
         nextBtn.textContent = currentQuestionIndex === shuffledQuestions.length - 1 ? 'Submit Test' : 'Next';
         nextBtn.classList.toggle('bg-indigo-500', currentQuestionIndex < shuffledQuestions.length - 1);
@@ -1964,35 +1957,27 @@ document.addEventListener("DOMContentLoaded", function () {
         const userAnswerOriginalIndex = userAnswers[currentReviewQuestionIndex]; // This is the original index of the user's selected option
         const correctAnswerOriginalIndex = question.correctAnswer; // This is the original index of the correct answer
 
-        // Get the shuffled options for the current review question
-        const shuffledOptionsForReview = shuffledOptionsMap.get(currentReviewQuestionIndex);
-        if (!shuffledOptionsForReview || !Array.isArray(shuffledOptionsForReview)) {
-            console.error("Shuffled options for review are invalid or missing for index:", currentReviewQuestionIndex);
+        // Get the options (ab original order mein) for the current review question
+        const optionsForReview = shuffledOptionsMap.get(currentReviewQuestionIndex);
+        if (!optionsForReview || !Array.isArray(optionsForReview)) {
+            console.error("Options for review are invalid or missing for index:", currentReviewQuestionIndex);
             reviewQuestionDisplay.innerHTML = '<p class="text-red-500 dark:text-red-400">Error loading options for review. Please restart the test.</p>';
             reviewPrevBtn.disabled = true;
             reviewNextBtn.disabled = true;
             return;
         }
 
-        let optionsHtml = shuffledOptionsForReview.map((optionText) => {
-            // Find the original index of this option text in the original question's options array
-            const originalQuestionData = originalQuestions[question.originalIndex];
-            if (!originalQuestionData || !Array.isArray(originalQuestionData.options)) {
-                console.error("Original question data or options are invalid for originalIndex:", question.originalIndex);
-                return `<div class="text-red-500">Error loading option.</div>`; // Fallback for option rendering
-            }
-            const originalIndexForThisOption = originalQuestionData.options.indexOf(optionText);
-
+        let optionsHtml = optionsForReview.map((optionText, optionIndex) => { // optionIndex yahan optionsForReview array ke andar ka index hai
             let iconClass = 'fa-circle text-slate-400 dark:text-slate-500'; // Default icon
             let optionClasses = 'bg-slate-100 dark:bg-slate-700'; // Default background
 
-            if (originalIndexForThisOption === correctAnswerOriginalIndex) {
+            if (optionIndex === correctAnswerOriginalIndex) {
                 iconClass = 'fa-check-circle text-green-500 dark:text-green-400';
                 optionClasses = 'bg-green-100 dark:bg-green-900/50 border border-green-200 dark:border-green-700';
             }
 
-            if (userAnswerOriginalIndex !== null && originalIndexForThisOption === userAnswerOriginalIndex) {
-                if (originalIndexForThisOption === correctAnswerOriginalIndex) {
+            if (userAnswerOriginalIndex !== null && optionIndex === userAnswerOriginalIndex) {
+                if (optionIndex === correctAnswerOriginalIndex) {
                     // User selected correctly - already handled by correct class
                 } else {
                     iconClass = 'fa-times-circle text-red-500 dark:text-red-400';
@@ -2003,7 +1988,7 @@ document.addEventListener("DOMContentLoaded", function () {
             return `
                 <div class="flex items-center gap-3 p-3 rounded-lg ${optionClasses}">
                     <i class="fa-solid ${iconClass} text-lg flex-shrink-0"></i>
-                    <p class="flex-1 text-slate-800 dark:text-slate-200 ${originalIndexForThisOption === correctAnswerOriginalIndex ? 'font-semibold' : ''}">${optionText}</p>
+                    <p class="flex-1 text-slate-800 dark:text-slate-200 ${optionIndex === correctAnswerOriginalIndex ? 'font-semibold' : ''}">${optionText}</p>
                 </div>
             `;
         }).join('');
@@ -2082,15 +2067,14 @@ document.addEventListener("DOMContentLoaded", function () {
             fscObtainedMarks = fscObtained;
             fscTotalMarks = fscTotal;
             
-            // Shuffle questions and options when test starts
-            shuffledQuestions = shuffleArray([...originalQuestions].map((q,idx) => ({...q, originalIndex: idx}))); // Keep original index for reference
-            shuffledOptionsMap.clear(); // Clear previous shuffled options
+            // Questions aur options ab original order mein aayenge
+            shuffledQuestions = [...originalQuestions].map((q,idx) => ({...q, originalIndex: idx})); // Questions ko original order mein rakhein
+            shuffledOptionsMap.clear(); // Pichla options map clear karein
             shuffledQuestions.forEach((q, qIndex) => {
-                const shuffledOpts = shuffleArray([...q.options]);
-                shuffledOptionsMap.set(qIndex, shuffledOpts);
+                shuffledOptionsMap.set(qIndex, [...q.options]); // Options ko bhi original order mein rakhein
             });
 
-            userAnswers = Array(shuffledQuestions.length).fill(null); // Reset user answers for new shuffled test
+            userAnswers = Array(shuffledQuestions.length).fill(null); // Naye test ke liye user answers reset karein
 
             showSection('quizSection');
             populateQuestionPalette();
@@ -2116,7 +2100,7 @@ document.addEventListener("DOMContentLoaded", function () {
             displayQuestion();
             updatePaletteSelection();
         } else {
-            showConfirmationModal(); // Show confirmation modal before submitting
+            showConfirmationModal(); // Submit karne se pehle confirmation modal dikhayein
         }
     });
 
@@ -2130,14 +2114,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     restartBtn.addEventListener('click', () => {
-        // Reset all state variables
+        // Sabhi state variables reset karein
         currentQuestionIndex = 0;
-        userAnswers = Array(originalQuestions.length).fill(null); // Reset for original length
-        shuffledQuestions = []; // Clear shuffled questions
-        shuffledOptionsMap.clear(); // Clear shuffled options
+        userAnswers = Array(originalQuestions.length).fill(null); // Original length ke liye reset karein
+        shuffledQuestions = []; // Questions clear karein
+        shuffledOptionsMap.clear(); // Options clear karein
         timeRemaining = totalTestDuration;
-        clearInterval(timerInterval); // Clear any running timer
-        timerDisplay.textContent = formatTime(totalTestDuration); // Reset timer display
+        clearInterval(timerInterval); // Agar koi timer chal raha hai toh clear karein
+        timerDisplay.textContent = formatTime(totalTestDuration); // Timer display reset karein
         testPasswordInput.value = '';
         sscObtainedInput.value = '';
         sscTotalInput.value = '';
@@ -2146,14 +2130,14 @@ document.addEventListener("DOMContentLoaded", function () {
         passwordError.classList.add('hidden');
         sscError.classList.add('hidden');
         fscError.classList.add('hidden');
-        currentReviewQuestionIndex = 0; // Reset for review section
+        currentReviewQuestionIndex = 0; // Review section ke liye reset karein
 
         showSection('passwordSection');
         showToast('info', 'Test Restarted', 'Please enter password and marks to start again.');
     });
 
     reviewBtn.addEventListener('click', () => {
-        currentReviewQuestionIndex = 0; // Start review from the first question
+        currentReviewQuestionIndex = 0; // Review pehle question se shuru karein
         showSection('reviewSection');
         displayReviewQuestion();
     });
@@ -2185,9 +2169,9 @@ document.addEventListener("DOMContentLoaded", function () {
     fullscreenToggleBtn.addEventListener('click', toggleFullscreen);
 
 
-    // Initial checks on page load
+    // Page load hone par initial checks
     checkTheme();
-    showSection('passwordSection'); // Show password section by default
+    showSection('passwordSection'); // Default roop se password section dikhayein
 });
 </script>
 

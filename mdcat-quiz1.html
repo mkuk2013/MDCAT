@@ -491,8 +491,8 @@ document.addEventListener("DOMContentLoaded", function () {
     let testStartTime;
     let sscObtainedMarks = 0, sscTotalMarks = 1, fscObtainedMarks = 0, fscTotalMarks = 1;
     let currentReviewQuestionIndex = 0; // Added for review section navigation
-    let shuffledQuestions = []; // To store shuffled questions
-    let shuffledOptionsMap = new Map(); // To store shuffled options for each question
+    let shuffledQuestions = []; // To store questions (now in original order)
+    let shuffledOptionsMap = new Map(); // To store options (now in original order)
 
     // --- Questions Data (Full 200 Questions) ---
     const originalQuestions = [
@@ -1506,14 +1506,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // --- Utility Functions ---
-    function shuffleArray(array) {
-        for (let i = array.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [array[i], array[j]] = [array[j], array[i]];
-        }
-        return array;
-    }
-
+    // Removed shuffleArray function as it's no longer needed for questions/options
     function formatTime(seconds) {
         const h = String(Math.floor(seconds / 3600)).padStart(2, '0');
         const m = String(Math.floor((seconds % 3600) / 60)).padStart(2, '0');
@@ -1672,15 +1665,15 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function displayQuestion() {
-        const question = shuffledQuestions[currentQuestionIndex];
+        const question = shuffledQuestions[currentQuestionIndex]; // Now 'shuffledQuestions' holds original order
         questionCounter.textContent = `Question ${currentQuestionIndex + 1}/${shuffledQuestions.length}`;
         questionText.innerHTML = `${currentQuestionIndex + 1}. ${question.question}`;
         optionsContainer.innerHTML = ''; // Clear previous options
 
-        // Get shuffled options for the current question
-        const shuffledOptions = shuffledOptionsMap.get(currentQuestionIndex);
+        // Get options (now in original order) for the current question
+        const optionsToDisplay = shuffledOptionsMap.get(currentQuestionIndex);
 
-        shuffledOptions.forEach((option, originalIndex) => {
+        optionsToDisplay.forEach((option, originalIndex) => { // originalIndex here refers to the index within the optionsToDisplay array
             const optionDiv = document.createElement('div');
             optionDiv.classList.add('flex', 'items-center', 'gap-3', 'bg-slate-100', 'dark:bg-slate-700', 'p-4', 'rounded-lg', 'cursor-pointer', 'transition-all', 'duration-150', 'ease-in-out', 'hover:bg-slate-200', 'dark:hover:bg-slate-600');
             optionDiv.dataset.originalIndex = originalIndex; // Store original index to map back to correctAnswer
@@ -1955,35 +1948,27 @@ document.addEventListener("DOMContentLoaded", function () {
         const userAnswerOriginalIndex = userAnswers[currentReviewQuestionIndex]; // This is the original index of the user's selected option
         const correctAnswerOriginalIndex = question.correctAnswer; // This is the original index of the correct answer
 
-        // Get the shuffled options for the current review question
-        const shuffledOptionsForReview = shuffledOptionsMap.get(currentReviewQuestionIndex);
-        if (!shuffledOptionsForReview || !Array.isArray(shuffledOptionsForReview)) {
-            console.error("Shuffled options for review are invalid or missing for index:", currentReviewQuestionIndex);
+        // Get the options (now in original order) for the current review question
+        const optionsForReview = shuffledOptionsMap.get(currentReviewQuestionIndex);
+        if (!optionsForReview || !Array.isArray(optionsForReview)) {
+            console.error("Options for review are invalid or missing for index:", currentReviewQuestionIndex);
             reviewQuestionDisplay.innerHTML = '<p class="text-red-500 dark:text-red-400">Error loading options for review. Please restart the test.</p>';
             reviewPrevBtn.disabled = true;
             reviewNextBtn.disabled = true;
             return;
         }
 
-        let optionsHtml = shuffledOptionsForReview.map((optionText) => {
-            // Find the original index of this option text in the original question's options array
-            const originalQuestionData = originalQuestions[question.originalIndex];
-            if (!originalQuestionData || !Array.isArray(originalQuestionData.options)) {
-                console.error("Original question data or options are invalid for originalIndex:", question.originalIndex);
-                return `<div class="text-red-500">Error loading option.</div>`; // Fallback for option rendering
-            }
-            const originalIndexForThisOption = originalQuestionData.options.indexOf(optionText);
-
+        let optionsHtml = optionsForReview.map((optionText, optionIndex) => { // optionIndex here is the index within the optionsForReview array
             let iconClass = 'fa-circle text-slate-400 dark:text-slate-500'; // Default icon
             let optionClasses = 'bg-slate-100 dark:bg-slate-700'; // Default background
 
-            if (originalIndexForThisOption === correctAnswerOriginalIndex) {
+            if (optionIndex === correctAnswerOriginalIndex) {
                 iconClass = 'fa-check-circle text-green-500 dark:text-green-400';
                 optionClasses = 'bg-green-100 dark:bg-green-900/50 border border-green-200 dark:border-green-700';
             }
 
-            if (userAnswerOriginalIndex !== null && originalIndexForThisOption === userAnswerOriginalIndex) {
-                if (originalIndexForThisOption === correctAnswerOriginalIndex) {
+            if (userAnswerOriginalIndex !== null && optionIndex === userAnswerOriginalIndex) {
+                if (optionIndex === correctAnswerOriginalIndex) {
                     // User selected correctly - already handled by correct class
                 } else {
                     iconClass = 'fa-times-circle text-red-500 dark:text-red-400';
@@ -1994,7 +1979,7 @@ document.addEventListener("DOMContentLoaded", function () {
             return `
                 <div class="flex items-center gap-3 p-3 rounded-lg ${optionClasses}">
                     <i class="fa-solid ${iconClass} text-lg flex-shrink-0"></i>
-                    <p class="flex-1 text-slate-800 dark:text-slate-200 ${originalIndexForThisOption === correctAnswerOriginalIndex ? 'font-semibold' : ''}">${optionText}</p>
+                    <p class="flex-1 text-slate-800 dark:text-slate-200 ${optionIndex === correctAnswerOriginalIndex ? 'font-semibold' : ''}">${optionText}</p>
                 </div>
             `;
         }).join('');
@@ -2073,15 +2058,14 @@ document.addEventListener("DOMContentLoaded", function () {
             fscObtainedMarks = fscObtained;
             fscTotalMarks = fscTotal;
             
-            // Shuffle questions and options when test starts
-            shuffledQuestions = shuffleArray([...originalQuestions].map((q,idx) => ({...q, originalIndex: idx}))); // Keep original index for reference
-            shuffledOptionsMap.clear(); // Clear previous shuffled options
+            // Questions and options will now be in their original order
+            shuffledQuestions = [...originalQuestions].map((q,idx) => ({...q, originalIndex: idx})); // Use original order for questions
+            shuffledOptionsMap.clear(); // Clear previous options map
             shuffledQuestions.forEach((q, qIndex) => {
-                const shuffledOpts = shuffleArray([...q.options]);
-                shuffledOptionsMap.set(qIndex, shuffledOpts);
+                shuffledOptionsMap.set(qIndex, [...q.options]); // Use original order for options
             });
 
-            userAnswers = Array(shuffledQuestions.length).fill(null); // Reset user answers for new shuffled test
+            userAnswers = Array(shuffledQuestions.length).fill(null); // Reset user answers for new test
 
             showSection('quizSection');
             populateQuestionPalette();
@@ -2124,8 +2108,8 @@ document.addEventListener("DOMContentLoaded", function () {
         // Reset all state variables
         currentQuestionIndex = 0;
         userAnswers = Array(originalQuestions.length).fill(null); // Reset for original length
-        shuffledQuestions = []; // Clear shuffled questions
-        shuffledOptionsMap.clear(); // Clear shuffled options
+        shuffledQuestions = []; // Clear questions
+        shuffledOptionsMap.clear(); // Clear options
         timeRemaining = totalTestDuration;
         clearInterval(timerInterval); // Clear any running timer
         timerDisplay.textContent = formatTime(totalTestDuration); // Reset timer display
