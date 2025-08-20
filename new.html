@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>MDCAT Mock Test 2</title>
+</head>
+<body>
+    <div>
+        <h1>MDCAT Mock Test 2</h1>
+    </div>
+
+    <div>
+        <h2>Start Your Test</h2>
+        <p>Enter the test password and your academic marks to begin.</p>
+
+        <div>
+            <label>Test Password</label>
+            <input type="password" placeholder="Incorrect password. Please try again.">
+        </div>
+
+        <div>
+            <p>NOTICE: All tests are password protected.</p>
+            <p>For password, please contact on WhatsApp: +92 348 0358640</p>
+        </div>
+
+        <div>
+            <h3>Academic Marks (for Merit Calculation)</h3>
+            <div>
+                <label>SSC Marks</label>
+                <input type="number" placeholder="Obtained"> / <input type="number" placeholder="Total">
+                <p>Please enter valid SSC marks (Obtained <= Total, Total > 0).</p>
+            </div>
+            <div>
+                <label>F.Sc. Marks</label>
+                <input type="number" placeholder="Obtained"> / <input type="number" placeholder="Total">
+                <p>Please enter valid F.Sc. marks (Obtained <= Total, Total > 0).</p>
+            </div>
+            <button>Start Test</button>
+        </div>
+    </div>
+
+    <div>
+        <h2>Question 1/200</h2>
+        <p>03:30:00</p>
+        <div id="questionArea"></div>
+        <button>Previous</button>
+        <button>Next</button>
+    </div>
+
+    <div>
+        <h3>Question Palette</h3>
+        <div id="questionPalette"></div>
+    </div>
+
+    <div>
+        <h2>Test Completed!</h2>
+        <p>Here's a summary of your performance.</p>
+
+        <div>
+            <div>MDCAT Score</div>
+            <div>Aggregate Score</div>
+            <div>Total Questions: <span id="totalQuestions">200</span></div>
+            <div>Attempted: 0</div>
+            <div>Correct: 0</div>
+            <div>Incorrect: 0</div>
+            <div>Unattempted: 0</div>
+        </div>
+
+        <p>Time Taken: 00:00:00</p>
+        <button>Restart Test</button>
+        <button>Review Answers</button>
+        <button>Save as PDF</button>
+    </div>
+
+    <div>
+        <h2>Review Answers</h2>
+        <button>Back to Results</button>
+        <div id="reviewArea"></div>
+        <button>Previous</button>
+        <button>Next</button>
+    </div>
+
+    <footer>
+        <p>© 2025 MDCAT Test Prep Portal. All rights reserved.</p>
+    </footer>
+
+    <div>
+        <h2>Submit Test?</h2>
+        <p>Are you sure you want to submit the test? Once submitted, you cannot change your answers.</p>
+        <button>Cancel</button>
+        <button>Submit</button>
+    </div>
+
+    <script src="questions3.js"></script>
+    <script>
+        // Ensure total questions match the array length
+        document.addEventListener("DOMContentLoaded", function() {
+            const totalQuestions = originalQuestions.length;
+            document.getElementById("totalQuestions").textContent = totalQuestions;
+            document.getElementById("questionArea").innerHTML = originalQuestions[0].question; // Example for first question
+        });
+    </script>
+</body>
+</html>
